@@ -1,0 +1,29 @@
+<div class="content" role="main">
+
+    <table class="tabela" *ngFor="let grupo of grupos; let i = index"  (click)="acaoBotaoDetalharGrupo(grupo.id)">
+      <tr >
+        <td style="width: 30%;">
+          <img src="{{grupo.icon}}" width="80px" />
+        </td>
+        <td class="textoGrupo">
+          <tr>
+            <td>{{grupo.nome}}</td>
+          </tr>
+          <tr style="font-size: 14px; text-align:left">
+            <td>
+              <tr>
+                <td>Jogadores: 35</td>
+              </tr>
+              <tr>
+                <td>Partidas: 7</td>
+              </tr>
+              <tr>
+                <td>Gols: 26</td>
+              </tr>
+            </td>
+          </tr>
+        </td>
+      </tr>
+    </table>
+  
+  </div>

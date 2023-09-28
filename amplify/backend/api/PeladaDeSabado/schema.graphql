@@ -1,0 +1,35 @@
+type JogadoresPelada @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Pelada: Pelada @hasOne
+  Jogadores: Jogadores @hasOne
+}
+
+type Pelada @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  data: AWSDate
+  qntJogadores: Int
+  duracaoPartida: Int
+  Grupo: Grupo! @hasOne
+  JogadoresPelada: JogadoresPelada @belongsTo
+}
+
+type Jogadores @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nome: String
+  email: AWSEmail
+  telefone: AWSPhone
+  foto: ID
+  Grupo: Grupo! @hasOne
+  JogadoresPelada: JogadoresPelada @belongsTo
+  time: String
+  aniversario: AWSDate
+  escudo: String
+  posicao: String
+}
+
+type Grupo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nome: String
+  icon: String
+}
+ 

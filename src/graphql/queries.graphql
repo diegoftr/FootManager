@@ -1,0 +1,202 @@
+# this is an auto generated file. This will be overwritten
+
+query GetJogadoresPelada($id: ID!) {
+  getJogadoresPelada(id: $id) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+query ListJogadoresPeladas(
+  $filter: ModelJogadoresPeladaFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJogadoresPeladas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetPelada($id: ID!) {
+  getPelada(id: $id) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+query ListPeladas(
+  $filter: ModelPeladaFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPeladas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetJogadores($id: ID!) {
+  getJogadores(id: $id) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+query ListJogadores(
+  $filter: ModelJogadoresFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJogadores(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetGrupo($id: ID!) {
+  getGrupo(id: $id) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListGrupos(
+  $filter: ModelGrupoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGrupos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}

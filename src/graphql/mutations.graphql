@@ -1,0 +1,379 @@
+# this is an auto generated file. This will be overwritten
+
+mutation CreateJogadoresPelada(
+  $input: CreateJogadoresPeladaInput!
+  $condition: ModelJogadoresPeladaConditionInput
+) {
+  createJogadoresPelada(input: $input, condition: $condition) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+mutation UpdateJogadoresPelada(
+  $input: UpdateJogadoresPeladaInput!
+  $condition: ModelJogadoresPeladaConditionInput
+) {
+  updateJogadoresPelada(input: $input, condition: $condition) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+mutation DeleteJogadoresPelada(
+  $input: DeleteJogadoresPeladaInput!
+  $condition: ModelJogadoresPeladaConditionInput
+) {
+  deleteJogadoresPelada(input: $input, condition: $condition) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+mutation CreatePelada(
+  $input: CreatePeladaInput!
+  $condition: ModelPeladaConditionInput
+) {
+  createPelada(input: $input, condition: $condition) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation UpdatePelada(
+  $input: UpdatePeladaInput!
+  $condition: ModelPeladaConditionInput
+) {
+  updatePelada(input: $input, condition: $condition) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation DeletePelada(
+  $input: DeletePeladaInput!
+  $condition: ModelPeladaConditionInput
+) {
+  deletePelada(input: $input, condition: $condition) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation CreateJogadores(
+  $input: CreateJogadoresInput!
+  $condition: ModelJogadoresConditionInput
+) {
+  createJogadores(input: $input, condition: $condition) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation UpdateJogadores(
+  $input: UpdateJogadoresInput!
+  $condition: ModelJogadoresConditionInput
+) {
+  updateJogadores(input: $input, condition: $condition) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation DeleteJogadores(
+  $input: DeleteJogadoresInput!
+  $condition: ModelJogadoresConditionInput
+) {
+  deleteJogadores(input: $input, condition: $condition) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+mutation CreateGrupo(
+  $input: CreateGrupoInput!
+  $condition: ModelGrupoConditionInput
+) {
+  createGrupo(input: $input, condition: $condition) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation UpdateGrupo(
+  $input: UpdateGrupoInput!
+  $condition: ModelGrupoConditionInput
+) {
+  updateGrupo(input: $input, condition: $condition) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation DeleteGrupo(
+  $input: DeleteGrupoInput!
+  $condition: ModelGrupoConditionInput
+) {
+  deleteGrupo(input: $input, condition: $condition) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}

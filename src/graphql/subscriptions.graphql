@@ -1,0 +1,349 @@
+# this is an auto generated file. This will be overwritten
+
+subscription OnCreateJogadoresPelada(
+  $filter: ModelSubscriptionJogadoresPeladaFilterInput
+) {
+  onCreateJogadoresPelada(filter: $filter) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+subscription OnUpdateJogadoresPelada(
+  $filter: ModelSubscriptionJogadoresPeladaFilterInput
+) {
+  onUpdateJogadoresPelada(filter: $filter) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+subscription OnDeleteJogadoresPelada(
+  $filter: ModelSubscriptionJogadoresPeladaFilterInput
+) {
+  onDeleteJogadoresPelada(filter: $filter) {
+    id
+    Pelada {
+      id
+      data
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      peladaJogadoresPeladaId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      jogadoresJogadoresPeladaId
+      __typename
+    }
+    createdAt
+    updatedAt
+    jogadoresPeladaPeladaId
+    jogadoresPeladaJogadoresId
+    __typename
+  }
+}
+
+subscription OnCreatePelada($filter: ModelSubscriptionPeladaFilterInput) {
+  onCreatePelada(filter: $filter) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnUpdatePelada($filter: ModelSubscriptionPeladaFilterInput) {
+  onUpdatePelada(filter: $filter) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnDeletePelada($filter: ModelSubscriptionPeladaFilterInput) {
+  onDeletePelada(filter: $filter) {
+    id
+    data
+    qntJogadores
+    duracaoPartida
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    createdAt
+    updatedAt
+    peladaGrupoId
+    peladaJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnCreateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
+  onCreateJogadores(filter: $filter) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnUpdateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
+  onUpdateJogadores(filter: $filter) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnDeleteJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
+  onDeleteJogadores(filter: $filter) {
+    id
+    nome
+    email
+    telefone
+    foto
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    JogadoresPelada {
+      id
+      createdAt
+      updatedAt
+      jogadoresPeladaPeladaId
+      jogadoresPeladaJogadoresId
+      __typename
+    }
+    time
+    aniversario
+    escudo
+    posicao
+    createdAt
+    updatedAt
+    jogadoresGrupoId
+    jogadoresJogadoresPeladaId
+    __typename
+  }
+}
+
+subscription OnCreateGrupo($filter: ModelSubscriptionGrupoFilterInput) {
+  onCreateGrupo(filter: $filter) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnUpdateGrupo($filter: ModelSubscriptionGrupoFilterInput) {
+  onUpdateGrupo(filter: $filter) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnDeleteGrupo($filter: ModelSubscriptionGrupoFilterInput) {
+  onDeleteGrupo(filter: $filter) {
+    id
+    nome
+    icon
+    createdAt
+    updatedAt
+    __typename
+  }
+}

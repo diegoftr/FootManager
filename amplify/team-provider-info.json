@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-peladadesabado-staging-01011-authRole",
+      "UnauthRoleArn": "arn:aws:iam::941380333541:role/amplify-peladadesabado-staging-01011-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::941380333541:role/amplify-peladadesabado-staging-01011-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-peladadesabado-staging-01011-deployment",
+      "UnauthRoleName": "amplify-peladadesabado-staging-01011-unauthRole",
+      "StackName": "amplify-peladadesabado-staging-01011",
+      "StackId": "arn:aws:cloudformation:us-east-2:941380333541:stack/amplify-peladadesabado-staging-01011/bdd7f240-5100-11ee-a121-0a58bd4f805f",
+      "AmplifyAppId": "d2z08mx8ig9kko"
+    },
+    "categories": {
+      "auth": {
+        "PeladaDeSabado": {}
+      }
+    }
+  }
+}
