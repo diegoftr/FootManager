@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetalharGrupoComponent } from './detalhar-grupo/detalhar-grupo.component';
 import { JogadoresComponent } from './jogadores/jogadores.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -15,6 +16,9 @@ import { HomeComponent } from './home/home.component';
   },{
     path: 'jogadores',
     component: JogadoresComponent,
+  },{
+    path: 'login',
+    component: LoginComponent,
   }];
 
 @NgModule({

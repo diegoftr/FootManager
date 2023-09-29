@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "PeladaDeSabado": {}
+      },
+      "api": {
+        "PeladaDeSabado": {}
+      },
+      "storage": {
+        "fotosjogadores": {}
       }
     }
   }

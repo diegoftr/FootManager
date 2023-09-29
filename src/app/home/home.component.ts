@@ -37,4 +37,5 @@ export class HomeComponent {
   acaoBotaoDetalharGrupo(idGrupo:String) {
     this.router.navigate(['/detalharGrupo'], { queryParams: { idGrupo: idGrupo}});
   }
+
 }

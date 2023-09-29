@@ -22,6 +22,9 @@ import { MatSliderModule} from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { LoginComponent } from './login/login.component';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 
 
@@ -32,6 +35,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     DetalharGrupoComponent,
     HomeComponent,
     JogadoresComponent,
+    LoginComponent,
     
   ],
   imports: [
@@ -39,6 +43,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatToolbarModule,
     MatButtonModule,
     MatSliderModule,
+    AmplifyAuthenticatorModule,
     MatIconModule,
     MatMenuModule,
     MatSelectModule,
@@ -50,7 +55,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatListModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ImageCropperModule
   ],
   schemas: [],
   providers: [

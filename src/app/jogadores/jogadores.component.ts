@@ -1,38 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService, Grupo, Jogadores } from '../API.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Escudo, Time } from 'src/entidades/entidades';
+import { LoadedImage } from 'ngx-image-cropper';
 
+import { v4 as uuid } from 'uuid';
+
+
+import { Storage } from 'aws-amplify';
 
 @Component({
   selector: 'app-jogadores',
   templateUrl: './jogadores.component.html',
   styleUrls: ['./jogadores.component.css']
 })
-export class JogadoresComponent {
+export class JogadoresComponent implements OnInit {
 
   grupo!: Grupo;
   jogadores: Array<Jogadores> = [];
   isInclusao!: Boolean;
   isAlteracao!: Boolean;
   form: FormGroup = new FormGroup({});
-  times: Array<Time> = [ { nome: 'Brasil' }, { nome: 'América de Natal' },   { nome: 'Atlético Goianiense' },   { nome: 'Atlético Mineiro' },   { nome: 'Atlético Paranaense' },   { nome: 'Avaí' },   { nome: 'Bahia' },   { nome: 'Botafogo' },   { nome: 'Bragantino' },   { nome: 'Ceará' },   { nome: 'Chapecoense' },   { nome: 'Corinthians' },   { nome: 'Coritiba' },   { nome: 'CRB' },   { nome: 'Criciúma' },   { nome: 'Cruzeiro' },   { nome: 'CSA' },   { nome: 'Flamengo' },   { nome: 'Fluminense' },   { nome: 'Fortaleza' },   { nome: 'Figueirense' },   { nome: 'Goiás' },   { nome: 'Grêmio' },   { nome: 'Guarani' },   { nome: 'Internacional' },   { nome: 'Internacional de Limeira' },   { nome: 'Joinville' },   { nome: 'Juventude' },   { nome: 'Londrina' },   { nome: 'Luverdense' },   { nome: 'Náutico' },   { nome: 'Palmeiras' },   { nome: 'Paraná' },   { nome: 'Paysandu' },   { nome: 'Ponte Preta' },   { nome: 'Portuguesa' },   { nome: 'Remo' },   { nome: 'Rio Ave' },   { nome: 'Santa Clara' },   { nome: 'Santa Cruz' },   { nome: 'Santo André' },   { nome: 'Santos' },   { nome: 'São Bento' },   { nome: 'São Caetano' },   { nome: 'São Paulo' },   { nome: 'Sampaio Corrêa' },   { nome: 'Santa Clara' },   { nome: 'Sport Recife' },   { nome: 'Vasco da Gama' },   { nome: 'Vila Nova' },   { nome: 'Vitória' }];
-  escudos: Array<Escudo> = [ {nome:'vermelha'}, {nome:'100'}, {nome:'aniversariante'}, {nome:'azul'}, {nome:'bronze'}, {nome:'diamanteazul'}, {nome:'diamanteroxa'}, {nome:'diamentebranca'}, {nome:'heroi'}, {nome:'heroi2'}, {nome:'icone'}, {nome:'ouro'}, {nome:'ouropreto'}, {nome:'pichação'}, {nome:'prata'}];
+  times: Array<Time> = [{ nome: 'Brasil' }, { nome: 'América de Natal' }, { nome: 'Atlético Goianiense' }, { nome: 'Atlético Mineiro' }, { nome: 'Atlético Paranaense' }, { nome: 'Avaí' }, { nome: 'Bahia' }, { nome: 'Botafogo' }, { nome: 'Bragantino' }, { nome: 'Ceará' }, { nome: 'Chapecoense' }, { nome: 'Corinthians' }, { nome: 'Coritiba' }, { nome: 'CRB' }, { nome: 'Criciúma' }, { nome: 'Cruzeiro' }, { nome: 'CSA' }, { nome: 'Flamengo' }, { nome: 'Fluminense' }, { nome: 'Fortaleza' }, { nome: 'Figueirense' }, { nome: 'Goiás' }, { nome: 'Grêmio' }, { nome: 'Guarani' }, { nome: 'Internacional' }, { nome: 'Internacional de Limeira' }, { nome: 'Joinville' }, { nome: 'Juventude' }, { nome: 'Londrina' }, { nome: 'Luverdense' }, { nome: 'Náutico' }, { nome: 'Palmeiras' }, { nome: 'Paraná' }, { nome: 'Paysandu' }, { nome: 'Ponte Preta' }, { nome: 'Portuguesa' }, { nome: 'Remo' }, { nome: 'Rio Ave' }, { nome: 'Santa Clara' }, { nome: 'Santa Cruz' }, { nome: 'Santo André' }, { nome: 'Santos' }, { nome: 'São Bento' }, { nome: 'São Caetano' }, { nome: 'São Paulo' }, { nome: 'Sampaio Corrêa' }, { nome: 'Santa Clara' }, { nome: 'Sport Recife' }, { nome: 'Vasco da Gama' }, { nome: 'Vila Nova' }, { nome: 'Vitória' }];
+  escudos: Array<Escudo> = [{ nome: 'Bronze' }, { nome: 'Prata' }, { nome: 'Ouro' }, { nome: 'Pichação' }, { nome: 'Vermelha' }, { nome: '100' }, { nome: 'Azul' }, { nome: 'DiamanteAzul' }, { nome: 'DiamanteRoxa' }, { nome: 'DiamenteBranca' }, { nome: 'Heroi' }, { nome: 'Heroi2' }, { nome: 'Icone' } ];
+  posicoes: Array<Escudo> = [{ nome: 'GOL' }, { nome: 'ZAG' }, { nome: 'LD' }, { nome: 'LE' }, { nome: 'VOL' }, { nome: 'MC' }, { nome: 'MD' }, { nome: 'ME' }, { nome: 'MEI' }, { nome: 'PE' }, { nome: 'PD' }, { nome: 'SA' }, { nome: 'ATA' }];
 
-  constructor(private router: Router, private activateRouter:ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
+  imageChangedEvent: any = '';
+  croppedImage: any = null;
 
+
+  constructor(private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
+
+    
+  }
+
+  ngOnInit() {
     this.form = new FormGroup({
-      id: new FormControl(null, Validators.required),
+      id: new FormControl(null),
       nome: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.email]),
-      telefone: new FormControl(null),
-      foto: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      telefone: new FormControl(null, Validators.required),
+      foto: new FormControl(null),
       time: new FormControl(null, Validators.required),
       aniversario: new FormControl(null, Validators.required),
       escudo: new FormControl(null, Validators.required),
-      posicao: new FormControl(null, Validators.required)
+      posicao: new FormControl(null, Validators.required),
+      jogadoresGrupoId: new FormControl(null),
+      jogadoresJogadoresPeladaId: new FormControl(null),
     });
 
     this.spinner.show();
@@ -43,13 +59,19 @@ export class JogadoresComponent {
           eq: idGrupo
         }
       };
-      api.GetGrupo(idGrupo).then(g=> {
-        api.ListJogadores(filter).then(jogadores => {
+      this.api.GetGrupo(idGrupo).then(g => {
+        this.api.ListJogadores(filter).then(jogadores => {
           this.jogadores = (jogadores as any).items;
-          
+          this.jogadores.forEach((j, idx, array) => {
+            Storage.get(j.foto!).then(arquivo=> {
+              j.foto = arquivo;
+              if (idx === array.length - 1){ 
+                this.spinner.hide();
+            }
+            });
+          });
           this.jogadores.sort((a, b) => {
-            // Use o operador de comparação ">" para ordenar por nome em ordem alfabética crescente
-            if(a.nome != null && b.nome != null) {
+            if (a.nome != null && b.nome != null) {
               if (a.nome > b.nome) {
                 return 1;
               } else if (a.nome < b.nome) {
@@ -60,48 +82,98 @@ export class JogadoresComponent {
             }
             return 0;
           });
-          
           this.grupo = g;
-          this.spinner.hide();
         });
 
       });
 
     });
   }
-  
+
+  salvarJogador() {
+    this.spinner.show();
+    if(this.form.valid && this.croppedImage != null) {
+      var telefone = this.form.get('telefone')?.value;
+      this.form.get('telefone')?.setValue('+55' + telefone);
+      var dateAniversario = this.form.get('aniversario')?.value;
+
+      const ano = dateAniversario.getFullYear().toString().padStart(4, '0');
+      const mes = (dateAniversario.getMonth() + 1).toString().padStart(2, '0'); 
+      const dia = dateAniversario.getDate().toString().padStart(2, '0');
+      const dataFormatada = `${ano}-${mes}-${dia}`;
+
+      this.form.get('aniversario')?.setValue(dataFormatada);
+      this.form.get('jogadoresGrupoId')?.setValue(this.grupo.id);
+      this.form.get('id')?.setValue(uuid());
+
+      fetch(this.croppedImage)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], "File name",{ type: "image/png" })
+        Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then(a => {
+          this.form.get('foto')?.setValue(a.key)
+          this.api.CreateJogadores(this.form.value).then(a => {
+            this.isInclusao = false;
+            this.isAlteracao = false;
+            this.limparForm();
+            this.ngOnInit();
+            this.spinner.hide();
+          });
+        })
+      })
+    } else {
+      this.spinner.hide();
+    }
+  }
+
+  limparForm() {
+    this.form = new FormGroup({
+      id: new FormControl(null),
+      nome: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      telefone: new FormControl(null, Validators.required),
+      foto: new FormControl(null),
+      time: new FormControl(null, Validators.required),
+      aniversario: new FormControl(null, Validators.required),
+      escudo: new FormControl(null, Validators.required),
+      posicao: new FormControl(null, Validators.required),
+      jogadoresGrupoId: new FormControl(null),
+      jogadoresJogadoresPeladaId: new FormControl(null),
+    });
+  }
+
 
   incluirNovoJogador() {
     this.isInclusao = true;
   }
 
   calcularIdade(aniversario?: string) {
-    if(aniversario) {
+    if (aniversario) {
       const partesDataNascimento = aniversario.split('-');
       const anoNascimento = parseInt(partesDataNascimento[0]);
       const mesNascimento = parseInt(partesDataNascimento[1]);
       const diaNascimento = parseInt(partesDataNascimento[2]);
-    
+
       const dataAtual = new Date();
-    
+
       const anoAtual = dataAtual.getFullYear();
       const mesAtual = dataAtual.getMonth() + 1;
-      const diaAtual = dataAtual.getDate(); 
-    
+      const diaAtual = dataAtual.getDate();
+
       let idade = anoAtual - anoNascimento;
-    
+
       if (mesAtual < mesNascimento || (mesAtual === mesNascimento && diaAtual < diaNascimento)) {
         idade--;
       }
-    
+
       return idade;
     }
     return 0;
   }
 
   formatarDataAniversario(data?: string) {
-    if(data) {
-      const partesData = data.split('-'); 
+    if (data) {
+      const partesData = data.split('-');
       const mes = partesData[1];
       const dia = partesData[2];
       const dataFormatada = `${dia}/${mes}`;
@@ -111,7 +183,64 @@ export class JogadoresComponent {
   }
 
   acaoVoltar() {
-    this.router.navigate(['/detalharGrupo'], { queryParams: { idGrupo: this.grupo.id}});
+    if(this.isInclusao || this.isAlteracao) {
+      this.router.navigate(['/jogadores'], { queryParams: { idGrupo: this.grupo.id } });
+
+    } else {
+      this.router.navigate(['/detalharGrupo'], { queryParams: { idGrupo: this.grupo.id } });
+
+    }
+  }
+
+  capturarFotoSelfie($event: any): void {
+
+    this.imageChangedEvent = $event;
+
+    this.spinner.show();
+    var file: File = $event.target.files[0];
+    var myReader: FileReader = new FileReader();
+
+    var fotoSelfie = (<HTMLInputElement>document.getElementById('fotoSelfie'));
+
+    myReader.onloadend = (e) => {
+      if (e != null && e.target != null && e.target.result != null) {
+
+        fotoSelfie.value = e.target.result.toString()
+        this.spinner.hide();
+
+      }
+
+    }
+    if (file)
+      myReader.readAsDataURL(file);
+  }
+
+  isSelfie() {
+    var fotoSelfie = (<HTMLInputElement>document.getElementById('fotoSelfie'));
+
+    if (fotoSelfie && fotoSelfie.value != '') {
+      return true
+    }
+    return false
+  }
+
+  imageCropped(event: any) {
+    // this.croppedImage = event.blob.toString();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(event.blob);
+    return new Promise(resolve => {
+      reader.onloadend = () => {
+        this.croppedImage = reader.result;
+      };
+    });
+
+  }
+  imageLoaded(image: LoadedImage) {
+  }
+  cropperReady() {
+  }
+  loadImageFailed() {
   }
 
 }
