@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Escudo, Time } from 'src/entidades/entidades';
 import { LoadedImage } from 'ngx-image-cropper';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
 
 import { v4 as uuid } from 'uuid';
 
@@ -23,7 +24,7 @@ export class JogadoresComponent implements OnInit {
   isInclusao!: Boolean;
   isAlteracao!: Boolean;
   form: FormGroup = new FormGroup({});
-  times: Array<Time> = [{ nome: 'Brasil' }, { nome: 'América de Natal' }, { nome: 'Atlético Goianiense' }, { nome: 'Atlético Mineiro' }, { nome: 'Atlético Paranaense' }, { nome: 'Avaí' }, { nome: 'Bahia' }, { nome: 'Botafogo' }, { nome: 'Bragantino' }, { nome: 'Ceará' }, { nome: 'Chapecoense' }, { nome: 'Corinthians' }, { nome: 'Coritiba' }, { nome: 'CRB' }, { nome: 'Criciúma' }, { nome: 'Cruzeiro' }, { nome: 'CSA' }, { nome: 'Flamengo' }, { nome: 'Fluminense' }, { nome: 'Fortaleza' }, { nome: 'Figueirense' }, { nome: 'Goiás' }, { nome: 'Grêmio' }, { nome: 'Guarani' }, { nome: 'Internacional' }, { nome: 'Internacional de Limeira' }, { nome: 'Joinville' }, { nome: 'Juventude' }, { nome: 'Londrina' }, { nome: 'Luverdense' }, { nome: 'Náutico' }, { nome: 'Palmeiras' }, { nome: 'Paraná' }, { nome: 'Paysandu' }, { nome: 'Ponte Preta' }, { nome: 'Portuguesa' }, { nome: 'Remo' }, { nome: 'Rio Ave' }, { nome: 'Santa Clara' }, { nome: 'Santa Cruz' }, { nome: 'Santo André' }, { nome: 'Santos' }, { nome: 'São Bento' }, { nome: 'São Caetano' }, { nome: 'São Paulo' }, { nome: 'Sampaio Corrêa' }, { nome: 'Santa Clara' }, { nome: 'Sport Recife' }, { nome: 'Vasco da Gama' }, { nome: 'Vila Nova' }, { nome: 'Vitória' }];
+  times: Array<Time> = [{ nome: 'Brasil' }, { nome: 'América de Natal' }, { nome: 'Atlético Goianiense' }, { nome: 'Atlético Mineiro' }, { nome: 'Atlético Paranaense' }, { nome: 'Avaí' }, { nome: 'Bahia' }, { nome: 'Botafogo' }, { nome: 'Bragantino' }, { nome: 'Ceará' }, { nome: 'Chapecoense' }, { nome: 'Corinthians' }, { nome: 'Coritiba' }, { nome: 'Criciúma' }, { nome: 'Cruzeiro' }, { nome: 'Flamengo' }, { nome: 'Fluminense' }, { nome: 'Fortaleza' }, { nome: 'Figueirense' }, { nome: 'Goiás' }, { nome: 'Grêmio' }, { nome: 'Internacional' }, { nome: 'Internacional de Limeira' }, { nome: 'Joinville' }, { nome: 'Juventude' }, { nome: 'Londrina' }, { nome: 'Luverdense' }, { nome: 'Náutico' }, { nome: 'Palmeiras' }, { nome: 'Paraná' }, { nome: 'Paysandu' }, { nome: 'Ponte Preta' }, { nome: 'Portuguesa' }, { nome: 'Remo' }, { nome: 'Rio Ave' }, { nome: 'Santa Clara' }, { nome: 'Santa Cruz' }, { nome: 'Santo André' }, { nome: 'Santos' }, { nome: 'São Bento' }, { nome: 'São Caetano' }, { nome: 'São Paulo' }, { nome: 'Sampaio Corrêa' }, { nome: 'Santa Clara' }, { nome: 'Sport Recife' }, { nome: 'Vasco da Gama' }, { nome: 'Vila Nova' }, { nome: 'Vitória' }];
   escudos: Array<Escudo> = [{ nome: 'Bronze' }, { nome: 'Prata' }, { nome: 'Ouro' }, { nome: 'Pichação' }, { nome: 'Vermelha' }, { nome: '100' }, { nome: 'Azul' }, { nome: 'DiamanteAzul' }, { nome: 'DiamanteRoxa' }, { nome: 'DiamenteBranca' }, { nome: 'Heroi' }, { nome: 'Heroi2' }, { nome: 'Icone' }];
   posicoes: Array<Escudo> = [{ nome: 'GOL' }, { nome: 'ZAG' }, { nome: 'LD' }, { nome: 'LE' }, { nome: 'VOL' }, { nome: 'MC' }, { nome: 'MD' }, { nome: 'ME' }, { nome: 'MEI' }, { nome: 'PE' }, { nome: 'PD' }, { nome: 'SA' }, { nome: 'ATA' }];
 
@@ -31,9 +32,12 @@ export class JogadoresComponent implements OnInit {
   croppedImage: any = null;
 
 
-  constructor(private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
+  constructor(private authenticator: AuthenticatorService, private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
 
+  }
 
+  isLogado() {
+    return this.authenticator.user != null;
   }
 
   ngOnInit() {
