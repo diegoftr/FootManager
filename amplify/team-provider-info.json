@@ -19,7 +19,11 @@
         "PeladaDeSabado": {}
       },
       "storage": {
-        "fotosjogadores": {}
+        "fotosjogadores": {},
+        "peladadesabado0599d003": {
+          "bucketName": "stlbuckt213907-dev",
+          "region": "us-east-1"
+        }
       }
     }
   }
