@@ -18,10 +18,10 @@
         <div *ngIf="!isInclusao && !isAlteracao" id="tabela" class="tabela" style="height: 100%; width: 280px;">
             <div *ngFor="let jogador of jogadores; let i = index" style="height: 400px; width: 80%;">
                 <div style="position: relative; width: 280px;  left: -10px "><img style="width: 280px;" src="assets/escudos/{{jogador.escudo}}.png"/></div>
-                <div style="position: relative;left: 40%;bottom: 357px;"><img src="{{jogador.foto}}" style="width: 153px" /></div>
+                <div style="position: relative;left: 43%;bottom: 357px;"><img src="{{jogador.foto}}" style="width: 153px" /></div>
                 <div class="nome" style="font-size: 24px;color: black;position: relative;top: -360px;left: 17%;font-family: ea;width: 100%;text-align: center;">{{jogador.nome}}</div>
-                <div style="position: relative;left: -20%;bottom: 120%;text-align: center;"><img style="max-height: 70px;" src="assets/times/{{jogador.time}}.png" /></div>
-                <div style="font-size: 24px;color: black;position: relative;top: -148%;left: -20%;font-family: ea;text-align: center;">{{jogador.posicao}}</div>
+                <div style="position: relative;left: -16%;bottom: 120%;text-align: center;"><img style="max-height: 70px;" src="assets/times/{{jogador.time}}.png" /></div>
+                <div style="font-size: 24px;color: black;position: relative;top: -148%;left: -15%;font-family: ea;text-align: center;">{{jogador.posicao}}</div>
                 <div style="font-size: 14px;color: black;position: relative;top: -113%;left: 20%;font-family: ea;text-align: left;">Idade: {{calcularIdade(jogador.aniversario!)}}</div>
                 <div style="font-size: 14px;color: black;position: relative;top: -113%;left: 20%;font-family: ea;text-align: left;">Aniver: {{formatarDataAniversario(jogador.aniversario!)}}</div>
                 <div style="font-size: 14px;color: black;position: relative;top: -113%;left: 20%;font-family: ea;text-align: left;">Gols: 0</div>
