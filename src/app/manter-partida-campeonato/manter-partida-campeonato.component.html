@@ -1,0 +1,106 @@
+<form id="form" [formGroup]="form">
+    <div class="content2" role="main">
+        <div class="voltar">
+            <a (click)='acaoVoltar()'><svg height="34px" width="34px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <polygon style="fill:#ff9911;" points="370.552,497.491 83.082,255.978 370.552,14.465 "></polygon> <path d="M376.935,1.354c-5.1-2.376-10.973-1.581-15.275,2.036L74.258,244.905c-3.272,2.747-5.126,6.801-5.126,11.073 s1.906,8.326,5.176,11.073l287.478,241.513c2.658,2.233,5.969,3.39,9.311,3.39c2.071,0,3.883-0.445,5.833-1.354 c5.095-2.375,8.082-7.488,8.082-13.109V14.465C385.015,8.842,382.031,3.729,376.935,1.354z M356.089,466.45L105.567,255.978 L356.089,45.505V466.45z"></path> <path d="M428.405,0.002c-7.987,0-14.463,6.477-14.463,14.463v483.072c0,7.987,6.477,14.463,14.463,14.463 s14.463-6.477,14.463-14.463V14.465C442.868,6.477,436.391,0.002,428.405,0.002z"></path> </g></svg></a>
+            <span class="titulo" style="padding-bottom: 5px;">{{campeonato != null ? campeonato.nome : ''}}</span>
+            <a style="width: 34px;"></a>
+        </div>
+
+        <br>
+        <span class="titulo" style="color: white;">PARTIDAS</span>
+        <br>
+
+        <div *ngIf="isAlteracao && partida != null && partida!.EquipeA != null && partida!.EquipeB != null" class="tabela" style="height: 100%;">
+            <div style="text-align: center; width: 100%;">
+                <span class="titulo" style="color: white;font-size: 70px;"><img height="54px" src='assets/times/{{partida!.EquipeA!.pais}}.png' >{{golsMarcados(partida!.EquipeA!.id)}} X {{golsMarcados(partida!.EquipeB!.id)}}<img height="54px" src='assets/times/{{partida!.EquipeB!.pais}}.png' ></span>
+            </div>
+            <br>
+            <table style="width: 100%;">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Gol</th>
+                    <th>Assistencia</th>
+                </tr>
+                <tr *ngFor="let gol of gols; let i2 = index" >
+                    <td><svg (click)="excluirGol(gol.id)" height="32px" width="32px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#B8C8D9;" d="M322.783,100.174H189.217c-9.228,0-16.696-7.467-16.696-16.696V16.696 C172.521,7.467,179.989,0,189.217,0h133.566c9.228,0,16.696,7.467,16.696,16.696v66.783 C339.479,92.707,332.011,100.174,322.783,100.174z M205.913,66.783h100.174V33.391H205.913V66.783z"></path> <path style="fill:#A3B8CC;" d="M322.783,0H256v33.391h50.087v33.391H256v33.391h66.783c9.228,0,16.696-7.467,16.696-16.696V16.696 C339.479,7.467,332.011,0,322.783,0z"></path> <path style="fill:#B8C8D9;" d="M422.957,133.566H89.043c-9.18,0-16.696,7.477-16.696,16.696v345.045 c0,9.214,7.482,16.693,16.696,16.693h333.914c9.214,0,16.696-7.48,16.696-16.693V150.262 C439.653,141.043,432.138,133.566,422.957,133.566z"></path> <path style="fill:#A3B8CC;" d="M422.957,133.566H256V512h166.957c9.214,0,16.696-7.48,16.696-16.693V150.262 C439.653,141.043,432.138,133.566,422.957,133.566z"></path> <g> <path style="fill:#E6F3FF;" d="M239.304,217.044v211.479c0,9.22,7.474,16.696,16.696,16.696c9.221,0,16.696-7.475,16.696-16.696 V217.044c0-9.223-7.475-16.696-16.696-16.696C246.778,200.349,239.304,207.822,239.304,217.044"></path> <path style="fill:#E6F3FF;" d="M139.13,217.044v211.479c0,9.22,7.474,16.696,16.696,16.696c9.22,0,16.696-7.475,16.696-16.696 V217.044c0-9.223-7.475-16.696-16.696-16.696C146.604,200.349,139.13,207.822,139.13,217.044"></path> </g> <g> <path style="fill:#CFDBE6;" d="M339.479,217.044v211.479c0,9.22,7.474,16.696,16.696,16.696c9.22,0,16.696-7.475,16.696-16.696 V217.044c0-9.223-7.475-16.696-16.696-16.696C346.953,200.349,339.479,207.822,339.479,217.044"></path> <path style="fill:#CFDBE6;" d="M256,200.349v244.871c9.221,0,16.696-7.475,16.696-16.696V217.044 C272.696,207.822,265.22,200.349,256,200.349z"></path> </g> <path style="fill:#E6F3FF;" d="M456.349,66.783H55.651c-9.18,0-16.696,7.477-16.696,16.696v66.783 c0,9.214,7.482,16.693,16.696,16.693h400.697c9.214,0,16.696-7.48,16.696-16.693V83.479 C473.044,74.317,465.586,66.783,456.349,66.783z"></path> <path style="fill:#CFDBE6;" d="M456.349,66.783H256v100.172h200.349c9.214,0,16.696-7.48,16.696-16.693V83.479 C473.044,74.317,465.586,66.783,456.349,66.783z"></path> </g></svg></td>
+                    <td><img height="20px" src='assets/times/{{gol.EquipeCampeonato?.pais}}.png' > {{gol.EquipeCampeonato?.nome}}</td>
+                    <td>{{gol.JogadoresGol?.Jogadores?.nome}}</td>
+                    <td>{{gol.JogadoresAssistencia?.Jogadores?.nome}}</td>
+                </tr>
+            </table> 
+            <br>
+            <div>
+
+                <mat-form-field style="width: 100%;" >
+                    <mat-label>Time que marcou o gol</mat-label>
+                    <mat-select (selectionChange)="carregarJogadores($event)" formControlName="golPartidaCampeonatoEquipeCampeonatoId">
+                        <mat-option *ngFor="let time of equipes" [value]="time.id">
+                            {{time.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field style="width: 100%;" >
+                    <mat-label>Jogador marcou gol</mat-label>
+                    <mat-select formControlName="golPartidaCampeonatoJogadoresGolId">
+                        <mat-option *ngFor="let jogador of jogadoresCamp" [value]="jogador.id">
+                            {{jogador.Jogadores?.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field style="width: 100%;" >
+                    <mat-label>Jogador que deu a assistencia</mat-label>
+                    <mat-select formControlName="golPartidaCampeonatoJogadoresAssistenciaId">
+                        <mat-option *ngFor="let jogador of jogadoresCamp" [value]="jogador.id">
+                            {{jogador.Jogadores?.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div style="text-align: center; width: 100%;">
+                    <svg (click)="salvarGol()" height="50px" width="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 485.656 485.656" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#E5E8E8;" d="M466.352,165.424l-51.768-12.944l-58.264,29.128l-21.752,72.504l43.144,50.336l54.376,6.8 c23.552-30.92,37.568-69.472,37.568-111.248C469.656,188.184,468.488,176.632,466.352,165.424z"></path> <path style="fill:#E07940;" d="M368.904,364.016c19.104-9.736,36.288-22.696,50.832-38.192l-40.032-5L368.904,364.016z"></path> <g> <path style="fill:#E5E8E8;" d="M249.336,264.192l-42.92,49.976l14.536,58.112c20.144,7.592,41.936,11.752,64.696,11.752 c22.616,0,44.28-4.136,64.312-11.632l0.464-0.472l14.464-57.752l-42.912-49.984H249.336z"></path> <path style="fill:#E5E8E8;" d="M293.656,124l56.84,42.632l56.768-28.384l20.584-54.888C404.6,55.072,373.08,33.856,337.04,23.352 l-43.384,28.936V124z"></path> </g> <g> <path style="fill:#E07940;" d="M462.088,147.864c-5.216-17.616-12.992-34.136-22.912-49.128l-14.88,39.68L462.088,147.864z"></path> <path style="fill:#E07940;" d="M151.576,325.824c14.544,15.488,31.728,28.448,50.832,38.192l-10.8-43.192L151.576,325.824z"></path> <path style="fill:#E07940;" d="M315.536,18.464c-9.728-1.6-19.704-2.464-29.88-2.464s-20.152,0.864-29.88,2.464l29.88,19.928 L315.536,18.464z"></path> <polygon style="fill:#E07940;" points="230.92,179.144 251.608,248.192 319.704,248.192 340.392,179.144 285.656,138.096 "></polygon> </g> <path style="fill:#E5E8E8;" d="M236.736,254.112l-21.752-72.504L156.72,152.48l-51.768,12.944 c-2.128,11.208-3.296,22.76-3.296,34.576c0,41.776,14.016,80.32,37.56,111.24l54.376-6.8L236.736,254.112z"></path> <path style="fill:#E07940;" d="M132.136,98.736c-9.92,14.992-17.696,31.512-22.912,49.128l37.792-9.448L132.136,98.736z"></path> <path style="fill:#E5E8E8;" d="M220.816,166.64l56.84-42.64V52.288L234.264,23.36c-36.04,10.504-67.56,31.72-90.808,60.008 l20.584,54.888L220.816,166.64z"></path> <path style="fill:#334C5B;" d="M285.656,0C192.464,0,113.968,64.072,91.872,150.472L16,226.344l11.312,11.312l59.568-59.568 c-0.784,7.2-1.224,14.504-1.224,21.912c0,4.128,0.168,8.208,0.416,12.272L0,298.344l11.312,11.312l77.048-77.048 c1.52,9.224,3.64,18.248,6.376,27L0,354.344l11.312,11.312l89.464-89.456c3.944,9.544,8.584,18.736,13.904,27.472L0,418.344 l11.312,11.312l112.44-112.44c4.656,6.408,9.664,12.544,15.024,18.352L0,474.344l11.312,11.312L150.088,346.88 c7.208,6.656,14.896,12.8,23.024,18.352L64,474.344l11.312,11.312l111.752-111.752c8.976,5.104,18.368,9.552,28.128,13.24 L128,474.344l11.312,11.312l92.952-92.952c11.288,3.136,22.968,5.312,34.96,6.416L192,474.344l11.312,11.312l85.744-85.744 c12.824-0.216,25.368-1.6,37.512-4.136L264,458.344l11.312,11.312l83.624-83.616c74.12-29.304,126.72-101.616,126.72-186.04 C485.656,89.72,395.936,0,285.656,0z M462.088,147.864l-37.792-9.448l14.88-39.68C449.096,113.728,456.872,130.248,462.088,147.864z M427.848,83.368l-20.584,54.888l-56.768,28.384L293.656,124V52.288l43.392-28.928C373.088,33.864,404.6,55.08,427.848,83.368z M340.392,179.144l-20.688,69.048h-68.096l-20.688-69.048l54.736-41.048L340.392,179.144z M285.656,16 c10.176,0,20.152,0.864,29.88,2.464l-29.88,19.928l-29.88-19.92C265.504,16.872,275.48,16,285.656,16z M234.264,23.36l43.392,28.928 v71.72l-56.84,42.632l-56.768-28.384l-20.584-54.888C166.712,55.08,198.224,33.864,234.264,23.36z M132.136,98.736l14.88,39.68 l-37.792,9.448C114.44,130.248,122.216,113.728,132.136,98.736z M139.216,311.248c-23.544-30.92-37.56-69.472-37.56-111.248 c0-11.824,1.168-23.368,3.304-34.576l51.768-12.944l58.264,29.128l21.752,72.504L193.6,304.448L139.216,311.248z M151.576,325.824 l40.032-5l10.8,43.192C183.304,354.272,166.12,341.312,151.576,325.824z M350.432,371.912l-0.464,0.464 C329.936,379.872,308.272,384,285.656,384c-22.76,0-44.56-4.184-64.696-11.776l-14.536-58.064l42.912-49.968h72.64l42.92,49.976 L350.432,371.912z M368.904,364.016l10.8-43.192l40.032,5C405.192,341.312,388.008,354.272,368.904,364.016z M377.72,304.448 l-43.144-50.336l21.752-72.504l58.264-29.128l51.768,12.944c2.128,11.208,3.296,22.76,3.296,34.576 c0,41.776-14.016,80.32-37.56,111.24L377.72,304.448z"></path> </g></svg>
+                </div>
+            </div>
+        </div>
+
+        
+        <div *ngIf="isInclusao" class="tabela" style="height: 100%;">
+            <mat-form-field style="width: 100%;" >
+                <mat-label>Time A</mat-label>
+                <mat-select formControlName="partidaCampeonatoEquipeAId">
+                    <mat-option *ngFor="let time of equipes" [value]="time.id">
+                        {{time.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;" >
+                <mat-label>Time B</mat-label>
+                <mat-select formControlName="partidaCampeonatoEquipeBId">
+                    <mat-option *ngFor="let time of equipes" [value]="time.id">
+                        {{time.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;" >
+                <mat-label>Tipo Partida</mat-label>
+                <mat-select formControlName="tipoPartida">
+                    <mat-option *ngFor="let tipoPartida of tiposPartidas" [value]="tipoPartida">
+                        {{tipoPartida}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <button mat-raised-button class="botao" (click)="salvarPartida()">SALVAR</button>
+            </div>
+        </div>
+    
+    </div>
+
+</form>

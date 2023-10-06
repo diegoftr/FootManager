@@ -1,0 +1,29 @@
+<form id="form" [formGroup]="form">
+    <div class="content2" role="main">
+
+        <div class="tabela" style="height: 100%;">
+            <mat-form-field style="width: 100%;">
+                <mat-label><span>Nome</span></mat-label>
+                <input matInput type="string" maxlength="150" formControlName="nome">
+            </mat-form-field>
+
+
+            <mat-form-field style="width: 100%;">
+                <mat-label>País</mat-label>
+                <mat-select formControlName="pais">
+                    <mat-option *ngFor="let pais of paises" [value]="pais.nome">
+                        {{pais.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <button mat-raised-button class="botao" (click)="salvarEquipe()">SALVAR</button>
+            </div>
+
+
+        </div>
+    </div>
+</form>

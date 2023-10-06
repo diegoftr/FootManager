@@ -25,6 +25,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { LoginComponent } from './login/login.component';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { PartidasComponent } from './partidas/partidas.component';
+import { PeladaComponent } from './pelada/pelada.component';
+import { CampeonatosComponent } from './campeonatos/campeonatos.component';
+import { DetalharCampeonatoComponent } from './detalhar-campeonato/detalhar-campeonato.component';
+import { ManterEquipeCampeonatoComponent } from './manter-equipe-campeonato/manter-equipe-campeonato.component';
+import { SelecionarJogadoresComponent } from './selecionar-jogadores/selecionar-jogadores.component';
+import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/manter-partida-campeonato.component';
 
 
 
@@ -36,6 +43,13 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
     HomeComponent,
     JogadoresComponent,
     LoginComponent,
+    PartidasComponent,
+    PeladaComponent,
+    CampeonatosComponent,
+    DetalharCampeonatoComponent,
+    ManterEquipeCampeonatoComponent,
+    SelecionarJogadoresComponent,
+    ManterPartidaCampeonatoComponent,
     
   ],
   imports: [

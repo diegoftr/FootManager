@@ -1,17 +1,251 @@
 # this is an auto generated file. This will be overwritten
 
-query GetJogadoresPelada($id: ID!) {
-  getJogadoresPelada(id: $id) {
+query GetGolPartidaCampeonato($id: ID!) {
+  getGolPartidaCampeonato(id: $id) {
     id
-    Pelada {
+    JogadoresGol {
       id
-      data
-      qntJogadores
-      duracaoPartida
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      peladaGrupoId
-      peladaJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+query ListGolPartidaCampeonatoes(
+  $filter: ModelGolPartidaCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGolPartidaCampeonatoes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      partidacampeonatoID
+      createdAt
+      updatedAt
+      golPartidaCampeonatoJogadoresGolId
+      golPartidaCampeonatoJogadoresAssistenciaId
+      golPartidaCampeonatoEquipeCampeonatoId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GolPartidaCampeonatoesByPartidacampeonatoID(
+  $partidacampeonatoID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelGolPartidaCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  golPartidaCampeonatoesByPartidacampeonatoID(
+    partidacampeonatoID: $partidacampeonatoID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      partidacampeonatoID
+      createdAt
+      updatedAt
+      golPartidaCampeonatoJogadoresGolId
+      golPartidaCampeonatoJogadoresAssistenciaId
+      golPartidaCampeonatoEquipeCampeonatoId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetPartidaCampeonato($id: ID!) {
+  getPartidaCampeonato(id: $id) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+query ListPartidaCampeonatoes(
+  $filter: ModelPartidaCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPartidaCampeonatoes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      tipoPartida
+      campeonatoID
+      createdAt
+      updatedAt
+      partidaCampeonatoEquipeAId
+      partidaCampeonatoEquipeBId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query PartidaCampeonatoesByCampeonatoID(
+  $campeonatoID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelPartidaCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  partidaCampeonatoesByCampeonatoID(
+    campeonatoID: $campeonatoID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      tipoPartida
+      campeonatoID
+      createdAt
+      updatedAt
+      partidaCampeonatoEquipeAId
+      partidaCampeonatoEquipeBId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetEquipeCampeonato($id: ID!) {
+  getEquipeCampeonato(id: $id) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+query ListEquipeCampeonatoes(
+  $filter: ModelEquipeCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEquipeCampeonatoes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetJogadoresCampeonato($id: ID!) {
+  getJogadoresCampeonato(id: $id) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
       __typename
     }
     Jogadores {
@@ -27,7 +261,138 @@ query GetJogadoresPelada($id: ID!) {
       createdAt
       updatedAt
       jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+query ListJogadoresCampeonatoes(
+  $filter: ModelJogadoresCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJogadoresCampeonatoes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query JogadoresCampeonatoesByEquipecampeonatoID(
+  $equipecampeonatoID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelJogadoresCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  jogadoresCampeonatoesByEquipecampeonatoID(
+    equipecampeonatoID: $equipecampeonatoID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetCampeonato($id: ID!) {
+  getCampeonato(id: $id) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+query ListCampeonatoes(
+  $filter: ModelCampeonatoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetJogadoresPelada($id: ID!) {
+  getJogadoresPelada(id: $id) {
+    id
+    Pelada {
+      id
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -60,7 +425,6 @@ query ListJogadoresPeladas(
 query GetPelada($id: ID!) {
   getPelada(id: $id) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -71,18 +435,9 @@ query GetPelada($id: ID!) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -95,13 +450,11 @@ query ListPeladas(
   listPeladas(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      data
       qntJogadores
       duracaoPartida
       createdAt
       updatedAt
       peladaGrupoId
-      peladaJogadoresPeladaId
       __typename
     }
     nextToken
@@ -124,14 +477,6 @@ query GetJogadores($id: ID!) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -139,7 +484,6 @@ query GetJogadores($id: ID!) {
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
@@ -163,7 +507,6 @@ query ListJogadores(
       createdAt
       updatedAt
       jogadoresGrupoId
-      jogadoresJogadoresPeladaId
       __typename
     }
     nextToken

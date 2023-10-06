@@ -26,12 +26,20 @@ export class DetalharGrupoComponent {
     });
   }
 
+  acaoBotaoDetalharPelada(idGrupo:String) {
+    this.router.navigate(['/peladas'], { queryParams: { idGrupo: idGrupo}});
+  }
+
   acaoVoltar() {
     this.router.navigate(['/home']);
   }
 
   acaoBotaoAtletas(idGrupo:String) {
     this.router.navigate(['/jogadores'], { queryParams: { idGrupo: idGrupo}});
+  }
+ 
+  acaoBotaoDetalharCampeonatos(idGrupo:String) {
+    this.router.navigate(['/campeonatos'], { queryParams: { idGrupo: idGrupo}});
   }
 
 }

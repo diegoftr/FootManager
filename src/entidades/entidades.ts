@@ -5,3 +5,7 @@ export type Time = {
 export type Escudo = {
   nome: string;
 };
+
+export type Paises = {
+  nome: string;
+};

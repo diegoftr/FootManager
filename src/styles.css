@@ -14,7 +14,9 @@ html {
     background-color: #232526;
     background-image: url('assets/background.jpg');
     background-size: 100%;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
+    font-family: ea;
+    font-size: 14px;
 }
 
 .content {
@@ -36,7 +38,7 @@ html {
 }
 
 :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: ea;
     font-size: 14px;
     color: #333;
     box-sizing: border-box;
@@ -124,4 +126,7 @@ p {
     font-weight: 400;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family:ea;font-size: 14px; }
+.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography {
+    font-family:ea;font-size: 14px;color: white;
+}

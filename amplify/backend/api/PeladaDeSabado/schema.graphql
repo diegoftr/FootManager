@@ -1,16 +1,56 @@
+type GolPartidaCampeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  JogadoresGol: JogadoresCampeonato @hasOne
+  JogadoresAssistencia: JogadoresCampeonato @hasOne
+  partidacampeonatoID: ID! @index(name: "byPartidaCampeonato")
+  EquipeCampeonato: EquipeCampeonato @hasOne
+}
+
+type PartidaCampeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  EquipeA: EquipeCampeonato @hasOne
+  EquipeB: EquipeCampeonato @hasOne
+  tipoPartida: String
+  GolPartidaCampeonatoes: [GolPartidaCampeonato] @hasMany(indexName: "byPartidaCampeonato", fields: ["id"])
+  campeonatoID: ID! @index(name: "byCampeonato")
+}
+
+type EquipeCampeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nome: String
+  pais: String
+  Campeonato: Campeonato @hasOne
+  JogadoresCampeonatoes: [JogadoresCampeonato] @hasMany(indexName: "byEquipeCampeonato", fields: ["id"])
+}
+
+type JogadoresCampeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Campeonato: Campeonato @hasOne
+  Jogadores: Jogadores @hasOne
+  classificacao: String
+  equipecampeonatoID: ID @index(name: "byEquipeCampeonato")
+}
+
+type Campeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nome: String
+  Grupo: Grupo @hasOne
+  icone: String
+  data: AWSDate
+  PartidaCampeonatoes: [PartidaCampeonato] @hasMany(indexName: "byCampeonato", fields: ["id"])
+}
+
 type JogadoresPelada @model @auth(rules: [{allow: public}]) {
   id: ID!
   Pelada: Pelada @hasOne
-  Jogadores: Jogadores @hasOne
+  Jogadores: JogadoresCampeonato @hasOne
 }
 
 type Pelada @model @auth(rules: [{allow: public}]) {
   id: ID!
-  data: AWSDate
   qntJogadores: Int
   duracaoPartida: Int
   Grupo: Grupo! @hasOne
-  JogadoresPelada: JogadoresPelada @belongsTo
 }
 
 type Jogadores @model @auth(rules: [{allow: public}]) {
@@ -20,7 +60,6 @@ type Jogadores @model @auth(rules: [{allow: public}]) {
   telefone: AWSPhone
   foto: ID
   Grupo: Grupo! @hasOne
-  JogadoresPelada: JogadoresPelada @belongsTo
   time: String
   aniversario: AWSDate
   escudo: String

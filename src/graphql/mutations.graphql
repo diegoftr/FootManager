@@ -1,20 +1,355 @@
 # this is an auto generated file. This will be overwritten
 
-mutation CreateJogadoresPelada(
-  $input: CreateJogadoresPeladaInput!
-  $condition: ModelJogadoresPeladaConditionInput
+mutation CreateGolPartidaCampeonato(
+  $input: CreateGolPartidaCampeonatoInput!
+  $condition: ModelGolPartidaCampeonatoConditionInput
 ) {
-  createJogadoresPelada(input: $input, condition: $condition) {
+  createGolPartidaCampeonato(input: $input, condition: $condition) {
     id
-    Pelada {
+    JogadoresGol {
       id
-      data
-      qntJogadores
-      duracaoPartida
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      peladaGrupoId
-      peladaJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+mutation UpdateGolPartidaCampeonato(
+  $input: UpdateGolPartidaCampeonatoInput!
+  $condition: ModelGolPartidaCampeonatoConditionInput
+) {
+  updateGolPartidaCampeonato(input: $input, condition: $condition) {
+    id
+    JogadoresGol {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+mutation DeleteGolPartidaCampeonato(
+  $input: DeleteGolPartidaCampeonatoInput!
+  $condition: ModelGolPartidaCampeonatoConditionInput
+) {
+  deleteGolPartidaCampeonato(input: $input, condition: $condition) {
+    id
+    JogadoresGol {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+mutation CreatePartidaCampeonato(
+  $input: CreatePartidaCampeonatoInput!
+  $condition: ModelPartidaCampeonatoConditionInput
+) {
+  createPartidaCampeonato(input: $input, condition: $condition) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+mutation UpdatePartidaCampeonato(
+  $input: UpdatePartidaCampeonatoInput!
+  $condition: ModelPartidaCampeonatoConditionInput
+) {
+  updatePartidaCampeonato(input: $input, condition: $condition) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+mutation DeletePartidaCampeonato(
+  $input: DeletePartidaCampeonatoInput!
+  $condition: ModelPartidaCampeonatoConditionInput
+) {
+  deletePartidaCampeonato(input: $input, condition: $condition) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+mutation CreateEquipeCampeonato(
+  $input: CreateEquipeCampeonatoInput!
+  $condition: ModelEquipeCampeonatoConditionInput
+) {
+  createEquipeCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+mutation UpdateEquipeCampeonato(
+  $input: UpdateEquipeCampeonatoInput!
+  $condition: ModelEquipeCampeonatoConditionInput
+) {
+  updateEquipeCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+mutation DeleteEquipeCampeonato(
+  $input: DeleteEquipeCampeonatoInput!
+  $condition: ModelEquipeCampeonatoConditionInput
+) {
+  deleteEquipeCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+mutation CreateJogadoresCampeonato(
+  $input: CreateJogadoresCampeonatoInput!
+  $condition: ModelJogadoresCampeonatoConditionInput
+) {
+  createJogadoresCampeonato(input: $input, condition: $condition) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
       __typename
     }
     Jogadores {
@@ -30,7 +365,207 @@ mutation CreateJogadoresPelada(
       createdAt
       updatedAt
       jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+mutation UpdateJogadoresCampeonato(
+  $input: UpdateJogadoresCampeonatoInput!
+  $condition: ModelJogadoresCampeonatoConditionInput
+) {
+  updateJogadoresCampeonato(input: $input, condition: $condition) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+mutation DeleteJogadoresCampeonato(
+  $input: DeleteJogadoresCampeonatoInput!
+  $condition: ModelJogadoresCampeonatoConditionInput
+) {
+  deleteJogadoresCampeonato(input: $input, condition: $condition) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+mutation CreateCampeonato(
+  $input: CreateCampeonatoInput!
+  $condition: ModelCampeonatoConditionInput
+) {
+  createCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+mutation UpdateCampeonato(
+  $input: UpdateCampeonatoInput!
+  $condition: ModelCampeonatoConditionInput
+) {
+  updateCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+mutation DeleteCampeonato(
+  $input: DeleteCampeonatoInput!
+  $condition: ModelCampeonatoConditionInput
+) {
+  deleteCampeonato(input: $input, condition: $condition) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+mutation CreateJogadoresPelada(
+  $input: CreateJogadoresPeladaInput!
+  $condition: ModelJogadoresPeladaConditionInput
+) {
+  createJogadoresPelada(input: $input, condition: $condition) {
+    id
+    Pelada {
+      id
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -49,29 +584,21 @@ mutation UpdateJogadoresPelada(
     id
     Pelada {
       id
-      data
       qntJogadores
       duracaoPartida
       createdAt
       updatedAt
       peladaGrupoId
-      peladaJogadoresPeladaId
       __typename
     }
     Jogadores {
       id
-      nome
-      email
-      telefone
-      foto
-      time
-      aniversario
-      escudo
-      posicao
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -90,29 +617,21 @@ mutation DeleteJogadoresPelada(
     id
     Pelada {
       id
-      data
       qntJogadores
       duracaoPartida
       createdAt
       updatedAt
       peladaGrupoId
-      peladaJogadoresPeladaId
       __typename
     }
     Jogadores {
       id
-      nome
-      email
-      telefone
-      foto
-      time
-      aniversario
-      escudo
-      posicao
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -129,7 +648,6 @@ mutation CreatePelada(
 ) {
   createPelada(input: $input, condition: $condition) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -140,18 +658,9 @@ mutation CreatePelada(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -162,7 +671,6 @@ mutation UpdatePelada(
 ) {
   updatePelada(input: $input, condition: $condition) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -173,18 +681,9 @@ mutation UpdatePelada(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -195,7 +694,6 @@ mutation DeletePelada(
 ) {
   deletePelada(input: $input, condition: $condition) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -206,18 +704,9 @@ mutation DeletePelada(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -240,14 +729,6 @@ mutation CreateJogadores(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -255,7 +736,6 @@ mutation CreateJogadores(
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
@@ -278,14 +758,6 @@ mutation UpdateJogadores(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -293,7 +765,6 @@ mutation UpdateJogadores(
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
@@ -316,14 +787,6 @@ mutation DeleteJogadores(
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -331,7 +794,6 @@ mutation DeleteJogadores(
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }

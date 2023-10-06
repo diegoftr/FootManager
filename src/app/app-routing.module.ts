@@ -4,6 +4,13 @@ import { DetalharGrupoComponent } from './detalhar-grupo/detalhar-grupo.componen
 import { JogadoresComponent } from './jogadores/jogadores.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PartidasComponent } from './partidas/partidas.component';
+import { PeladaComponent } from './pelada/pelada.component';
+import { CampeonatosComponent } from './campeonatos/campeonatos.component';
+import { DetalharCampeonatoComponent } from './detalhar-campeonato/detalhar-campeonato.component';
+import { ManterEquipeCampeonatoComponent } from './manter-equipe-campeonato/manter-equipe-campeonato.component';
+import { SelecionarJogadoresComponent } from './selecionar-jogadores/selecionar-jogadores.component';
+import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/manter-partida-campeonato.component';
 
 
 
@@ -19,6 +26,27 @@ import { LoginComponent } from './login/login.component';
   },{
     path: 'login',
     component: LoginComponent,
+  },{
+    path: 'partidas',
+    component: PartidasComponent,
+  },{
+    path: 'peladas',
+    component: PeladaComponent,
+  },{ 
+    path: 'campeonatos',
+    component: CampeonatosComponent,
+  },{
+    path: 'detalharCampeonato',
+    component: DetalharCampeonatoComponent,
+  },{
+    path: 'manterEquipeCampeonato',
+    component: ManterEquipeCampeonatoComponent,
+  },{
+    path: 'selecionarJogador',
+    component: SelecionarJogadoresComponent
+  },{
+    path: 'manterPartida',
+    component: ManterPartidaCampeonatoComponent
   }];
 
 @NgModule({

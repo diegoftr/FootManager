@@ -25,7 +25,7 @@ export class JogadoresComponent implements OnInit {
   isAlteracao!: Boolean;
   form: FormGroup = new FormGroup({});
   times: Array<Time> = [{ nome: 'Brasil' }, { nome: 'América de Natal' }, { nome: 'Atlético Goianiense' }, { nome: 'Atlético Mineiro' }, { nome: 'Atlético Paranaense' }, { nome: 'Avaí' }, { nome: 'Bahia' }, { nome: 'Botafogo' }, { nome: 'Bragantino' }, { nome: 'Ceará' }, { nome: 'Chapecoense' }, { nome: 'Corinthians' }, { nome: 'Coritiba' }, { nome: 'Criciúma' }, { nome: 'Cruzeiro' }, { nome: 'Flamengo' }, { nome: 'Fluminense' }, { nome: 'Fortaleza' }, { nome: 'Figueirense' }, { nome: 'Goiás' }, { nome: 'Grêmio' }, { nome: 'Internacional' }, { nome: 'Internacional de Limeira' }, { nome: 'Joinville' }, { nome: 'Juventude' }, { nome: 'Londrina' }, { nome: 'Luverdense' }, { nome: 'Náutico' }, { nome: 'Palmeiras' }, { nome: 'Paraná' }, { nome: 'Paysandu' }, { nome: 'Ponte Preta' }, { nome: 'Portuguesa' }, { nome: 'Remo' }, { nome: 'Rio Ave' }, { nome: 'Santa Clara' }, { nome: 'Santa Cruz' }, { nome: 'Santo André' }, { nome: 'Santos' }, { nome: 'São Bento' }, { nome: 'São Caetano' }, { nome: 'São Paulo' }, { nome: 'Sampaio Corrêa' }, { nome: 'Santa Clara' }, { nome: 'Sport Recife' }, { nome: 'Vasco da Gama' }, { nome: 'Vila Nova' }, { nome: 'Vitória' }];
-  escudos: Array<Escudo> = [{ nome: 'Bronze' }, { nome: 'Prata' }, { nome: 'Ouro' }, { nome: 'Pichação' }, { nome: 'Vermelha' }, { nome: '100' }, { nome: 'Azul' }, { nome: 'DiamanteAzul' }, { nome: 'DiamanteRoxa' }, { nome: 'DiamenteBranca' }, { nome: 'Heroi' }, { nome: 'Heroi2' }, { nome: 'Icone' }];
+  escudos: Array<Escudo> = [{ nome: 'Bronze' }, { nome: 'Prata' }, { nome: 'Ouro' }, { nome: 'Pichação' }, { nome: 'Vermelha' }, { nome: '100' }, { nome: 'Azul' }, { nome: 'DiamanteAzul' }, { nome: 'DiamanteRoxa' }, { nome: 'DiamenteBranca' }, { nome: 'Heroi' }, { nome: 'Heroi2' }, { nome: 'Icone' }, { nome: 'Aniversariante' }];
   posicoes: Array<Escudo> = [{ nome: 'GOL' }, { nome: 'ZAG' }, { nome: 'LD' }, { nome: 'LE' }, { nome: 'VOL' }, { nome: 'MC' }, { nome: 'MD' }, { nome: 'ME' }, { nome: 'MEI' }, { nome: 'PE' }, { nome: 'PD' }, { nome: 'SA' }, { nome: 'ATA' }];
 
   imageChangedEvent: any = '';
@@ -40,6 +40,7 @@ export class JogadoresComponent implements OnInit {
     return this.authenticator.user != null;
   }
 
+
   ngOnInit() {
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -52,7 +53,6 @@ export class JogadoresComponent implements OnInit {
       escudo: new FormControl(null, Validators.required),
       posicao: new FormControl(null, Validators.required),
       jogadoresGrupoId: new FormControl(null),
-      jogadoresJogadoresPeladaId: new FormControl(null),
     });
 
     this.spinner.show();
@@ -67,7 +67,7 @@ export class JogadoresComponent implements OnInit {
         this.api.ListJogadores(filter).then(jogadores => {
           this.jogadores = (jogadores as any).items;
 
-          if(jogadores.items.length == 0)
+          if (jogadores.items.length == 0)
             this.spinner.hide();
           this.jogadores.forEach((j, idx, array) => {
             Storage.get(j.foto!, { level: 'public' }).then(arquivo => {
@@ -97,30 +97,30 @@ export class JogadoresComponent implements OnInit {
     });
   }
 
-  reduzirTamanhoBase64(base64:any, largura:any, altura:any) {
+  reduzirTamanhoBase64(base64: any, largura: any, altura: any) {
     return new Promise((resolve, reject) => {
       // Crie uma nova imagem em base64
       const imagem = new Image();
       imagem.src = base64;
-  
+
       // Quando a imagem estiver carregada, redimensione-a
       imagem.onload = function () {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-  
+
         // Defina as dimensões do canvas para redimensionar a imagem
         canvas.width = largura;
         canvas.height = altura;
-  
+
         ctx!.drawImage(imagem, 0, 0, largura, altura);
-  
+
         // Converta o canvas de volta para base64
         const imagemRedimensionadaBase64 = canvas.toDataURL('image/png'); // Você pode ajustar o formato aqui
-  
+
         // Resolva a promessa com a imagem redimensionada em base64
         resolve(imagemRedimensionadaBase64);
       };
-  
+
       // Lide com erros de carregamento da imagem, se necessário
       imagem.onerror = function () {
         reject(new Error('Erro ao carregar a imagem base64.'));
@@ -144,23 +144,23 @@ export class JogadoresComponent implements OnInit {
       this.form.get('aniversario')?.setValue(dataFormatada);
       this.form.get('jogadoresGrupoId')?.setValue(this.grupo.id);
       this.form.get('id')?.setValue(uuid());
-      this.croppedImage = this.reduzirTamanhoBase64(this.croppedImage, 288,312).then((imagemRedimensionadaBase64) =>{
-       
+      this.croppedImage = this.reduzirTamanhoBase64(this.croppedImage, 144, 156).then((imagemRedimensionadaBase64) => {
+
         fetch(imagemRedimensionadaBase64 as any)
-        .then(res => res.blob())
-        .then(blob => {
-          const file = new File([blob], "File name", { type: "image/png" })
-          Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then(a => {
-            this.form.get('foto')?.setValue(a.key)
-            this.api.CreateJogadores(this.form.value).then(a => {
-              this.isInclusao = false;
-              this.isAlteracao = false;
-              this.limparForm();
-              this.ngOnInit();
-              this.spinner.hide();
-            });
+          .then(res => res.blob())
+          .then(blob => {
+            const file = new File([blob], "File name", { type: "image/png" })
+            Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then(a => {
+              this.form.get('foto')?.setValue(a.key)
+              this.api.CreateJogadores(this.form.value).then(a => {
+                this.isInclusao = false;
+                this.isAlteracao = false;
+                this.limparForm();
+                this.ngOnInit();
+                this.spinner.hide();
+              });
+            })
           })
-        })
       });
     } else {
       this.spinner.hide();
@@ -179,7 +179,6 @@ export class JogadoresComponent implements OnInit {
       escudo: new FormControl(null, Validators.required),
       posicao: new FormControl(null, Validators.required),
       jogadoresGrupoId: new FormControl(null),
-      jogadoresJogadoresPeladaId: new FormControl(null),
     });
   }
 

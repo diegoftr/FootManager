@@ -10,6 +10,21 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
+  onCreateGolPartidaCampeonato: OnCreateGolPartidaCampeonatoSubscription;
+  onUpdateGolPartidaCampeonato: OnUpdateGolPartidaCampeonatoSubscription;
+  onDeleteGolPartidaCampeonato: OnDeleteGolPartidaCampeonatoSubscription;
+  onCreatePartidaCampeonato: OnCreatePartidaCampeonatoSubscription;
+  onUpdatePartidaCampeonato: OnUpdatePartidaCampeonatoSubscription;
+  onDeletePartidaCampeonato: OnDeletePartidaCampeonatoSubscription;
+  onCreateEquipeCampeonato: OnCreateEquipeCampeonatoSubscription;
+  onUpdateEquipeCampeonato: OnUpdateEquipeCampeonatoSubscription;
+  onDeleteEquipeCampeonato: OnDeleteEquipeCampeonatoSubscription;
+  onCreateJogadoresCampeonato: OnCreateJogadoresCampeonatoSubscription;
+  onUpdateJogadoresCampeonato: OnUpdateJogadoresCampeonatoSubscription;
+  onDeleteJogadoresCampeonato: OnDeleteJogadoresCampeonatoSubscription;
+  onCreateCampeonato: OnCreateCampeonatoSubscription;
+  onUpdateCampeonato: OnUpdateCampeonatoSubscription;
+  onDeleteCampeonato: OnDeleteCampeonatoSubscription;
   onCreateJogadoresPelada: OnCreateJogadoresPeladaSubscription;
   onUpdateJogadoresPelada: OnUpdateJogadoresPeladaSubscription;
   onDeleteJogadoresPelada: OnDeleteJogadoresPeladaSubscription;
@@ -24,18 +39,22 @@ export type __SubscriptionContainer = {
   onDeleteGrupo: OnDeleteGrupoSubscription;
 };
 
-export type CreateJogadoresPeladaInput = {
+export type CreateGolPartidaCampeonatoInput = {
   id?: string | null;
-  jogadoresPeladaPeladaId?: string | null;
-  jogadoresPeladaJogadoresId?: string | null;
+  partidacampeonatoID: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
 };
 
-export type ModelJogadoresPeladaConditionInput = {
-  and?: Array<ModelJogadoresPeladaConditionInput | null> | null;
-  or?: Array<ModelJogadoresPeladaConditionInput | null> | null;
-  not?: ModelJogadoresPeladaConditionInput | null;
-  jogadoresPeladaPeladaId?: ModelIDInput | null;
-  jogadoresPeladaJogadoresId?: ModelIDInput | null;
+export type ModelGolPartidaCampeonatoConditionInput = {
+  partidacampeonatoID?: ModelIDInput | null;
+  and?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
+  or?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
+  not?: ModelGolPartidaCampeonatoConditionInput | null;
+  golPartidaCampeonatoJogadoresGolId?: ModelIDInput | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: ModelIDInput | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: ModelIDInput | null;
 };
 
 export type ModelIDInput = {
@@ -77,29 +96,44 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type JogadoresPelada = {
-  __typename: "JogadoresPelada";
+export type GolPartidaCampeonato = {
+  __typename: "GolPartidaCampeonato";
   id: string;
-  Pelada?: Pelada | null;
-  Jogadores?: Jogadores | null;
+  JogadoresGol?: JogadoresCampeonato | null;
+  JogadoresAssistencia?: JogadoresCampeonato | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: EquipeCampeonato | null;
   createdAt: string;
   updatedAt: string;
-  jogadoresPeladaPeladaId?: string | null;
-  jogadoresPeladaJogadoresId?: string | null;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
 };
 
-export type Pelada = {
-  __typename: "Pelada";
+export type JogadoresCampeonato = {
+  __typename: "JogadoresCampeonato";
   id: string;
-  data?: string | null;
-  qntJogadores?: number | null;
-  duracaoPartida?: number | null;
-  Grupo: Grupo;
-  JogadoresPelada?: JogadoresPelada | null;
+  Campeonato?: Campeonato | null;
+  Jogadores?: Jogadores | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
   createdAt: string;
   updatedAt: string;
-  peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type Campeonato = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: Grupo | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: ModelPartidaCampeonatoConnection | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
 };
 
 export type Grupo = {
@@ -111,6 +145,50 @@ export type Grupo = {
   updatedAt: string;
 };
 
+export type ModelPartidaCampeonatoConnection = {
+  __typename: "ModelPartidaCampeonatoConnection";
+  items: Array<PartidaCampeonato | null>;
+  nextToken?: string | null;
+};
+
+export type PartidaCampeonato = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: EquipeCampeonato | null;
+  EquipeB?: EquipeCampeonato | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: ModelGolPartidaCampeonatoConnection | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type EquipeCampeonato = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: Campeonato | null;
+  JogadoresCampeonatoes?: ModelJogadoresCampeonatoConnection | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type ModelJogadoresCampeonatoConnection = {
+  __typename: "ModelJogadoresCampeonatoConnection";
+  items: Array<JogadoresCampeonato | null>;
+  nextToken?: string | null;
+};
+
+export type ModelGolPartidaCampeonatoConnection = {
+  __typename: "ModelGolPartidaCampeonatoConnection";
+  items: Array<GolPartidaCampeonato | null>;
+  nextToken?: string | null;
+};
+
 export type Jogadores = {
   __typename: "Jogadores";
   id: string;
@@ -119,7 +197,6 @@ export type Jogadores = {
   telefone?: string | null;
   foto?: string | null;
   Grupo: Grupo;
-  JogadoresPelada?: JogadoresPelada | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -127,37 +204,36 @@ export type Jogadores = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
-export type UpdateJogadoresPeladaInput = {
+export type UpdateGolPartidaCampeonatoInput = {
   id: string;
-  jogadoresPeladaPeladaId?: string | null;
-  jogadoresPeladaJogadoresId?: string | null;
+  partidacampeonatoID?: string | null;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
 };
 
-export type DeleteJogadoresPeladaInput = {
+export type DeleteGolPartidaCampeonatoInput = {
   id: string;
 };
 
-export type CreatePeladaInput = {
+export type CreatePartidaCampeonatoInput = {
   id?: string | null;
-  data?: string | null;
-  qntJogadores?: number | null;
-  duracaoPartida?: number | null;
-  peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
+  tipoPartida?: string | null;
+  campeonatoID: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
 };
 
-export type ModelPeladaConditionInput = {
-  data?: ModelStringInput | null;
-  qntJogadores?: ModelIntInput | null;
-  duracaoPartida?: ModelIntInput | null;
-  and?: Array<ModelPeladaConditionInput | null> | null;
-  or?: Array<ModelPeladaConditionInput | null> | null;
-  not?: ModelPeladaConditionInput | null;
-  peladaGrupoId?: ModelIDInput | null;
-  peladaJogadoresPeladaId?: ModelIDInput | null;
+export type ModelPartidaCampeonatoConditionInput = {
+  tipoPartida?: ModelStringInput | null;
+  campeonatoID?: ModelIDInput | null;
+  and?: Array<ModelPartidaCampeonatoConditionInput | null> | null;
+  or?: Array<ModelPartidaCampeonatoConditionInput | null> | null;
+  not?: ModelPartidaCampeonatoConditionInput | null;
+  partidaCampeonatoEquipeAId?: ModelIDInput | null;
+  partidaCampeonatoEquipeBId?: ModelIDInput | null;
 };
 
 export type ModelStringInput = {
@@ -176,6 +252,167 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null;
 };
 
+export type UpdatePartidaCampeonatoInput = {
+  id: string;
+  tipoPartida?: string | null;
+  campeonatoID?: string | null;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type DeletePartidaCampeonatoInput = {
+  id: string;
+};
+
+export type CreateEquipeCampeonatoInput = {
+  id?: string | null;
+  nome?: string | null;
+  pais?: string | null;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type ModelEquipeCampeonatoConditionInput = {
+  nome?: ModelStringInput | null;
+  pais?: ModelStringInput | null;
+  and?: Array<ModelEquipeCampeonatoConditionInput | null> | null;
+  or?: Array<ModelEquipeCampeonatoConditionInput | null> | null;
+  not?: ModelEquipeCampeonatoConditionInput | null;
+  equipeCampeonatoCampeonatoId?: ModelIDInput | null;
+};
+
+export type UpdateEquipeCampeonatoInput = {
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type DeleteEquipeCampeonatoInput = {
+  id: string;
+};
+
+export type CreateJogadoresCampeonatoInput = {
+  id?: string | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type ModelJogadoresCampeonatoConditionInput = {
+  classificacao?: ModelStringInput | null;
+  equipecampeonatoID?: ModelIDInput | null;
+  and?: Array<ModelJogadoresCampeonatoConditionInput | null> | null;
+  or?: Array<ModelJogadoresCampeonatoConditionInput | null> | null;
+  not?: ModelJogadoresCampeonatoConditionInput | null;
+  jogadoresCampeonatoCampeonatoId?: ModelIDInput | null;
+  jogadoresCampeonatoJogadoresId?: ModelIDInput | null;
+};
+
+export type UpdateJogadoresCampeonatoInput = {
+  id: string;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type DeleteJogadoresCampeonatoInput = {
+  id: string;
+};
+
+export type CreateCampeonatoInput = {
+  id?: string | null;
+  nome?: string | null;
+  icone?: string | null;
+  data?: string | null;
+  campeonatoGrupoId?: string | null;
+};
+
+export type ModelCampeonatoConditionInput = {
+  nome?: ModelStringInput | null;
+  icone?: ModelStringInput | null;
+  data?: ModelStringInput | null;
+  and?: Array<ModelCampeonatoConditionInput | null> | null;
+  or?: Array<ModelCampeonatoConditionInput | null> | null;
+  not?: ModelCampeonatoConditionInput | null;
+  campeonatoGrupoId?: ModelIDInput | null;
+};
+
+export type UpdateCampeonatoInput = {
+  id: string;
+  nome?: string | null;
+  icone?: string | null;
+  data?: string | null;
+  campeonatoGrupoId?: string | null;
+};
+
+export type DeleteCampeonatoInput = {
+  id: string;
+};
+
+export type CreateJogadoresPeladaInput = {
+  id?: string | null;
+  jogadoresPeladaPeladaId?: string | null;
+  jogadoresPeladaJogadoresId?: string | null;
+};
+
+export type ModelJogadoresPeladaConditionInput = {
+  and?: Array<ModelJogadoresPeladaConditionInput | null> | null;
+  or?: Array<ModelJogadoresPeladaConditionInput | null> | null;
+  not?: ModelJogadoresPeladaConditionInput | null;
+  jogadoresPeladaPeladaId?: ModelIDInput | null;
+  jogadoresPeladaJogadoresId?: ModelIDInput | null;
+};
+
+export type JogadoresPelada = {
+  __typename: "JogadoresPelada";
+  id: string;
+  Pelada?: Pelada | null;
+  Jogadores?: JogadoresCampeonato | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresPeladaPeladaId?: string | null;
+  jogadoresPeladaJogadoresId?: string | null;
+};
+
+export type Pelada = {
+  __typename: "Pelada";
+  id: string;
+  qntJogadores?: number | null;
+  duracaoPartida?: number | null;
+  Grupo: Grupo;
+  createdAt: string;
+  updatedAt: string;
+  peladaGrupoId: string;
+};
+
+export type UpdateJogadoresPeladaInput = {
+  id: string;
+  jogadoresPeladaPeladaId?: string | null;
+  jogadoresPeladaJogadoresId?: string | null;
+};
+
+export type DeleteJogadoresPeladaInput = {
+  id: string;
+};
+
+export type CreatePeladaInput = {
+  id?: string | null;
+  qntJogadores?: number | null;
+  duracaoPartida?: number | null;
+  peladaGrupoId: string;
+};
+
+export type ModelPeladaConditionInput = {
+  qntJogadores?: ModelIntInput | null;
+  duracaoPartida?: ModelIntInput | null;
+  and?: Array<ModelPeladaConditionInput | null> | null;
+  or?: Array<ModelPeladaConditionInput | null> | null;
+  not?: ModelPeladaConditionInput | null;
+  peladaGrupoId?: ModelIDInput | null;
+};
+
 export type ModelIntInput = {
   ne?: number | null;
   eq?: number | null;
@@ -190,11 +427,9 @@ export type ModelIntInput = {
 
 export type UpdatePeladaInput = {
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   peladaGrupoId?: string | null;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type DeletePeladaInput = {
@@ -212,7 +447,6 @@ export type CreateJogadoresInput = {
   escudo?: string | null;
   posicao?: string | null;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type ModelJogadoresConditionInput = {
@@ -228,7 +462,6 @@ export type ModelJogadoresConditionInput = {
   or?: Array<ModelJogadoresConditionInput | null> | null;
   not?: ModelJogadoresConditionInput | null;
   jogadoresGrupoId?: ModelIDInput | null;
-  jogadoresJogadoresPeladaId?: ModelIDInput | null;
 };
 
 export type UpdateJogadoresInput = {
@@ -242,7 +475,6 @@ export type UpdateJogadoresInput = {
   escudo?: string | null;
   posicao?: string | null;
   jogadoresGrupoId?: string | null;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type DeleteJogadoresInput = {
@@ -273,6 +505,77 @@ export type DeleteGrupoInput = {
   id: string;
 };
 
+export type ModelGolPartidaCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  partidacampeonatoID?: ModelIDInput | null;
+  and?: Array<ModelGolPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelGolPartidaCampeonatoFilterInput | null> | null;
+  not?: ModelGolPartidaCampeonatoFilterInput | null;
+  golPartidaCampeonatoJogadoresGolId?: ModelIDInput | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: ModelIDInput | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: ModelIDInput | null;
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC"
+}
+
+export type ModelPartidaCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  tipoPartida?: ModelStringInput | null;
+  campeonatoID?: ModelIDInput | null;
+  and?: Array<ModelPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelPartidaCampeonatoFilterInput | null> | null;
+  not?: ModelPartidaCampeonatoFilterInput | null;
+  partidaCampeonatoEquipeAId?: ModelIDInput | null;
+  partidaCampeonatoEquipeBId?: ModelIDInput | null;
+};
+
+export type ModelEquipeCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  nome?: ModelStringInput | null;
+  pais?: ModelStringInput | null;
+  and?: Array<ModelEquipeCampeonatoFilterInput | null> | null;
+  or?: Array<ModelEquipeCampeonatoFilterInput | null> | null;
+  not?: ModelEquipeCampeonatoFilterInput | null;
+  equipeCampeonatoCampeonatoId?: ModelIDInput | null;
+};
+
+export type ModelEquipeCampeonatoConnection = {
+  __typename: "ModelEquipeCampeonatoConnection";
+  items: Array<EquipeCampeonato | null>;
+  nextToken?: string | null;
+};
+
+export type ModelJogadoresCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  classificacao?: ModelStringInput | null;
+  equipecampeonatoID?: ModelIDInput | null;
+  and?: Array<ModelJogadoresCampeonatoFilterInput | null> | null;
+  or?: Array<ModelJogadoresCampeonatoFilterInput | null> | null;
+  not?: ModelJogadoresCampeonatoFilterInput | null;
+  jogadoresCampeonatoCampeonatoId?: ModelIDInput | null;
+  jogadoresCampeonatoJogadoresId?: ModelIDInput | null;
+};
+
+export type ModelCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  nome?: ModelStringInput | null;
+  icone?: ModelStringInput | null;
+  data?: ModelStringInput | null;
+  and?: Array<ModelCampeonatoFilterInput | null> | null;
+  or?: Array<ModelCampeonatoFilterInput | null> | null;
+  not?: ModelCampeonatoFilterInput | null;
+  campeonatoGrupoId?: ModelIDInput | null;
+};
+
+export type ModelCampeonatoConnection = {
+  __typename: "ModelCampeonatoConnection";
+  items: Array<Campeonato | null>;
+  nextToken?: string | null;
+};
+
 export type ModelJogadoresPeladaFilterInput = {
   id?: ModelIDInput | null;
   and?: Array<ModelJogadoresPeladaFilterInput | null> | null;
@@ -290,14 +593,12 @@ export type ModelJogadoresPeladaConnection = {
 
 export type ModelPeladaFilterInput = {
   id?: ModelIDInput | null;
-  data?: ModelStringInput | null;
   qntJogadores?: ModelIntInput | null;
   duracaoPartida?: ModelIntInput | null;
   and?: Array<ModelPeladaFilterInput | null> | null;
   or?: Array<ModelPeladaFilterInput | null> | null;
   not?: ModelPeladaFilterInput | null;
   peladaGrupoId?: ModelIDInput | null;
-  peladaJogadoresPeladaId?: ModelIDInput | null;
 };
 
 export type ModelPeladaConnection = {
@@ -320,7 +621,6 @@ export type ModelJogadoresFilterInput = {
   or?: Array<ModelJogadoresFilterInput | null> | null;
   not?: ModelJogadoresFilterInput | null;
   jogadoresGrupoId?: ModelIDInput | null;
-  jogadoresJogadoresPeladaId?: ModelIDInput | null;
 };
 
 export type ModelJogadoresConnection = {
@@ -344,10 +644,11 @@ export type ModelGrupoConnection = {
   nextToken?: string | null;
 };
 
-export type ModelSubscriptionJogadoresPeladaFilterInput = {
+export type ModelSubscriptionGolPartidaCampeonatoFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionJogadoresPeladaFilterInput | null> | null;
-  or?: Array<ModelSubscriptionJogadoresPeladaFilterInput | null> | null;
+  partidacampeonatoID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
@@ -365,13 +666,12 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array<string | null> | null;
 };
 
-export type ModelSubscriptionPeladaFilterInput = {
+export type ModelSubscriptionPartidaCampeonatoFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  data?: ModelSubscriptionStringInput | null;
-  qntJogadores?: ModelSubscriptionIntInput | null;
-  duracaoPartida?: ModelSubscriptionIntInput | null;
-  and?: Array<ModelSubscriptionPeladaFilterInput | null> | null;
-  or?: Array<ModelSubscriptionPeladaFilterInput | null> | null;
+  tipoPartida?: ModelSubscriptionStringInput | null;
+  campeonatoID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
 };
 
 export type ModelSubscriptionStringInput = {
@@ -387,6 +687,45 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null;
   in?: Array<string | null> | null;
   notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionEquipeCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  nome?: ModelSubscriptionStringInput | null;
+  pais?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionEquipeCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionEquipeCampeonatoFilterInput | null> | null;
+};
+
+export type ModelSubscriptionJogadoresCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  classificacao?: ModelSubscriptionStringInput | null;
+  equipecampeonatoID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionJogadoresCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionJogadoresCampeonatoFilterInput | null> | null;
+};
+
+export type ModelSubscriptionCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  nome?: ModelSubscriptionStringInput | null;
+  icone?: ModelSubscriptionStringInput | null;
+  data?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionCampeonatoFilterInput | null> | null;
+};
+
+export type ModelSubscriptionJogadoresPeladaFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionJogadoresPeladaFilterInput | null> | null;
+  or?: Array<ModelSubscriptionJogadoresPeladaFilterInput | null> | null;
+};
+
+export type ModelSubscriptionPeladaFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  qntJogadores?: ModelSubscriptionIntInput | null;
+  duracaoPartida?: ModelSubscriptionIntInput | null;
+  and?: Array<ModelSubscriptionPeladaFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPeladaFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIntInput = {
@@ -423,19 +762,309 @@ export type ModelSubscriptionGrupoFilterInput = {
   or?: Array<ModelSubscriptionGrupoFilterInput | null> | null;
 };
 
-export type CreateJogadoresPeladaMutation = {
-  __typename: "JogadoresPelada";
+export type CreateGolPartidaCampeonatoMutation = {
+  __typename: "GolPartidaCampeonato";
   id: string;
-  Pelada?: {
-    __typename: "Pelada";
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
     id: string;
-    data?: string | null;
-    qntJogadores?: number | null;
-    duracaoPartida?: number | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type UpdateGolPartidaCampeonatoMutation = {
+  __typename: "GolPartidaCampeonato";
+  id: string;
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type DeleteGolPartidaCampeonatoMutation = {
+  __typename: "GolPartidaCampeonato";
+  id: string;
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type CreatePartidaCampeonatoMutation = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type UpdatePartidaCampeonatoMutation = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type DeletePartidaCampeonatoMutation = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type CreateEquipeCampeonatoMutation = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type UpdateEquipeCampeonatoMutation = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type DeleteEquipeCampeonatoMutation = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type CreateJogadoresCampeonatoMutation = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
   } | null;
   Jogadores?: {
     __typename: "Jogadores";
@@ -451,7 +1080,177 @@ export type CreateJogadoresPeladaMutation = {
     createdAt: string;
     updatedAt: string;
     jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type UpdateJogadoresCampeonatoMutation = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  Jogadores?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type DeleteJogadoresCampeonatoMutation = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  Jogadores?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type CreateCampeonatoMutation = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type UpdateCampeonatoMutation = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type DeleteCampeonatoMutation = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type CreateJogadoresPeladaMutation = {
+  __typename: "JogadoresPelada";
+  id: string;
+  Pelada?: {
+    __typename: "Pelada";
+    id: string;
+    qntJogadores?: number | null;
+    duracaoPartida?: number | null;
+    createdAt: string;
+    updatedAt: string;
+    peladaGrupoId: string;
+  } | null;
+  Jogadores?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -465,29 +1264,21 @@ export type UpdateJogadoresPeladaMutation = {
   Pelada?: {
     __typename: "Pelada";
     id: string;
-    data?: string | null;
     qntJogadores?: number | null;
     duracaoPartida?: number | null;
     createdAt: string;
     updatedAt: string;
     peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
   } | null;
   Jogadores?: {
-    __typename: "Jogadores";
+    __typename: "JogadoresCampeonato";
     id: string;
-    nome?: string | null;
-    email?: string | null;
-    telefone?: string | null;
-    foto?: string | null;
-    time?: string | null;
-    aniversario?: string | null;
-    escudo?: string | null;
-    posicao?: string | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -501,29 +1292,21 @@ export type DeleteJogadoresPeladaMutation = {
   Pelada?: {
     __typename: "Pelada";
     id: string;
-    data?: string | null;
     qntJogadores?: number | null;
     duracaoPartida?: number | null;
     createdAt: string;
     updatedAt: string;
     peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
   } | null;
   Jogadores?: {
-    __typename: "Jogadores";
+    __typename: "JogadoresCampeonato";
     id: string;
-    nome?: string | null;
-    email?: string | null;
-    telefone?: string | null;
-    foto?: string | null;
-    time?: string | null;
-    aniversario?: string | null;
-    escudo?: string | null;
-    posicao?: string | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -534,7 +1317,6 @@ export type DeleteJogadoresPeladaMutation = {
 export type CreatePeladaMutation = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -545,24 +1327,14 @@ export type CreatePeladaMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type UpdatePeladaMutation = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -573,24 +1345,14 @@ export type UpdatePeladaMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type DeletePeladaMutation = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -601,18 +1363,9 @@ export type DeletePeladaMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type CreateJogadoresMutation = {
@@ -630,14 +1383,6 @@ export type CreateJogadoresMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -645,7 +1390,6 @@ export type CreateJogadoresMutation = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type UpdateJogadoresMutation = {
@@ -663,14 +1407,6 @@ export type UpdateJogadoresMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -678,7 +1414,6 @@ export type UpdateJogadoresMutation = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type DeleteJogadoresMutation = {
@@ -696,14 +1431,6 @@ export type DeleteJogadoresMutation = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -711,7 +1438,6 @@ export type DeleteJogadoresMutation = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type CreateGrupoMutation = {
@@ -741,19 +1467,189 @@ export type DeleteGrupoMutation = {
   updatedAt: string;
 };
 
-export type GetJogadoresPeladaQuery = {
-  __typename: "JogadoresPelada";
+export type GetGolPartidaCampeonatoQuery = {
+  __typename: "GolPartidaCampeonato";
   id: string;
-  Pelada?: {
-    __typename: "Pelada";
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
     id: string;
-    data?: string | null;
-    qntJogadores?: number | null;
-    duracaoPartida?: number | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type ListGolPartidaCampeonatoesQuery = {
+  __typename: "ModelGolPartidaCampeonatoConnection";
+  items: Array<{
+    __typename: "GolPartidaCampeonato";
+    id: string;
+    partidacampeonatoID: string;
+    createdAt: string;
+    updatedAt: string;
+    golPartidaCampeonatoJogadoresGolId?: string | null;
+    golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+    golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GolPartidaCampeonatoesByPartidacampeonatoIDQuery = {
+  __typename: "ModelGolPartidaCampeonatoConnection";
+  items: Array<{
+    __typename: "GolPartidaCampeonato";
+    id: string;
+    partidacampeonatoID: string;
+    createdAt: string;
+    updatedAt: string;
+    golPartidaCampeonatoJogadoresGolId?: string | null;
+    golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+    golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetPartidaCampeonatoQuery = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type ListPartidaCampeonatoesQuery = {
+  __typename: "ModelPartidaCampeonatoConnection";
+  items: Array<{
+    __typename: "PartidaCampeonato";
+    id: string;
+    tipoPartida?: string | null;
+    campeonatoID: string;
+    createdAt: string;
+    updatedAt: string;
+    partidaCampeonatoEquipeAId?: string | null;
+    partidaCampeonatoEquipeBId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type PartidaCampeonatoesByCampeonatoIDQuery = {
+  __typename: "ModelPartidaCampeonatoConnection";
+  items: Array<{
+    __typename: "PartidaCampeonato";
+    id: string;
+    tipoPartida?: string | null;
+    campeonatoID: string;
+    createdAt: string;
+    updatedAt: string;
+    partidaCampeonatoEquipeAId?: string | null;
+    partidaCampeonatoEquipeBId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetEquipeCampeonatoQuery = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type ListEquipeCampeonatoesQuery = {
+  __typename: "ModelEquipeCampeonatoConnection";
+  items: Array<{
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetJogadoresCampeonatoQuery = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
   } | null;
   Jogadores?: {
     __typename: "Jogadores";
@@ -769,7 +1665,104 @@ export type GetJogadoresPeladaQuery = {
     createdAt: string;
     updatedAt: string;
     jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type ListJogadoresCampeonatoesQuery = {
+  __typename: "ModelJogadoresCampeonatoConnection";
+  items: Array<{
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type JogadoresCampeonatoesByEquipecampeonatoIDQuery = {
+  __typename: "ModelJogadoresCampeonatoConnection";
+  items: Array<{
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetCampeonatoQuery = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type ListCampeonatoesQuery = {
+  __typename: "ModelCampeonatoConnection";
+  items: Array<{
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetJogadoresPeladaQuery = {
+  __typename: "JogadoresPelada";
+  id: string;
+  Pelada?: {
+    __typename: "Pelada";
+    id: string;
+    qntJogadores?: number | null;
+    duracaoPartida?: number | null;
+    createdAt: string;
+    updatedAt: string;
+    peladaGrupoId: string;
+  } | null;
+  Jogadores?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -793,7 +1786,6 @@ export type ListJogadoresPeladasQuery = {
 export type GetPeladaQuery = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -804,18 +1796,9 @@ export type GetPeladaQuery = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type ListPeladasQuery = {
@@ -823,13 +1806,11 @@ export type ListPeladasQuery = {
   items: Array<{
     __typename: "Pelada";
     id: string;
-    data?: string | null;
     qntJogadores?: number | null;
     duracaoPartida?: number | null;
     createdAt: string;
     updatedAt: string;
     peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -849,14 +1830,6 @@ export type GetJogadoresQuery = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -864,7 +1837,6 @@ export type GetJogadoresQuery = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type ListJogadoresQuery = {
@@ -883,7 +1855,6 @@ export type ListJogadoresQuery = {
     createdAt: string;
     updatedAt: string;
     jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -910,19 +1881,309 @@ export type ListGruposQuery = {
   nextToken?: string | null;
 };
 
-export type OnCreateJogadoresPeladaSubscription = {
-  __typename: "JogadoresPelada";
+export type OnCreateGolPartidaCampeonatoSubscription = {
+  __typename: "GolPartidaCampeonato";
   id: string;
-  Pelada?: {
-    __typename: "Pelada";
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
     id: string;
-    data?: string | null;
-    qntJogadores?: number | null;
-    duracaoPartida?: number | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type OnUpdateGolPartidaCampeonatoSubscription = {
+  __typename: "GolPartidaCampeonato";
+  id: string;
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type OnDeleteGolPartidaCampeonatoSubscription = {
+  __typename: "GolPartidaCampeonato";
+  id: string;
+  JogadoresGol?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  JogadoresAssistencia?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
+  } | null;
+  partidacampeonatoID: string;
+  EquipeCampeonato?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type OnCreatePartidaCampeonatoSubscription = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type OnUpdatePartidaCampeonatoSubscription = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type OnDeletePartidaCampeonatoSubscription = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  EquipeB?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: {
+    __typename: "ModelGolPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type OnCreateEquipeCampeonatoSubscription = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type OnUpdateEquipeCampeonatoSubscription = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type OnDeleteEquipeCampeonatoSubscription = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  JogadoresCampeonatoes?: {
+    __typename: "ModelJogadoresCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type OnCreateJogadoresCampeonatoSubscription = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
   } | null;
   Jogadores?: {
     __typename: "Jogadores";
@@ -938,7 +2199,177 @@ export type OnCreateJogadoresPeladaSubscription = {
     createdAt: string;
     updatedAt: string;
     jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type OnUpdateJogadoresCampeonatoSubscription = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  Jogadores?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type OnDeleteJogadoresCampeonatoSubscription = {
+  __typename: "JogadoresCampeonato";
+  id: string;
+  Campeonato?: {
+    __typename: "Campeonato";
+    id: string;
+    nome?: string | null;
+    icone?: string | null;
+    data?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    campeonatoGrupoId?: string | null;
+  } | null;
+  Jogadores?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  classificacao?: string | null;
+  equipecampeonatoID?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresCampeonatoCampeonatoId?: string | null;
+  jogadoresCampeonatoJogadoresId?: string | null;
+};
+
+export type OnCreateCampeonatoSubscription = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type OnUpdateCampeonatoSubscription = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type OnDeleteCampeonatoSubscription = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: {
+    __typename: "Grupo";
+    id: string;
+    nome?: string | null;
+    icon?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: {
+    __typename: "ModelPartidaCampeonatoConnection";
+    nextToken?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type OnCreateJogadoresPeladaSubscription = {
+  __typename: "JogadoresPelada";
+  id: string;
+  Pelada?: {
+    __typename: "Pelada";
+    id: string;
+    qntJogadores?: number | null;
+    duracaoPartida?: number | null;
+    createdAt: string;
+    updatedAt: string;
+    peladaGrupoId: string;
+  } | null;
+  Jogadores?: {
+    __typename: "JogadoresCampeonato";
+    id: string;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -952,29 +2383,21 @@ export type OnUpdateJogadoresPeladaSubscription = {
   Pelada?: {
     __typename: "Pelada";
     id: string;
-    data?: string | null;
     qntJogadores?: number | null;
     duracaoPartida?: number | null;
     createdAt: string;
     updatedAt: string;
     peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
   } | null;
   Jogadores?: {
-    __typename: "Jogadores";
+    __typename: "JogadoresCampeonato";
     id: string;
-    nome?: string | null;
-    email?: string | null;
-    telefone?: string | null;
-    foto?: string | null;
-    time?: string | null;
-    aniversario?: string | null;
-    escudo?: string | null;
-    posicao?: string | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -988,29 +2411,21 @@ export type OnDeleteJogadoresPeladaSubscription = {
   Pelada?: {
     __typename: "Pelada";
     id: string;
-    data?: string | null;
     qntJogadores?: number | null;
     duracaoPartida?: number | null;
     createdAt: string;
     updatedAt: string;
     peladaGrupoId: string;
-    peladaJogadoresPeladaId?: string | null;
   } | null;
   Jogadores?: {
-    __typename: "Jogadores";
+    __typename: "JogadoresCampeonato";
     id: string;
-    nome?: string | null;
-    email?: string | null;
-    telefone?: string | null;
-    foto?: string | null;
-    time?: string | null;
-    aniversario?: string | null;
-    escudo?: string | null;
-    posicao?: string | null;
+    classificacao?: string | null;
+    equipecampeonatoID?: string | null;
     createdAt: string;
     updatedAt: string;
-    jogadoresGrupoId: string;
-    jogadoresJogadoresPeladaId?: string | null;
+    jogadoresCampeonatoCampeonatoId?: string | null;
+    jogadoresCampeonatoJogadoresId?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
@@ -1021,7 +2436,6 @@ export type OnDeleteJogadoresPeladaSubscription = {
 export type OnCreatePeladaSubscription = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -1032,24 +2446,14 @@ export type OnCreatePeladaSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type OnUpdatePeladaSubscription = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -1060,24 +2464,14 @@ export type OnUpdatePeladaSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type OnDeletePeladaSubscription = {
   __typename: "Pelada";
   id: string;
-  data?: string | null;
   qntJogadores?: number | null;
   duracaoPartida?: number | null;
   Grupo: {
@@ -1088,18 +2482,9 @@ export type OnDeletePeladaSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   peladaGrupoId: string;
-  peladaJogadoresPeladaId?: string | null;
 };
 
 export type OnCreateJogadoresSubscription = {
@@ -1117,14 +2502,6 @@ export type OnCreateJogadoresSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -1132,7 +2509,6 @@ export type OnCreateJogadoresSubscription = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type OnUpdateJogadoresSubscription = {
@@ -1150,14 +2526,6 @@ export type OnUpdateJogadoresSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -1165,7 +2533,6 @@ export type OnUpdateJogadoresSubscription = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type OnDeleteJogadoresSubscription = {
@@ -1183,14 +2550,6 @@ export type OnDeleteJogadoresSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  JogadoresPelada?: {
-    __typename: "JogadoresPelada";
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    jogadoresPeladaPeladaId?: string | null;
-    jogadoresPeladaJogadoresId?: string | null;
-  } | null;
   time?: string | null;
   aniversario?: string | null;
   escudo?: string | null;
@@ -1198,7 +2557,6 @@ export type OnDeleteJogadoresSubscription = {
   createdAt: string;
   updatedAt: string;
   jogadoresGrupoId: string;
-  jogadoresJogadoresPeladaId?: string | null;
 };
 
 export type OnCreateGrupoSubscription = {
@@ -1232,24 +2590,470 @@ export type OnDeleteGrupoSubscription = {
   providedIn: "root"
 })
 export class APIService {
-  async CreateJogadoresPelada(
-    input: CreateJogadoresPeladaInput,
-    condition?: ModelJogadoresPeladaConditionInput
-  ): Promise<CreateJogadoresPeladaMutation> {
-    const statement = `mutation CreateJogadoresPelada($input: CreateJogadoresPeladaInput!, $condition: ModelJogadoresPeladaConditionInput) {
-        createJogadoresPelada(input: $input, condition: $condition) {
+  async CreateGolPartidaCampeonato(
+    input: CreateGolPartidaCampeonatoInput,
+    condition?: ModelGolPartidaCampeonatoConditionInput
+  ): Promise<CreateGolPartidaCampeonatoMutation> {
+    const statement = `mutation CreateGolPartidaCampeonato($input: CreateGolPartidaCampeonatoInput!, $condition: ModelGolPartidaCampeonatoConditionInput) {
+        createGolPartidaCampeonato(input: $input, condition: $condition) {
           __typename
           id
-          Pelada {
+          JogadoresGol {
             __typename
             id
-            data
-            qntJogadores
-            duracaoPartida
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            peladaGrupoId
-            peladaJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateGolPartidaCampeonatoMutation>(
+      response.data.createGolPartidaCampeonato
+    );
+  }
+  async UpdateGolPartidaCampeonato(
+    input: UpdateGolPartidaCampeonatoInput,
+    condition?: ModelGolPartidaCampeonatoConditionInput
+  ): Promise<UpdateGolPartidaCampeonatoMutation> {
+    const statement = `mutation UpdateGolPartidaCampeonato($input: UpdateGolPartidaCampeonatoInput!, $condition: ModelGolPartidaCampeonatoConditionInput) {
+        updateGolPartidaCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          JogadoresGol {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateGolPartidaCampeonatoMutation>(
+      response.data.updateGolPartidaCampeonato
+    );
+  }
+  async DeleteGolPartidaCampeonato(
+    input: DeleteGolPartidaCampeonatoInput,
+    condition?: ModelGolPartidaCampeonatoConditionInput
+  ): Promise<DeleteGolPartidaCampeonatoMutation> {
+    const statement = `mutation DeleteGolPartidaCampeonato($input: DeleteGolPartidaCampeonatoInput!, $condition: ModelGolPartidaCampeonatoConditionInput) {
+        deleteGolPartidaCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          JogadoresGol {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteGolPartidaCampeonatoMutation>(
+      response.data.deleteGolPartidaCampeonato
+    );
+  }
+  async CreatePartidaCampeonato(
+    input: CreatePartidaCampeonatoInput,
+    condition?: ModelPartidaCampeonatoConditionInput
+  ): Promise<CreatePartidaCampeonatoMutation> {
+    const statement = `mutation CreatePartidaCampeonato($input: CreatePartidaCampeonatoInput!, $condition: ModelPartidaCampeonatoConditionInput) {
+        createPartidaCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreatePartidaCampeonatoMutation>(
+      response.data.createPartidaCampeonato
+    );
+  }
+  async UpdatePartidaCampeonato(
+    input: UpdatePartidaCampeonatoInput,
+    condition?: ModelPartidaCampeonatoConditionInput
+  ): Promise<UpdatePartidaCampeonatoMutation> {
+    const statement = `mutation UpdatePartidaCampeonato($input: UpdatePartidaCampeonatoInput!, $condition: ModelPartidaCampeonatoConditionInput) {
+        updatePartidaCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdatePartidaCampeonatoMutation>(
+      response.data.updatePartidaCampeonato
+    );
+  }
+  async DeletePartidaCampeonato(
+    input: DeletePartidaCampeonatoInput,
+    condition?: ModelPartidaCampeonatoConditionInput
+  ): Promise<DeletePartidaCampeonatoMutation> {
+    const statement = `mutation DeletePartidaCampeonato($input: DeletePartidaCampeonatoInput!, $condition: ModelPartidaCampeonatoConditionInput) {
+        deletePartidaCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeletePartidaCampeonatoMutation>(
+      response.data.deletePartidaCampeonato
+    );
+  }
+  async CreateEquipeCampeonato(
+    input: CreateEquipeCampeonatoInput,
+    condition?: ModelEquipeCampeonatoConditionInput
+  ): Promise<CreateEquipeCampeonatoMutation> {
+    const statement = `mutation CreateEquipeCampeonato($input: CreateEquipeCampeonatoInput!, $condition: ModelEquipeCampeonatoConditionInput) {
+        createEquipeCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateEquipeCampeonatoMutation>response.data.createEquipeCampeonato;
+  }
+  async UpdateEquipeCampeonato(
+    input: UpdateEquipeCampeonatoInput,
+    condition?: ModelEquipeCampeonatoConditionInput
+  ): Promise<UpdateEquipeCampeonatoMutation> {
+    const statement = `mutation UpdateEquipeCampeonato($input: UpdateEquipeCampeonatoInput!, $condition: ModelEquipeCampeonatoConditionInput) {
+        updateEquipeCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateEquipeCampeonatoMutation>response.data.updateEquipeCampeonato;
+  }
+  async DeleteEquipeCampeonato(
+    input: DeleteEquipeCampeonatoInput,
+    condition?: ModelEquipeCampeonatoConditionInput
+  ): Promise<DeleteEquipeCampeonatoMutation> {
+    const statement = `mutation DeleteEquipeCampeonato($input: DeleteEquipeCampeonatoInput!, $condition: ModelEquipeCampeonatoConditionInput) {
+        deleteEquipeCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteEquipeCampeonatoMutation>response.data.deleteEquipeCampeonato;
+  }
+  async CreateJogadoresCampeonato(
+    input: CreateJogadoresCampeonatoInput,
+    condition?: ModelJogadoresCampeonatoConditionInput
+  ): Promise<CreateJogadoresCampeonatoMutation> {
+    const statement = `mutation CreateJogadoresCampeonato($input: CreateJogadoresCampeonatoInput!, $condition: ModelJogadoresCampeonatoConditionInput) {
+        createJogadoresCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
           }
           Jogadores {
             __typename
@@ -1265,7 +3069,279 @@ export class APIService {
             createdAt
             updatedAt
             jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateJogadoresCampeonatoMutation>(
+      response.data.createJogadoresCampeonato
+    );
+  }
+  async UpdateJogadoresCampeonato(
+    input: UpdateJogadoresCampeonatoInput,
+    condition?: ModelJogadoresCampeonatoConditionInput
+  ): Promise<UpdateJogadoresCampeonatoMutation> {
+    const statement = `mutation UpdateJogadoresCampeonato($input: UpdateJogadoresCampeonatoInput!, $condition: ModelJogadoresCampeonatoConditionInput) {
+        updateJogadoresCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateJogadoresCampeonatoMutation>(
+      response.data.updateJogadoresCampeonato
+    );
+  }
+  async DeleteJogadoresCampeonato(
+    input: DeleteJogadoresCampeonatoInput,
+    condition?: ModelJogadoresCampeonatoConditionInput
+  ): Promise<DeleteJogadoresCampeonatoMutation> {
+    const statement = `mutation DeleteJogadoresCampeonato($input: DeleteJogadoresCampeonatoInput!, $condition: ModelJogadoresCampeonatoConditionInput) {
+        deleteJogadoresCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteJogadoresCampeonatoMutation>(
+      response.data.deleteJogadoresCampeonato
+    );
+  }
+  async CreateCampeonato(
+    input: CreateCampeonatoInput,
+    condition?: ModelCampeonatoConditionInput
+  ): Promise<CreateCampeonatoMutation> {
+    const statement = `mutation CreateCampeonato($input: CreateCampeonatoInput!, $condition: ModelCampeonatoConditionInput) {
+        createCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCampeonatoMutation>response.data.createCampeonato;
+  }
+  async UpdateCampeonato(
+    input: UpdateCampeonatoInput,
+    condition?: ModelCampeonatoConditionInput
+  ): Promise<UpdateCampeonatoMutation> {
+    const statement = `mutation UpdateCampeonato($input: UpdateCampeonatoInput!, $condition: ModelCampeonatoConditionInput) {
+        updateCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCampeonatoMutation>response.data.updateCampeonato;
+  }
+  async DeleteCampeonato(
+    input: DeleteCampeonatoInput,
+    condition?: ModelCampeonatoConditionInput
+  ): Promise<DeleteCampeonatoMutation> {
+    const statement = `mutation DeleteCampeonato($input: DeleteCampeonatoInput!, $condition: ModelCampeonatoConditionInput) {
+        deleteCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCampeonatoMutation>response.data.deleteCampeonato;
+  }
+  async CreateJogadoresPelada(
+    input: CreateJogadoresPeladaInput,
+    condition?: ModelJogadoresPeladaConditionInput
+  ): Promise<CreateJogadoresPeladaMutation> {
+    const statement = `mutation CreateJogadoresPelada($input: CreateJogadoresPeladaInput!, $condition: ModelJogadoresPeladaConditionInput) {
+        createJogadoresPelada(input: $input, condition: $condition) {
+          __typename
+          id
+          Pelada {
+            __typename
+            id
+            qntJogadores
+            duracaoPartida
+            createdAt
+            updatedAt
+            peladaGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -1295,29 +3371,21 @@ export class APIService {
           Pelada {
             __typename
             id
-            data
             qntJogadores
             duracaoPartida
             createdAt
             updatedAt
             peladaGrupoId
-            peladaJogadoresPeladaId
           }
           Jogadores {
             __typename
             id
-            nome
-            email
-            telefone
-            foto
-            time
-            aniversario
-            escudo
-            posicao
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -1347,29 +3415,21 @@ export class APIService {
           Pelada {
             __typename
             id
-            data
             qntJogadores
             duracaoPartida
             createdAt
             updatedAt
             peladaGrupoId
-            peladaJogadoresPeladaId
           }
           Jogadores {
             __typename
             id
-            nome
-            email
-            telefone
-            foto
-            time
-            aniversario
-            escudo
-            posicao
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -1396,7 +3456,6 @@ export class APIService {
         createPelada(input: $input, condition: $condition) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -1407,18 +3466,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1440,7 +3490,6 @@ export class APIService {
         updatePelada(input: $input, condition: $condition) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -1451,18 +3500,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1484,7 +3524,6 @@ export class APIService {
         deletePelada(input: $input, condition: $condition) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -1495,18 +3534,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1540,14 +3570,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -1555,7 +3577,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1589,14 +3610,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -1604,7 +3617,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1638,14 +3650,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -1653,7 +3657,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1742,21 +3745,366 @@ export class APIService {
     )) as any;
     return <DeleteGrupoMutation>response.data.deleteGrupo;
   }
-  async GetJogadoresPelada(id: string): Promise<GetJogadoresPeladaQuery> {
-    const statement = `query GetJogadoresPelada($id: ID!) {
-        getJogadoresPelada(id: $id) {
+  async GetGolPartidaCampeonato(
+    id: string
+  ): Promise<GetGolPartidaCampeonatoQuery> {
+    const statement = `query GetGolPartidaCampeonato($id: ID!) {
+        getGolPartidaCampeonato(id: $id) {
           __typename
           id
-          Pelada {
+          JogadoresGol {
             __typename
             id
-            data
-            qntJogadores
-            duracaoPartida
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            peladaGrupoId
-            peladaJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetGolPartidaCampeonatoQuery>response.data.getGolPartidaCampeonato;
+  }
+  async ListGolPartidaCampeonatoes(
+    filter?: ModelGolPartidaCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListGolPartidaCampeonatoesQuery> {
+    const statement = `query ListGolPartidaCampeonatoes($filter: ModelGolPartidaCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listGolPartidaCampeonatoes(
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            partidacampeonatoID
+            createdAt
+            updatedAt
+            golPartidaCampeonatoJogadoresGolId
+            golPartidaCampeonatoJogadoresAssistenciaId
+            golPartidaCampeonatoEquipeCampeonatoId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListGolPartidaCampeonatoesQuery>(
+      response.data.listGolPartidaCampeonatoes
+    );
+  }
+  async GolPartidaCampeonatoesByPartidacampeonatoID(
+    partidacampeonatoID: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelGolPartidaCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<GolPartidaCampeonatoesByPartidacampeonatoIDQuery> {
+    const statement = `query GolPartidaCampeonatoesByPartidacampeonatoID($partidacampeonatoID: ID!, $sortDirection: ModelSortDirection, $filter: ModelGolPartidaCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        golPartidaCampeonatoesByPartidacampeonatoID(
+          partidacampeonatoID: $partidacampeonatoID
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            partidacampeonatoID
+            createdAt
+            updatedAt
+            golPartidaCampeonatoJogadoresGolId
+            golPartidaCampeonatoJogadoresAssistenciaId
+            golPartidaCampeonatoEquipeCampeonatoId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      partidacampeonatoID
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GolPartidaCampeonatoesByPartidacampeonatoIDQuery>(
+      response.data.golPartidaCampeonatoesByPartidacampeonatoID
+    );
+  }
+  async GetPartidaCampeonato(id: string): Promise<GetPartidaCampeonatoQuery> {
+    const statement = `query GetPartidaCampeonato($id: ID!) {
+        getPartidaCampeonato(id: $id) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetPartidaCampeonatoQuery>response.data.getPartidaCampeonato;
+  }
+  async ListPartidaCampeonatoes(
+    filter?: ModelPartidaCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListPartidaCampeonatoesQuery> {
+    const statement = `query ListPartidaCampeonatoes($filter: ModelPartidaCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listPartidaCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            tipoPartida
+            campeonatoID
+            createdAt
+            updatedAt
+            partidaCampeonatoEquipeAId
+            partidaCampeonatoEquipeBId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListPartidaCampeonatoesQuery>response.data.listPartidaCampeonatoes;
+  }
+  async PartidaCampeonatoesByCampeonatoID(
+    campeonatoID: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelPartidaCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<PartidaCampeonatoesByCampeonatoIDQuery> {
+    const statement = `query PartidaCampeonatoesByCampeonatoID($campeonatoID: ID!, $sortDirection: ModelSortDirection, $filter: ModelPartidaCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        partidaCampeonatoesByCampeonatoID(
+          campeonatoID: $campeonatoID
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            tipoPartida
+            campeonatoID
+            createdAt
+            updatedAt
+            partidaCampeonatoEquipeAId
+            partidaCampeonatoEquipeBId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      campeonatoID
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <PartidaCampeonatoesByCampeonatoIDQuery>(
+      response.data.partidaCampeonatoesByCampeonatoID
+    );
+  }
+  async GetEquipeCampeonato(id: string): Promise<GetEquipeCampeonatoQuery> {
+    const statement = `query GetEquipeCampeonato($id: ID!) {
+        getEquipeCampeonato(id: $id) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetEquipeCampeonatoQuery>response.data.getEquipeCampeonato;
+  }
+  async ListEquipeCampeonatoes(
+    filter?: ModelEquipeCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListEquipeCampeonatoesQuery> {
+    const statement = `query ListEquipeCampeonatoes($filter: ModelEquipeCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listEquipeCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListEquipeCampeonatoesQuery>response.data.listEquipeCampeonatoes;
+  }
+  async GetJogadoresCampeonato(
+    id: string
+  ): Promise<GetJogadoresCampeonatoQuery> {
+    const statement = `query GetJogadoresCampeonato($id: ID!) {
+        getJogadoresCampeonato(id: $id) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
           }
           Jogadores {
             __typename
@@ -1772,7 +4120,204 @@ export class APIService {
             createdAt
             updatedAt
             jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetJogadoresCampeonatoQuery>response.data.getJogadoresCampeonato;
+  }
+  async ListJogadoresCampeonatoes(
+    filter?: ModelJogadoresCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListJogadoresCampeonatoesQuery> {
+    const statement = `query ListJogadoresCampeonatoes($filter: ModelJogadoresCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listJogadoresCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListJogadoresCampeonatoesQuery>(
+      response.data.listJogadoresCampeonatoes
+    );
+  }
+  async JogadoresCampeonatoesByEquipecampeonatoID(
+    equipecampeonatoID: string,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelJogadoresCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<JogadoresCampeonatoesByEquipecampeonatoIDQuery> {
+    const statement = `query JogadoresCampeonatoesByEquipecampeonatoID($equipecampeonatoID: ID!, $sortDirection: ModelSortDirection, $filter: ModelJogadoresCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        jogadoresCampeonatoesByEquipecampeonatoID(
+          equipecampeonatoID: $equipecampeonatoID
+          sortDirection: $sortDirection
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          __typename
+          items {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      equipecampeonatoID
+    };
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <JogadoresCampeonatoesByEquipecampeonatoIDQuery>(
+      response.data.jogadoresCampeonatoesByEquipecampeonatoID
+    );
+  }
+  async GetCampeonato(id: string): Promise<GetCampeonatoQuery> {
+    const statement = `query GetCampeonato($id: ID!) {
+        getCampeonato(id: $id) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCampeonatoQuery>response.data.getCampeonato;
+  }
+  async ListCampeonatoes(
+    filter?: ModelCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCampeonatoesQuery> {
+    const statement = `query ListCampeonatoes($filter: ModelCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCampeonatoesQuery>response.data.listCampeonatoes;
+  }
+  async GetJogadoresPelada(id: string): Promise<GetJogadoresPeladaQuery> {
+    const statement = `query GetJogadoresPelada($id: ID!) {
+        getJogadoresPelada(id: $id) {
+          __typename
+          id
+          Pelada {
+            __typename
+            id
+            qntJogadores
+            duracaoPartida
+            createdAt
+            updatedAt
+            peladaGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -1827,7 +4372,6 @@ export class APIService {
         getPelada(id: $id) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -1838,18 +4382,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1871,13 +4406,11 @@ export class APIService {
           items {
             __typename
             id
-            data
             qntJogadores
             duracaoPartida
             createdAt
             updatedAt
             peladaGrupoId
-            peladaJogadoresPeladaId
           }
           nextToken
         }
@@ -1914,14 +4447,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -1929,7 +4454,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1962,7 +4486,6 @@ export class APIService {
             createdAt
             updatedAt
             jogadoresGrupoId
-            jogadoresJogadoresPeladaId
           }
           nextToken
         }
@@ -2035,27 +4558,506 @@ export class APIService {
     )) as any;
     return <ListGruposQuery>response.data.listGrupos;
   }
-  OnCreateJogadoresPeladaListener(
-    filter?: ModelSubscriptionJogadoresPeladaFilterInput
+  OnCreateGolPartidaCampeonatoListener(
+    filter?: ModelSubscriptionGolPartidaCampeonatoFilterInput
   ): Observable<
     SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateJogadoresPelada">
+      Pick<__SubscriptionContainer, "onCreateGolPartidaCampeonato">
     >
   > {
-    const statement = `subscription OnCreateJogadoresPelada($filter: ModelSubscriptionJogadoresPeladaFilterInput) {
-        onCreateJogadoresPelada(filter: $filter) {
+    const statement = `subscription OnCreateGolPartidaCampeonato($filter: ModelSubscriptionGolPartidaCampeonatoFilterInput) {
+        onCreateGolPartidaCampeonato(filter: $filter) {
           __typename
           id
-          Pelada {
+          JogadoresGol {
             __typename
             id
-            data
-            qntJogadores
-            duracaoPartida
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            peladaGrupoId
-            peladaJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateGolPartidaCampeonato">
+      >
+    >;
+  }
+
+  OnUpdateGolPartidaCampeonatoListener(
+    filter?: ModelSubscriptionGolPartidaCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateGolPartidaCampeonato">
+    >
+  > {
+    const statement = `subscription OnUpdateGolPartidaCampeonato($filter: ModelSubscriptionGolPartidaCampeonatoFilterInput) {
+        onUpdateGolPartidaCampeonato(filter: $filter) {
+          __typename
+          id
+          JogadoresGol {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateGolPartidaCampeonato">
+      >
+    >;
+  }
+
+  OnDeleteGolPartidaCampeonatoListener(
+    filter?: ModelSubscriptionGolPartidaCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteGolPartidaCampeonato">
+    >
+  > {
+    const statement = `subscription OnDeleteGolPartidaCampeonato($filter: ModelSubscriptionGolPartidaCampeonatoFilterInput) {
+        onDeleteGolPartidaCampeonato(filter: $filter) {
+          __typename
+          id
+          JogadoresGol {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          JogadoresAssistencia {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
+          }
+          partidacampeonatoID
+          EquipeCampeonato {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          createdAt
+          updatedAt
+          golPartidaCampeonatoJogadoresGolId
+          golPartidaCampeonatoJogadoresAssistenciaId
+          golPartidaCampeonatoEquipeCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteGolPartidaCampeonato">
+      >
+    >;
+  }
+
+  OnCreatePartidaCampeonatoListener(
+    filter?: ModelSubscriptionPartidaCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreatePartidaCampeonato">
+    >
+  > {
+    const statement = `subscription OnCreatePartidaCampeonato($filter: ModelSubscriptionPartidaCampeonatoFilterInput) {
+        onCreatePartidaCampeonato(filter: $filter) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreatePartidaCampeonato">
+      >
+    >;
+  }
+
+  OnUpdatePartidaCampeonatoListener(
+    filter?: ModelSubscriptionPartidaCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdatePartidaCampeonato">
+    >
+  > {
+    const statement = `subscription OnUpdatePartidaCampeonato($filter: ModelSubscriptionPartidaCampeonatoFilterInput) {
+        onUpdatePartidaCampeonato(filter: $filter) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdatePartidaCampeonato">
+      >
+    >;
+  }
+
+  OnDeletePartidaCampeonatoListener(
+    filter?: ModelSubscriptionPartidaCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeletePartidaCampeonato">
+    >
+  > {
+    const statement = `subscription OnDeletePartidaCampeonato($filter: ModelSubscriptionPartidaCampeonatoFilterInput) {
+        onDeletePartidaCampeonato(filter: $filter) {
+          __typename
+          id
+          EquipeA {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          EquipeB {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          tipoPartida
+          GolPartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          campeonatoID
+          createdAt
+          updatedAt
+          partidaCampeonatoEquipeAId
+          partidaCampeonatoEquipeBId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeletePartidaCampeonato">
+      >
+    >;
+  }
+
+  OnCreateEquipeCampeonatoListener(
+    filter?: ModelSubscriptionEquipeCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateEquipeCampeonato">
+    >
+  > {
+    const statement = `subscription OnCreateEquipeCampeonato($filter: ModelSubscriptionEquipeCampeonatoFilterInput) {
+        onCreateEquipeCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateEquipeCampeonato">
+      >
+    >;
+  }
+
+  OnUpdateEquipeCampeonatoListener(
+    filter?: ModelSubscriptionEquipeCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateEquipeCampeonato">
+    >
+  > {
+    const statement = `subscription OnUpdateEquipeCampeonato($filter: ModelSubscriptionEquipeCampeonatoFilterInput) {
+        onUpdateEquipeCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateEquipeCampeonato">
+      >
+    >;
+  }
+
+  OnDeleteEquipeCampeonatoListener(
+    filter?: ModelSubscriptionEquipeCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteEquipeCampeonato">
+    >
+  > {
+    const statement = `subscription OnDeleteEquipeCampeonato($filter: ModelSubscriptionEquipeCampeonatoFilterInput) {
+        onDeleteEquipeCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          pais
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          JogadoresCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          equipeCampeonatoCampeonatoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteEquipeCampeonato">
+      >
+    >;
+  }
+
+  OnCreateJogadoresCampeonatoListener(
+    filter?: ModelSubscriptionJogadoresCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateJogadoresCampeonato">
+    >
+  > {
+    const statement = `subscription OnCreateJogadoresCampeonato($filter: ModelSubscriptionJogadoresCampeonatoFilterInput) {
+        onCreateJogadoresCampeonato(filter: $filter) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
           }
           Jogadores {
             __typename
@@ -2071,7 +5073,291 @@ export class APIService {
             createdAt
             updatedAt
             jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateJogadoresCampeonato">
+      >
+    >;
+  }
+
+  OnUpdateJogadoresCampeonatoListener(
+    filter?: ModelSubscriptionJogadoresCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateJogadoresCampeonato">
+    >
+  > {
+    const statement = `subscription OnUpdateJogadoresCampeonato($filter: ModelSubscriptionJogadoresCampeonatoFilterInput) {
+        onUpdateJogadoresCampeonato(filter: $filter) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateJogadoresCampeonato">
+      >
+    >;
+  }
+
+  OnDeleteJogadoresCampeonatoListener(
+    filter?: ModelSubscriptionJogadoresCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteJogadoresCampeonato">
+    >
+  > {
+    const statement = `subscription OnDeleteJogadoresCampeonato($filter: ModelSubscriptionJogadoresCampeonatoFilterInput) {
+        onDeleteJogadoresCampeonato(filter: $filter) {
+          __typename
+          id
+          Campeonato {
+            __typename
+            id
+            nome
+            icone
+            data
+            createdAt
+            updatedAt
+            campeonatoGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          classificacao
+          equipecampeonatoID
+          createdAt
+          updatedAt
+          jogadoresCampeonatoCampeonatoId
+          jogadoresCampeonatoJogadoresId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteJogadoresCampeonato">
+      >
+    >;
+  }
+
+  OnCreateCampeonatoListener(
+    filter?: ModelSubscriptionCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCampeonato">>
+  > {
+    const statement = `subscription OnCreateCampeonato($filter: ModelSubscriptionCampeonatoFilterInput) {
+        onCreateCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCampeonato">>
+    >;
+  }
+
+  OnUpdateCampeonatoListener(
+    filter?: ModelSubscriptionCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCampeonato">>
+  > {
+    const statement = `subscription OnUpdateCampeonato($filter: ModelSubscriptionCampeonatoFilterInput) {
+        onUpdateCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCampeonato">>
+    >;
+  }
+
+  OnDeleteCampeonatoListener(
+    filter?: ModelSubscriptionCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCampeonato">>
+  > {
+    const statement = `subscription OnDeleteCampeonato($filter: ModelSubscriptionCampeonatoFilterInput) {
+        onDeleteCampeonato(filter: $filter) {
+          __typename
+          id
+          nome
+          Grupo {
+            __typename
+            id
+            nome
+            icon
+            createdAt
+            updatedAt
+          }
+          icone
+          data
+          PartidaCampeonatoes {
+            __typename
+            nextToken
+          }
+          createdAt
+          updatedAt
+          campeonatoGrupoId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCampeonato">>
+    >;
+  }
+
+  OnCreateJogadoresPeladaListener(
+    filter?: ModelSubscriptionJogadoresPeladaFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateJogadoresPelada">
+    >
+  > {
+    const statement = `subscription OnCreateJogadoresPelada($filter: ModelSubscriptionJogadoresPeladaFilterInput) {
+        onCreateJogadoresPelada(filter: $filter) {
+          __typename
+          id
+          Pelada {
+            __typename
+            id
+            qntJogadores
+            duracaoPartida
+            createdAt
+            updatedAt
+            peladaGrupoId
+          }
+          Jogadores {
+            __typename
+            id
+            classificacao
+            equipecampeonatoID
+            createdAt
+            updatedAt
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -2106,29 +5392,21 @@ export class APIService {
           Pelada {
             __typename
             id
-            data
             qntJogadores
             duracaoPartida
             createdAt
             updatedAt
             peladaGrupoId
-            peladaJogadoresPeladaId
           }
           Jogadores {
             __typename
             id
-            nome
-            email
-            telefone
-            foto
-            time
-            aniversario
-            escudo
-            posicao
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -2163,29 +5441,21 @@ export class APIService {
           Pelada {
             __typename
             id
-            data
             qntJogadores
             duracaoPartida
             createdAt
             updatedAt
             peladaGrupoId
-            peladaJogadoresPeladaId
           }
           Jogadores {
             __typename
             id
-            nome
-            email
-            telefone
-            foto
-            time
-            aniversario
-            escudo
-            posicao
+            classificacao
+            equipecampeonatoID
             createdAt
             updatedAt
-            jogadoresGrupoId
-            jogadoresJogadoresPeladaId
+            jogadoresCampeonatoCampeonatoId
+            jogadoresCampeonatoJogadoresId
           }
           createdAt
           updatedAt
@@ -2215,7 +5485,6 @@ export class APIService {
         onCreatePelada(filter: $filter) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -2226,18 +5495,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2260,7 +5520,6 @@ export class APIService {
         onUpdatePelada(filter: $filter) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -2271,18 +5530,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2305,7 +5555,6 @@ export class APIService {
         onDeletePelada(filter: $filter) {
           __typename
           id
-          data
           qntJogadores
           duracaoPartida
           Grupo {
@@ -2316,18 +5565,9 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           createdAt
           updatedAt
           peladaGrupoId
-          peladaJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2362,14 +5602,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -2377,7 +5609,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2412,14 +5643,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -2427,7 +5650,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2462,14 +5684,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          JogadoresPelada {
-            __typename
-            id
-            createdAt
-            updatedAt
-            jogadoresPeladaPeladaId
-            jogadoresPeladaJogadoresId
-          }
           time
           aniversario
           escudo
@@ -2477,7 +5691,6 @@ export class APIService {
           createdAt
           updatedAt
           jogadoresGrupoId
-          jogadoresJogadoresPeladaId
         }
       }`;
     const gqlAPIServiceArguments: any = {};

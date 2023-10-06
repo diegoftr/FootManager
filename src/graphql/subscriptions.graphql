@@ -1,19 +1,345 @@
 # this is an auto generated file. This will be overwritten
 
-subscription OnCreateJogadoresPelada(
-  $filter: ModelSubscriptionJogadoresPeladaFilterInput
+subscription OnCreateGolPartidaCampeonato(
+  $filter: ModelSubscriptionGolPartidaCampeonatoFilterInput
 ) {
-  onCreateJogadoresPelada(filter: $filter) {
+  onCreateGolPartidaCampeonato(filter: $filter) {
     id
-    Pelada {
+    JogadoresGol {
       id
-      data
-      qntJogadores
-      duracaoPartida
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      peladaGrupoId
-      peladaJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+subscription OnUpdateGolPartidaCampeonato(
+  $filter: ModelSubscriptionGolPartidaCampeonatoFilterInput
+) {
+  onUpdateGolPartidaCampeonato(filter: $filter) {
+    id
+    JogadoresGol {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+subscription OnDeleteGolPartidaCampeonato(
+  $filter: ModelSubscriptionGolPartidaCampeonatoFilterInput
+) {
+  onDeleteGolPartidaCampeonato(filter: $filter) {
+    id
+    JogadoresGol {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    JogadoresAssistencia {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
+      __typename
+    }
+    partidacampeonatoID
+    EquipeCampeonato {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    createdAt
+    updatedAt
+    golPartidaCampeonatoJogadoresGolId
+    golPartidaCampeonatoJogadoresAssistenciaId
+    golPartidaCampeonatoEquipeCampeonatoId
+    __typename
+  }
+}
+
+subscription OnCreatePartidaCampeonato(
+  $filter: ModelSubscriptionPartidaCampeonatoFilterInput
+) {
+  onCreatePartidaCampeonato(filter: $filter) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+subscription OnUpdatePartidaCampeonato(
+  $filter: ModelSubscriptionPartidaCampeonatoFilterInput
+) {
+  onUpdatePartidaCampeonato(filter: $filter) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+subscription OnDeletePartidaCampeonato(
+  $filter: ModelSubscriptionPartidaCampeonatoFilterInput
+) {
+  onDeletePartidaCampeonato(filter: $filter) {
+    id
+    EquipeA {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    EquipeB {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    tipoPartida
+    GolPartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    campeonatoID
+    createdAt
+    updatedAt
+    partidaCampeonatoEquipeAId
+    partidaCampeonatoEquipeBId
+    __typename
+  }
+}
+
+subscription OnCreateEquipeCampeonato(
+  $filter: ModelSubscriptionEquipeCampeonatoFilterInput
+) {
+  onCreateEquipeCampeonato(filter: $filter) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+subscription OnUpdateEquipeCampeonato(
+  $filter: ModelSubscriptionEquipeCampeonatoFilterInput
+) {
+  onUpdateEquipeCampeonato(filter: $filter) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+subscription OnDeleteEquipeCampeonato(
+  $filter: ModelSubscriptionEquipeCampeonatoFilterInput
+) {
+  onDeleteEquipeCampeonato(filter: $filter) {
+    id
+    nome
+    pais
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    JogadoresCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    equipeCampeonatoCampeonatoId
+    __typename
+  }
+}
+
+subscription OnCreateJogadoresCampeonato(
+  $filter: ModelSubscriptionJogadoresCampeonatoFilterInput
+) {
+  onCreateJogadoresCampeonato(filter: $filter) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
       __typename
     }
     Jogadores {
@@ -29,7 +355,201 @@ subscription OnCreateJogadoresPelada(
       createdAt
       updatedAt
       jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+subscription OnUpdateJogadoresCampeonato(
+  $filter: ModelSubscriptionJogadoresCampeonatoFilterInput
+) {
+  onUpdateJogadoresCampeonato(filter: $filter) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+subscription OnDeleteJogadoresCampeonato(
+  $filter: ModelSubscriptionJogadoresCampeonatoFilterInput
+) {
+  onDeleteJogadoresCampeonato(filter: $filter) {
+    id
+    Campeonato {
+      id
+      nome
+      icone
+      data
+      createdAt
+      updatedAt
+      campeonatoGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    classificacao
+    equipecampeonatoID
+    createdAt
+    updatedAt
+    jogadoresCampeonatoCampeonatoId
+    jogadoresCampeonatoJogadoresId
+    __typename
+  }
+}
+
+subscription OnCreateCampeonato(
+  $filter: ModelSubscriptionCampeonatoFilterInput
+) {
+  onCreateCampeonato(filter: $filter) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+subscription OnUpdateCampeonato(
+  $filter: ModelSubscriptionCampeonatoFilterInput
+) {
+  onUpdateCampeonato(filter: $filter) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+subscription OnDeleteCampeonato(
+  $filter: ModelSubscriptionCampeonatoFilterInput
+) {
+  onDeleteCampeonato(filter: $filter) {
+    id
+    nome
+    Grupo {
+      id
+      nome
+      icon
+      createdAt
+      updatedAt
+      __typename
+    }
+    icone
+    data
+    PartidaCampeonatoes {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    campeonatoGrupoId
+    __typename
+  }
+}
+
+subscription OnCreateJogadoresPelada(
+  $filter: ModelSubscriptionJogadoresPeladaFilterInput
+) {
+  onCreateJogadoresPelada(filter: $filter) {
+    id
+    Pelada {
+      id
+      qntJogadores
+      duracaoPartida
+      createdAt
+      updatedAt
+      peladaGrupoId
+      __typename
+    }
+    Jogadores {
+      id
+      classificacao
+      equipecampeonatoID
+      createdAt
+      updatedAt
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -47,29 +567,21 @@ subscription OnUpdateJogadoresPelada(
     id
     Pelada {
       id
-      data
       qntJogadores
       duracaoPartida
       createdAt
       updatedAt
       peladaGrupoId
-      peladaJogadoresPeladaId
       __typename
     }
     Jogadores {
       id
-      nome
-      email
-      telefone
-      foto
-      time
-      aniversario
-      escudo
-      posicao
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -87,29 +599,21 @@ subscription OnDeleteJogadoresPelada(
     id
     Pelada {
       id
-      data
       qntJogadores
       duracaoPartida
       createdAt
       updatedAt
       peladaGrupoId
-      peladaJogadoresPeladaId
       __typename
     }
     Jogadores {
       id
-      nome
-      email
-      telefone
-      foto
-      time
-      aniversario
-      escudo
-      posicao
+      classificacao
+      equipecampeonatoID
       createdAt
       updatedAt
-      jogadoresGrupoId
-      jogadoresJogadoresPeladaId
+      jogadoresCampeonatoCampeonatoId
+      jogadoresCampeonatoJogadoresId
       __typename
     }
     createdAt
@@ -123,7 +627,6 @@ subscription OnDeleteJogadoresPelada(
 subscription OnCreatePelada($filter: ModelSubscriptionPeladaFilterInput) {
   onCreatePelada(filter: $filter) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -134,18 +637,9 @@ subscription OnCreatePelada($filter: ModelSubscriptionPeladaFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -153,7 +647,6 @@ subscription OnCreatePelada($filter: ModelSubscriptionPeladaFilterInput) {
 subscription OnUpdatePelada($filter: ModelSubscriptionPeladaFilterInput) {
   onUpdatePelada(filter: $filter) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -164,18 +657,9 @@ subscription OnUpdatePelada($filter: ModelSubscriptionPeladaFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -183,7 +667,6 @@ subscription OnUpdatePelada($filter: ModelSubscriptionPeladaFilterInput) {
 subscription OnDeletePelada($filter: ModelSubscriptionPeladaFilterInput) {
   onDeletePelada(filter: $filter) {
     id
-    data
     qntJogadores
     duracaoPartida
     Grupo {
@@ -194,18 +677,9 @@ subscription OnDeletePelada($filter: ModelSubscriptionPeladaFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     createdAt
     updatedAt
     peladaGrupoId
-    peladaJogadoresPeladaId
     __typename
   }
 }
@@ -225,14 +699,6 @@ subscription OnCreateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -240,7 +706,6 @@ subscription OnCreateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
@@ -260,14 +725,6 @@ subscription OnUpdateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -275,7 +732,6 @@ subscription OnUpdateJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
@@ -295,14 +751,6 @@ subscription OnDeleteJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
       updatedAt
       __typename
     }
-    JogadoresPelada {
-      id
-      createdAt
-      updatedAt
-      jogadoresPeladaPeladaId
-      jogadoresPeladaJogadoresId
-      __typename
-    }
     time
     aniversario
     escudo
@@ -310,7 +758,6 @@ subscription OnDeleteJogadores($filter: ModelSubscriptionJogadoresFilterInput) {
     createdAt
     updatedAt
     jogadoresGrupoId
-    jogadoresJogadoresPeladaId
     __typename
   }
 }
