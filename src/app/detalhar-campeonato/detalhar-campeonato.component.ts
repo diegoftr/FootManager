@@ -37,7 +37,7 @@ export class DetalharCampeonatoComponent implements OnInit {
 
         this.spinner.hide();
       } catch (error) {
-        alert('Erro:' + error);
+        console.error(error);
       } finally {
         this.spinner.hide();
       }
@@ -214,7 +214,7 @@ export class DetalharCampeonatoComponent implements OnInit {
       }
 
     } catch (error) {
-      alert('Erro: ' + error);
+      console.error(error);
     }
   }
 
