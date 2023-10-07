@@ -177,18 +177,14 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
         this.spinner.show();
         const partida = await this.api.CreatePartidaCampeonato(this.form.value);
   
-        this.router.navigate(['/manterPartida'], { queryParams: { idCampeonato: this.campeonato.id, idPartida: partida.id } });
+        this.ngOnInit();
       }
     } catch (error) {
       console.error(error)
       alert('Erro ao incluir');
       this.spinner.hide();
-    } finally {
-      this.spinner.hide();
-    }
+    } 
 
-
-    
   }
 
   acaoVoltar() {
