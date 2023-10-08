@@ -1,4 +1,4 @@
-import { NgModule} from '@angular/core';
+import { NgModule, isDevMode} from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -32,6 +32,7 @@ import { DetalharCampeonatoComponent } from './detalhar-campeonato/detalhar-camp
 import { ManterEquipeCampeonatoComponent } from './manter-equipe-campeonato/manter-equipe-campeonato.component';
 import { SelecionarJogadoresComponent } from './selecionar-jogadores/selecionar-jogadores.component';
 import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/manter-partida-campeonato.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -70,7 +71,13 @@ import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/ma
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    ImageCropperModule
+    ImageCropperModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   schemas: [],
   providers: [
