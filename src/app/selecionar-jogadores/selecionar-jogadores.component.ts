@@ -31,8 +31,9 @@ export class SelecionarJogadoresComponent implements OnInit {
   }
 
   isLogado() {
-    return this.authenticator.user != null;
+    return this.authenticator.user != null && this.authenticator.user.username != 'visitante';
   }
+
   ngOnInit() {
     this.form = new FormGroup({
       id: new FormControl(null),

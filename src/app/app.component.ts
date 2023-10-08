@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,14 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authenticator: AuthenticatorService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    var logIn = {username: "Visitante",
+    password: "Visitante"}
+    if(this.authenticator.user == null)
+      await Auth.signIn(logIn);
     this.router.navigate(['/home']);
   }
 
