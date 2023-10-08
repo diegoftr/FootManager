@@ -1,7 +1,7 @@
 {
-  "name": "peladasabado",
-  "short_name": "peladasabado",
-  "theme_color": "#1976d2",
+  "name": "Peladeitor 2.0",
+  "short_name": "Peladeitor 2.0",
+  "theme_color": "#232526",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
