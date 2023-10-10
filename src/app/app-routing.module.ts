@@ -11,43 +11,51 @@ import { DetalharCampeonatoComponent } from './detalhar-campeonato/detalhar-camp
 import { ManterEquipeCampeonatoComponent } from './manter-equipe-campeonato/manter-equipe-campeonato.component';
 import { SelecionarJogadoresComponent } from './selecionar-jogadores/selecionar-jogadores.component';
 import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/manter-partida-campeonato.component';
+import { ManterResultadoCampeonatoComponent } from './manter-resultado-campeonato/manter-resultado-campeonato.component';
+import { ManterFotosComponent } from './manter-fotos/manter-fotos.component';
 
 
 
-  const routes: Routes = [{
-    path: 'home',
-    component: HomeComponent,
-  },{
-    path: 'detalharGrupo',
-    component: DetalharGrupoComponent,
-  },{
-    path: 'jogadores',
-    component: JogadoresComponent,
-  },{
-    path: 'login',
-    component: LoginComponent,
-  },{
-    path: 'partidas',
-    component: PartidasComponent,
-  },{
-    path: 'peladas',
-    component: PeladaComponent,
-  },{ 
-    path: 'campeonatos',
-    component: CampeonatosComponent,
-  },{
-    path: 'detalharCampeonato',
-    component: DetalharCampeonatoComponent,
-  },{
-    path: 'manterEquipeCampeonato',
-    component: ManterEquipeCampeonatoComponent,
-  },{
-    path: 'selecionarJogador',
-    component: SelecionarJogadoresComponent
-  },{
-    path: 'manterPartida',
-    component: ManterPartidaCampeonatoComponent
-  }];
+const routes: Routes = [{
+  path: 'home',
+  component: HomeComponent,
+}, {
+  path: 'detalharGrupo',
+  component: DetalharGrupoComponent,
+}, {
+  path: 'jogadores',
+  component: JogadoresComponent,
+}, {
+  path: 'login',
+  component: LoginComponent,
+}, {
+  path: 'partidas',
+  component: PartidasComponent,
+}, {
+  path: 'peladas',
+  component: PeladaComponent,
+}, {
+  path: 'campeonatos',
+  component: CampeonatosComponent,
+}, {
+  path: 'detalharCampeonato',
+  component: DetalharCampeonatoComponent,
+}, {
+  path: 'manterEquipeCampeonato',
+  component: ManterEquipeCampeonatoComponent,
+}, {
+  path: 'selecionarJogador',
+  component: SelecionarJogadoresComponent
+}, {
+  path: 'manterPartida',
+  component: ManterPartidaCampeonatoComponent
+}, {
+  path: 'manterResultadoCampeonato',
+  component: ManterResultadoCampeonatoComponent
+}, {
+  path: 'manterFotos',
+  component: ManterFotosComponent
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

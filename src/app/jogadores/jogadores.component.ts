@@ -71,12 +71,10 @@ export class JogadoresComponent implements OnInit {
           if (jogadores.items.length == 0)
             this.spinner.hide();
           this.jogadores.forEach((j, idx, array) => {
-            Storage.get(j.foto!, { level: 'public' }).then(arquivo => {
-              j.foto = arquivo.split('?')[0];
-              if (idx === array.length - 1) {
-                this.spinner.hide();
-              }
-            });
+            j.foto = "https://stlbuckt213907-dev.s3.us-east-1.amazonaws.com/public/" + j.foto;
+            if (idx === array.length - 1) {
+              this.spinner.hide();
+            }
           });
           this.jogadores.sort((a, b) => {
             if (a.nome != null && b.nome != null) {
@@ -151,7 +149,7 @@ export class JogadoresComponent implements OnInit {
           .then(res => res.blob())
           .then(blob => {
             const file = new File([blob], "File name", { type: "image/png" })
-            Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then(a => {
+            Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then((a: { key: any; }) => {
               this.form.get('foto')?.setValue(a.key)
               this.api.CreateJogadores(this.form.value).then(a => {
                 this.isInclusao = false;

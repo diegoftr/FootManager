@@ -15,14 +15,13 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
 
   campeonato!: Campeonato;
   equipes: Array<EquipeCampeonato> = [];
+  jogadoresCamp: Array<JogadoresCampeonato> = [];
   isInclusao :boolean = false; 
   isAlteracao :boolean = false; 
   form: FormGroup = new FormGroup({});
   tiposPartidas: Array<String> = ['Normal', 'Disputa 3º','Final'];
   partida!: PartidaCampeonato;
-  jogadoresCamp: Array<JogadoresCampeonato> = [];
   gols: Array<GolPartidaCampeonato> = [];
-
 
 
   constructor(private authenticator: AuthenticatorService, private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
@@ -77,6 +76,8 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
           const partida = await this.api.GetPartidaCampeonato(idPartida);
           partida.EquipeA = await this.api.GetEquipeCampeonato(partida.partidaCampeonatoEquipeAId!);
           partida.EquipeB = await this.api.GetEquipeCampeonato(partida.partidaCampeonatoEquipeBId!);
+
+          this.equipes = this.equipes.filter(e=> e.id == partida.EquipeA?.id || e.id == partida.EquipeB?.id);
 
           const filter = {
             partidacampeonatoID: {
@@ -176,8 +177,7 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
   
         this.spinner.show();
         const partida = await this.api.CreatePartidaCampeonato(this.form.value);
-  
-        this.ngOnInit();
+        this.acaoVoltar();
       }
     } catch (error) {
       console.error(error)
@@ -191,5 +191,6 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
     this.router.navigate(['/detalharCampeonato'], { queryParams: { idCampeonato: this.campeonato.id } });
 
   }
+
 
 }

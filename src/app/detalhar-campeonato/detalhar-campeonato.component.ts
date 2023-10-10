@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { APIService, Campeonato, ModelJogadoresCampeonatoConnection, EquipeCampeonato, JogadoresCampeonato, UpdateJogadoresCampeonatoInput, GetCampeonatoQuery, GetEquipeCampeonatoQuery, PartidaCampeonato } from '../API.service';
+import { APIService, Campeonato, ModelJogadoresCampeonatoConnection, EquipeCampeonato, JogadoresCampeonato, UpdateJogadoresCampeonatoInput, GetCampeonatoQuery, GetEquipeCampeonatoQuery, PartidaCampeonato, GolPartidaCampeonato, GetResultadoCampeonatoQuery } from '../API.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
-import { Storage } from 'aws-amplify';
 
 @Component({
   selector: 'app-detalhar-campeonato',
@@ -16,6 +15,7 @@ export class DetalharCampeonatoComponent implements OnInit {
   equipes: Array<EquipeCampeonato> = [];
   jogadoresCampeonato: Array<JogadoresCampeonato> = [];
   partidas: Array<PartidaCampeonato> = [];
+  resultadoCampeonato!: GetResultadoCampeonatoQuery;
 
 
   constructor(private authenticator: AuthenticatorService, private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
@@ -34,6 +34,7 @@ export class DetalharCampeonatoComponent implements OnInit {
         this.consultarJogadoresCampeonato(campeonato);
         this.listarEquipesCampeonatos(campeonato);
         await this.listarPartidas(campeonato);
+        await this.listarResultadoCampeonato(campeonato);
 
         this.spinner.hide();
       } catch (error) {
@@ -42,6 +43,16 @@ export class DetalharCampeonatoComponent implements OnInit {
         this.spinner.hide();
       }
     });
+  }
+
+  async listarResultadoCampeonato(campeonato: GetCampeonatoQuery) {
+    const resultadoCampeonato = await this.api.GetResultadoCampeonato(campeonato.id);
+    this.resultadoCampeonato = resultadoCampeonato;
+    
+  }
+
+  filtrarPartidas(partidas: (PartidaCampeonato | null)[] | undefined, tipo: String) {
+    return partidas?.filter(p=>p?.tipoPartida == tipo);
   }
 
   async listarPartidas(c: any) {
@@ -64,10 +75,60 @@ export class DetalharCampeonatoComponent implements OnInit {
       p.GolPartidaCampeonatoes = await this.api.ListGolPartidaCampeonatoes(filter);
 
       const as = await this.api.ListGolPartidaCampeonatoes(filter);
-      as.items.filter(a => a?.golPartidaCampeonatoEquipeCampeonatoId == '').length
+
 
     }
+
+    partidas.items.sort((a: { createdAt: number | null; }, b: { createdAt: number | null; }) => {
+      if (a.createdAt != null && b.createdAt != null) {
+        if (a.createdAt > b.createdAt) {
+          return 1;
+        } else if (a.createdAt < b.createdAt) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+      return 0;
+    });
+
     this.campeonato.PartidaCampeonatoes = partidas;
+  }
+
+
+  incluirResultadoCampeonato() {
+    this.router.navigate(['/manterResultadoCampeonato'], { queryParams: { idCampeonato: this.campeonato.id } });
+  }
+
+  
+  async filtarJogadoresGolPartida(golsPartida:(GolPartidaCampeonato | null)[], idEquipe:string | undefined) {
+    var gols = golsPartida.filter(g=> g?.golPartidaCampeonatoEquipeCampeonatoId == idEquipe)
+    var retorno : any;
+    if(gols != null) {
+      for (const g of gols) {
+        if(g != null) {
+          const j = await this.api.GetJogadores(g!.golPartidaCampeonatoJogadoresGolId!);
+          retorno.push("https://stlbuckt213907-dev.s3.us-east-1.amazonaws.com/public/" + j.foto);
+        }
+      }
+    }
+    return retorno;
+  }
+
+  carregarImagemJogadorGol(idEquipe:string , gol:GolPartidaCampeonato | null) {
+    var retorno;
+    if(gol?.golPartidaCampeonatoEquipeCampeonatoId == idEquipe) {
+
+      var equipe = this.equipes.filter(e=>e.id == idEquipe)[0];
+      if(equipe != null && equipe.JogadoresCampeonatoes != null && equipe.JogadoresCampeonatoes.items != null) {
+        var jogador = equipe.JogadoresCampeonatoes.items.filter(j=>j!.id == gol.golPartidaCampeonatoJogadoresGolId)[0];
+        if(jogador != null && jogador.Jogadores != null) {
+          retorno = jogador!.Jogadores!.foto;
+        }
+
+      }
+    }
+    return retorno;
   }
 
   retornarJson(obj: any) {
@@ -77,7 +138,7 @@ export class DetalharCampeonatoComponent implements OnInit {
   calcularPontosGanhos(idEquipe: string) {
     var pontos = 0;
     if (this.campeonato != null && this.campeonato.PartidaCampeonatoes != null && this.campeonato.PartidaCampeonatoes.items != null) {
-      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe);
+      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p?.tipoPartida == 'Normal' && (p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe));
       for (const p of partidas) {
         var resultado = this.resultadoPartida(idEquipe, p!);
         if (resultado == 'EMPATE') {
@@ -93,7 +154,7 @@ export class DetalharCampeonatoComponent implements OnInit {
   quantPartidasJogadas(idEquipe: string) {
     var quant = 0;
     if (this.campeonato != null && this.campeonato.PartidaCampeonatoes != null && this.campeonato.PartidaCampeonatoes.items != null) {
-      quant = this.campeonato.PartidaCampeonatoes.items.filter(p => p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe).length;
+      quant = this.campeonato.PartidaCampeonatoes.items.filter(p => p?.tipoPartida == 'Normal' && (p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe)).length;
     }
     return quant;
   }
@@ -103,7 +164,7 @@ export class DetalharCampeonatoComponent implements OnInit {
     var golsAFavor = 0;
 
     if (this.campeonato != null && this.campeonato.PartidaCampeonatoes != null && this.campeonato.PartidaCampeonatoes.items != null) {
-      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe);
+      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p?.tipoPartida == 'Normal' && (p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe));
       for (const p of partidas) {
         if (p != null && p?.GolPartidaCampeonatoes != null) {
           golsAFavor = golsAFavor + p?.GolPartidaCampeonatoes?.items.filter(g => g?.golPartidaCampeonatoEquipeCampeonatoId == idEquipe).length;
@@ -149,7 +210,7 @@ export class DetalharCampeonatoComponent implements OnInit {
   quantResultado(idEquipe: string, resultadoEsperado: string) {
     var quant = 0;
     if (this.campeonato != null && this.campeonato.PartidaCampeonatoes != null && this.campeonato.PartidaCampeonatoes.items != null) {
-      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe);
+      var partidas = this.campeonato.PartidaCampeonatoes.items.filter(p => p?.tipoPartida == 'Normal' && (p!.partidaCampeonatoEquipeAId == idEquipe || p!.partidaCampeonatoEquipeBId == idEquipe));
       for (const p of partidas) {
         var resultado = this.resultadoPartida(idEquipe, p!);
         if (resultado == resultadoEsperado) {
@@ -201,8 +262,7 @@ export class DetalharCampeonatoComponent implements OnInit {
 
         for (const jogador of jogadores) {
           const jogadorResponse = await this.api.GetJogadores(jogador.jogadoresCampeonatoJogadoresId!);
-          const foto = await Storage.get(jogadorResponse.foto!);
-          jogadorResponse.foto = foto.split('?')[0];
+          jogadorResponse.foto = "https://stlbuckt213907-dev.s3.us-east-1.amazonaws.com/public/" + jogadorResponse.foto!;
           jogador.Jogadores = jogadorResponse;
         }
 
@@ -333,6 +393,10 @@ export class DetalharCampeonatoComponent implements OnInit {
   incluirJogadoresCampeonato() {
     this.router.navigate(['/selecionarJogador'], { queryParams: { idCampeonato: this.campeonato.id, idGrupo: this.campeonato.Grupo?.id } });
 
+  }
+
+  abrirManterFotos() {
+    this.router.navigate(['/manterFotos'], { queryParams: { id: this.campeonato.id } });
   }
 
 }

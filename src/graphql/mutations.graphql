@@ -1,5 +1,320 @@
 # this is an auto generated file. This will be overwritten
 
+mutation CreateFotos(
+  $input: CreateFotosInput!
+  $condition: ModelFotosConditionInput
+) {
+  createFotos(input: $input, condition: $condition) {
+    id
+    foto
+    idGrupoFoto
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation UpdateFotos(
+  $input: UpdateFotosInput!
+  $condition: ModelFotosConditionInput
+) {
+  updateFotos(input: $input, condition: $condition) {
+    id
+    foto
+    idGrupoFoto
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation DeleteFotos(
+  $input: DeleteFotosInput!
+  $condition: ModelFotosConditionInput
+) {
+  deleteFotos(input: $input, condition: $condition) {
+    id
+    foto
+    idGrupoFoto
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation CreateResultadoCampeonato(
+  $input: CreateResultadoCampeonatoInput!
+  $condition: ModelResultadoCampeonatoConditionInput
+) {
+  createResultadoCampeonato(input: $input, condition: $condition) {
+    id
+    Artilheiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Goleiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Destaque {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Campeao {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Segundo {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Terceiro {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    agradecimento
+    createdAt
+    updatedAt
+    resultadoCampeonatoArtilheiroId
+    resultadoCampeonatoGoleiroId
+    resultadoCampeonatoDestaqueId
+    resultadoCampeonatoCampeaoId
+    resultadoCampeonatoSegundoId
+    resultadoCampeonatoTerceiroId
+    __typename
+  }
+}
+
+mutation UpdateResultadoCampeonato(
+  $input: UpdateResultadoCampeonatoInput!
+  $condition: ModelResultadoCampeonatoConditionInput
+) {
+  updateResultadoCampeonato(input: $input, condition: $condition) {
+    id
+    Artilheiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Goleiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Destaque {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Campeao {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Segundo {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Terceiro {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    agradecimento
+    createdAt
+    updatedAt
+    resultadoCampeonatoArtilheiroId
+    resultadoCampeonatoGoleiroId
+    resultadoCampeonatoDestaqueId
+    resultadoCampeonatoCampeaoId
+    resultadoCampeonatoSegundoId
+    resultadoCampeonatoTerceiroId
+    __typename
+  }
+}
+
+mutation DeleteResultadoCampeonato(
+  $input: DeleteResultadoCampeonatoInput!
+  $condition: ModelResultadoCampeonatoConditionInput
+) {
+  deleteResultadoCampeonato(input: $input, condition: $condition) {
+    id
+    Artilheiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Goleiro {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Destaque {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
+    Campeao {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Segundo {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    Terceiro {
+      id
+      nome
+      pais
+      createdAt
+      updatedAt
+      equipeCampeonatoCampeonatoId
+      __typename
+    }
+    agradecimento
+    createdAt
+    updatedAt
+    resultadoCampeonatoArtilheiroId
+    resultadoCampeonatoGoleiroId
+    resultadoCampeonatoDestaqueId
+    resultadoCampeonatoCampeaoId
+    resultadoCampeonatoSegundoId
+    resultadoCampeonatoTerceiroId
+    __typename
+  }
+}
+
 mutation CreateGolPartidaCampeonato(
   $input: CreateGolPartidaCampeonatoInput!
   $condition: ModelGolPartidaCampeonatoConditionInput

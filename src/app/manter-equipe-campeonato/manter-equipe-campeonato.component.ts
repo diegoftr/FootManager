@@ -64,6 +64,10 @@ export class ManterEquipeCampeonatoComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
+  acaoVoltar() {
+    this.router.navigate(['/detalharCampeonato'], { queryParams: { idCampeonato: this.idCampeonato } });
+  }
+
 
   salvarEquipe() {
     this.spinner.show();
@@ -74,7 +78,7 @@ export class ManterEquipeCampeonatoComponent implements OnInit {
 
       this.api.CreateEquipeCampeonato(this.form.value).then(a => {
         this.spinner.hide();
-        this.router.navigate(['/detalharCampeonato'], { queryParams: { idCampeonato: this.idCampeonato } });
+        this.acaoVoltar();
       });
     }
   }

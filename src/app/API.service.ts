@@ -10,6 +10,12 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
+  onCreateFotos: OnCreateFotosSubscription;
+  onUpdateFotos: OnUpdateFotosSubscription;
+  onDeleteFotos: OnDeleteFotosSubscription;
+  onCreateResultadoCampeonato: OnCreateResultadoCampeonatoSubscription;
+  onUpdateResultadoCampeonato: OnUpdateResultadoCampeonatoSubscription;
+  onDeleteResultadoCampeonato: OnDeleteResultadoCampeonatoSubscription;
   onCreateGolPartidaCampeonato: OnCreateGolPartidaCampeonatoSubscription;
   onUpdateGolPartidaCampeonato: OnUpdateGolPartidaCampeonatoSubscription;
   onDeleteGolPartidaCampeonato: OnDeleteGolPartidaCampeonatoSubscription;
@@ -39,25 +45,21 @@ export type __SubscriptionContainer = {
   onDeleteGrupo: OnDeleteGrupoSubscription;
 };
 
-export type CreateGolPartidaCampeonatoInput = {
+export type CreateFotosInput = {
   id?: string | null;
-  partidacampeonatoID: string;
-  golPartidaCampeonatoJogadoresGolId?: string | null;
-  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
-  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
 };
 
-export type ModelGolPartidaCampeonatoConditionInput = {
-  partidacampeonatoID?: ModelIDInput | null;
-  and?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
-  or?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
-  not?: ModelGolPartidaCampeonatoConditionInput | null;
-  golPartidaCampeonatoJogadoresGolId?: ModelIDInput | null;
-  golPartidaCampeonatoJogadoresAssistenciaId?: ModelIDInput | null;
-  golPartidaCampeonatoEquipeCampeonatoId?: ModelIDInput | null;
+export type ModelFotosConditionInput = {
+  foto?: ModelStringInput | null;
+  idGrupoFoto?: ModelStringInput | null;
+  and?: Array<ModelFotosConditionInput | null> | null;
+  or?: Array<ModelFotosConditionInput | null> | null;
+  not?: ModelFotosConditionInput | null;
 };
 
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -96,6 +98,162 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type Fotos = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateFotosInput = {
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+};
+
+export type DeleteFotosInput = {
+  id: string;
+};
+
+export type CreateResultadoCampeonatoInput = {
+  id?: string | null;
+  agradecimento?: string | null;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type ModelResultadoCampeonatoConditionInput = {
+  agradecimento?: ModelStringInput | null;
+  and?: Array<ModelResultadoCampeonatoConditionInput | null> | null;
+  or?: Array<ModelResultadoCampeonatoConditionInput | null> | null;
+  not?: ModelResultadoCampeonatoConditionInput | null;
+  resultadoCampeonatoArtilheiroId?: ModelIDInput | null;
+  resultadoCampeonatoGoleiroId?: ModelIDInput | null;
+  resultadoCampeonatoDestaqueId?: ModelIDInput | null;
+  resultadoCampeonatoCampeaoId?: ModelIDInput | null;
+  resultadoCampeonatoSegundoId?: ModelIDInput | null;
+  resultadoCampeonatoTerceiroId?: ModelIDInput | null;
+};
+
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type ResultadoCampeonato = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: Jogadores | null;
+  Goleiro?: Jogadores | null;
+  Destaque?: Jogadores | null;
+  Campeao?: EquipeCampeonato | null;
+  Segundo?: EquipeCampeonato | null;
+  Terceiro?: EquipeCampeonato | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type Jogadores = {
+  __typename: "Jogadores";
+  id: string;
+  nome?: string | null;
+  email?: string | null;
+  telefone?: string | null;
+  foto?: string | null;
+  Grupo: Grupo;
+  time?: string | null;
+  aniversario?: string | null;
+  escudo?: string | null;
+  posicao?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  jogadoresGrupoId: string;
+};
+
+export type Grupo = {
+  __typename: "Grupo";
+  id: string;
+  nome?: string | null;
+  icon?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type EquipeCampeonato = {
+  __typename: "EquipeCampeonato";
+  id: string;
+  nome?: string | null;
+  pais?: string | null;
+  Campeonato?: Campeonato | null;
+  JogadoresCampeonatoes?: ModelJogadoresCampeonatoConnection | null;
+  createdAt: string;
+  updatedAt: string;
+  equipeCampeonatoCampeonatoId?: string | null;
+};
+
+export type Campeonato = {
+  __typename: "Campeonato";
+  id: string;
+  nome?: string | null;
+  Grupo?: Grupo | null;
+  icone?: string | null;
+  data?: string | null;
+  PartidaCampeonatoes?: ModelPartidaCampeonatoConnection | null;
+  createdAt: string;
+  updatedAt: string;
+  campeonatoGrupoId?: string | null;
+};
+
+export type ModelPartidaCampeonatoConnection = {
+  __typename: "ModelPartidaCampeonatoConnection";
+  items: Array<PartidaCampeonato | null>;
+  nextToken?: string | null;
+};
+
+export type PartidaCampeonato = {
+  __typename: "PartidaCampeonato";
+  id: string;
+  EquipeA?: EquipeCampeonato | null;
+  EquipeB?: EquipeCampeonato | null;
+  tipoPartida?: string | null;
+  GolPartidaCampeonatoes?: ModelGolPartidaCampeonatoConnection | null;
+  campeonatoID: string;
+  createdAt: string;
+  updatedAt: string;
+  partidaCampeonatoEquipeAId?: string | null;
+  partidaCampeonatoEquipeBId?: string | null;
+};
+
+export type ModelGolPartidaCampeonatoConnection = {
+  __typename: "ModelGolPartidaCampeonatoConnection";
+  items: Array<GolPartidaCampeonato | null>;
+  nextToken?: string | null;
+};
+
 export type GolPartidaCampeonato = {
   __typename: "GolPartidaCampeonato";
   id: string;
@@ -123,87 +281,43 @@ export type JogadoresCampeonato = {
   jogadoresCampeonatoJogadoresId?: string | null;
 };
 
-export type Campeonato = {
-  __typename: "Campeonato";
-  id: string;
-  nome?: string | null;
-  Grupo?: Grupo | null;
-  icone?: string | null;
-  data?: string | null;
-  PartidaCampeonatoes?: ModelPartidaCampeonatoConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  campeonatoGrupoId?: string | null;
-};
-
-export type Grupo = {
-  __typename: "Grupo";
-  id: string;
-  nome?: string | null;
-  icon?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ModelPartidaCampeonatoConnection = {
-  __typename: "ModelPartidaCampeonatoConnection";
-  items: Array<PartidaCampeonato | null>;
-  nextToken?: string | null;
-};
-
-export type PartidaCampeonato = {
-  __typename: "PartidaCampeonato";
-  id: string;
-  EquipeA?: EquipeCampeonato | null;
-  EquipeB?: EquipeCampeonato | null;
-  tipoPartida?: string | null;
-  GolPartidaCampeonatoes?: ModelGolPartidaCampeonatoConnection | null;
-  campeonatoID: string;
-  createdAt: string;
-  updatedAt: string;
-  partidaCampeonatoEquipeAId?: string | null;
-  partidaCampeonatoEquipeBId?: string | null;
-};
-
-export type EquipeCampeonato = {
-  __typename: "EquipeCampeonato";
-  id: string;
-  nome?: string | null;
-  pais?: string | null;
-  Campeonato?: Campeonato | null;
-  JogadoresCampeonatoes?: ModelJogadoresCampeonatoConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  equipeCampeonatoCampeonatoId?: string | null;
-};
-
 export type ModelJogadoresCampeonatoConnection = {
   __typename: "ModelJogadoresCampeonatoConnection";
   items: Array<JogadoresCampeonato | null>;
   nextToken?: string | null;
 };
 
-export type ModelGolPartidaCampeonatoConnection = {
-  __typename: "ModelGolPartidaCampeonatoConnection";
-  items: Array<GolPartidaCampeonato | null>;
-  nextToken?: string | null;
+export type UpdateResultadoCampeonatoInput = {
+  id: string;
+  agradecimento?: string | null;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
 };
 
-export type Jogadores = {
-  __typename: "Jogadores";
+export type DeleteResultadoCampeonatoInput = {
   id: string;
-  nome?: string | null;
-  email?: string | null;
-  telefone?: string | null;
-  foto?: string | null;
-  Grupo: Grupo;
-  time?: string | null;
-  aniversario?: string | null;
-  escudo?: string | null;
-  posicao?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  jogadoresGrupoId: string;
+};
+
+export type CreateGolPartidaCampeonatoInput = {
+  id?: string | null;
+  partidacampeonatoID: string;
+  golPartidaCampeonatoJogadoresGolId?: string | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: string | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: string | null;
+};
+
+export type ModelGolPartidaCampeonatoConditionInput = {
+  partidacampeonatoID?: ModelIDInput | null;
+  and?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
+  or?: Array<ModelGolPartidaCampeonatoConditionInput | null> | null;
+  not?: ModelGolPartidaCampeonatoConditionInput | null;
+  golPartidaCampeonatoJogadoresGolId?: ModelIDInput | null;
+  golPartidaCampeonatoJogadoresAssistenciaId?: ModelIDInput | null;
+  golPartidaCampeonatoEquipeCampeonatoId?: ModelIDInput | null;
 };
 
 export type UpdateGolPartidaCampeonatoInput = {
@@ -234,22 +348,6 @@ export type ModelPartidaCampeonatoConditionInput = {
   not?: ModelPartidaCampeonatoConditionInput | null;
   partidaCampeonatoEquipeAId?: ModelIDInput | null;
   partidaCampeonatoEquipeBId?: ModelIDInput | null;
-};
-
-export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
 };
 
 export type UpdatePartidaCampeonatoInput = {
@@ -505,6 +603,41 @@ export type DeleteGrupoInput = {
   id: string;
 };
 
+export type ModelFotosFilterInput = {
+  id?: ModelIDInput | null;
+  foto?: ModelStringInput | null;
+  idGrupoFoto?: ModelStringInput | null;
+  and?: Array<ModelFotosFilterInput | null> | null;
+  or?: Array<ModelFotosFilterInput | null> | null;
+  not?: ModelFotosFilterInput | null;
+};
+
+export type ModelFotosConnection = {
+  __typename: "ModelFotosConnection";
+  items: Array<Fotos | null>;
+  nextToken?: string | null;
+};
+
+export type ModelResultadoCampeonatoFilterInput = {
+  id?: ModelIDInput | null;
+  agradecimento?: ModelStringInput | null;
+  and?: Array<ModelResultadoCampeonatoFilterInput | null> | null;
+  or?: Array<ModelResultadoCampeonatoFilterInput | null> | null;
+  not?: ModelResultadoCampeonatoFilterInput | null;
+  resultadoCampeonatoArtilheiroId?: ModelIDInput | null;
+  resultadoCampeonatoGoleiroId?: ModelIDInput | null;
+  resultadoCampeonatoDestaqueId?: ModelIDInput | null;
+  resultadoCampeonatoCampeaoId?: ModelIDInput | null;
+  resultadoCampeonatoSegundoId?: ModelIDInput | null;
+  resultadoCampeonatoTerceiroId?: ModelIDInput | null;
+};
+
+export type ModelResultadoCampeonatoConnection = {
+  __typename: "ModelResultadoCampeonatoConnection";
+  items: Array<ResultadoCampeonato | null>;
+  nextToken?: string | null;
+};
+
 export type ModelGolPartidaCampeonatoFilterInput = {
   id?: ModelIDInput | null;
   partidacampeonatoID?: ModelIDInput | null;
@@ -644,11 +777,12 @@ export type ModelGrupoConnection = {
   nextToken?: string | null;
 };
 
-export type ModelSubscriptionGolPartidaCampeonatoFilterInput = {
+export type ModelSubscriptionFotosFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  partidacampeonatoID?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
-  or?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
+  foto?: ModelSubscriptionStringInput | null;
+  idGrupoFoto?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionFotosFilterInput | null> | null;
+  or?: Array<ModelSubscriptionFotosFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
@@ -666,14 +800,6 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array<string | null> | null;
 };
 
-export type ModelSubscriptionPartidaCampeonatoFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  tipoPartida?: ModelSubscriptionStringInput | null;
-  campeonatoID?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
-  or?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
-};
-
 export type ModelSubscriptionStringInput = {
   ne?: string | null;
   eq?: string | null;
@@ -687,6 +813,28 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null;
   in?: Array<string | null> | null;
   notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionResultadoCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  agradecimento?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionResultadoCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionResultadoCampeonatoFilterInput | null> | null;
+};
+
+export type ModelSubscriptionGolPartidaCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  partidacampeonatoID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionGolPartidaCampeonatoFilterInput | null> | null;
+};
+
+export type ModelSubscriptionPartidaCampeonatoFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  tipoPartida?: ModelSubscriptionStringInput | null;
+  campeonatoID?: ModelSubscriptionIDInput | null;
+  and?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPartidaCampeonatoFilterInput | null> | null;
 };
 
 export type ModelSubscriptionEquipeCampeonatoFilterInput = {
@@ -760,6 +908,291 @@ export type ModelSubscriptionGrupoFilterInput = {
   icon?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionGrupoFilterInput | null> | null;
   or?: Array<ModelSubscriptionGrupoFilterInput | null> | null;
+};
+
+export type CreateFotosMutation = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateFotosMutation = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteFotosMutation = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateResultadoCampeonatoMutation = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type UpdateResultadoCampeonatoMutation = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type DeleteResultadoCampeonatoMutation = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
 };
 
 export type CreateGolPartidaCampeonatoMutation = {
@@ -1467,6 +1900,132 @@ export type DeleteGrupoMutation = {
   updatedAt: string;
 };
 
+export type GetFotosQuery = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListFotosQuery = {
+  __typename: "ModelFotosConnection";
+  items: Array<{
+    __typename: "Fotos";
+    id: string;
+    foto?: string | null;
+    idGrupoFoto?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetResultadoCampeonatoQuery = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type ListResultadoCampeonatoesQuery = {
+  __typename: "ModelResultadoCampeonatoConnection";
+  items: Array<{
+    __typename: "ResultadoCampeonato";
+    id: string;
+    agradecimento?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    resultadoCampeonatoArtilheiroId?: string | null;
+    resultadoCampeonatoGoleiroId?: string | null;
+    resultadoCampeonatoDestaqueId?: string | null;
+    resultadoCampeonatoCampeaoId?: string | null;
+    resultadoCampeonatoSegundoId?: string | null;
+    resultadoCampeonatoTerceiroId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
 export type GetGolPartidaCampeonatoQuery = {
   __typename: "GolPartidaCampeonato";
   id: string;
@@ -1879,6 +2438,291 @@ export type ListGruposQuery = {
     updatedAt: string;
   } | null>;
   nextToken?: string | null;
+};
+
+export type OnCreateFotosSubscription = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateFotosSubscription = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteFotosSubscription = {
+  __typename: "Fotos";
+  id: string;
+  foto?: string | null;
+  idGrupoFoto?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateResultadoCampeonatoSubscription = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type OnUpdateResultadoCampeonatoSubscription = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
+};
+
+export type OnDeleteResultadoCampeonatoSubscription = {
+  __typename: "ResultadoCampeonato";
+  id: string;
+  Artilheiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Goleiro?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Destaque?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
+  Campeao?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Segundo?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  Terceiro?: {
+    __typename: "EquipeCampeonato";
+    id: string;
+    nome?: string | null;
+    pais?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    equipeCampeonatoCampeonatoId?: string | null;
+  } | null;
+  agradecimento?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  resultadoCampeonatoArtilheiroId?: string | null;
+  resultadoCampeonatoGoleiroId?: string | null;
+  resultadoCampeonatoDestaqueId?: string | null;
+  resultadoCampeonatoCampeaoId?: string | null;
+  resultadoCampeonatoSegundoId?: string | null;
+  resultadoCampeonatoTerceiroId?: string | null;
 };
 
 export type OnCreateGolPartidaCampeonatoSubscription = {
@@ -2590,6 +3434,393 @@ export type OnDeleteGrupoSubscription = {
   providedIn: "root"
 })
 export class APIService {
+  async CreateFotos(
+    input: CreateFotosInput,
+    condition?: ModelFotosConditionInput
+  ): Promise<CreateFotosMutation> {
+    const statement = `mutation CreateFotos($input: CreateFotosInput!, $condition: ModelFotosConditionInput) {
+        createFotos(input: $input, condition: $condition) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateFotosMutation>response.data.createFotos;
+  }
+  async UpdateFotos(
+    input: UpdateFotosInput,
+    condition?: ModelFotosConditionInput
+  ): Promise<UpdateFotosMutation> {
+    const statement = `mutation UpdateFotos($input: UpdateFotosInput!, $condition: ModelFotosConditionInput) {
+        updateFotos(input: $input, condition: $condition) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateFotosMutation>response.data.updateFotos;
+  }
+  async DeleteFotos(
+    input: DeleteFotosInput,
+    condition?: ModelFotosConditionInput
+  ): Promise<DeleteFotosMutation> {
+    const statement = `mutation DeleteFotos($input: DeleteFotosInput!, $condition: ModelFotosConditionInput) {
+        deleteFotos(input: $input, condition: $condition) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteFotosMutation>response.data.deleteFotos;
+  }
+  async CreateResultadoCampeonato(
+    input: CreateResultadoCampeonatoInput,
+    condition?: ModelResultadoCampeonatoConditionInput
+  ): Promise<CreateResultadoCampeonatoMutation> {
+    const statement = `mutation CreateResultadoCampeonato($input: CreateResultadoCampeonatoInput!, $condition: ModelResultadoCampeonatoConditionInput) {
+        createResultadoCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateResultadoCampeonatoMutation>(
+      response.data.createResultadoCampeonato
+    );
+  }
+  async UpdateResultadoCampeonato(
+    input: UpdateResultadoCampeonatoInput,
+    condition?: ModelResultadoCampeonatoConditionInput
+  ): Promise<UpdateResultadoCampeonatoMutation> {
+    const statement = `mutation UpdateResultadoCampeonato($input: UpdateResultadoCampeonatoInput!, $condition: ModelResultadoCampeonatoConditionInput) {
+        updateResultadoCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateResultadoCampeonatoMutation>(
+      response.data.updateResultadoCampeonato
+    );
+  }
+  async DeleteResultadoCampeonato(
+    input: DeleteResultadoCampeonatoInput,
+    condition?: ModelResultadoCampeonatoConditionInput
+  ): Promise<DeleteResultadoCampeonatoMutation> {
+    const statement = `mutation DeleteResultadoCampeonato($input: DeleteResultadoCampeonatoInput!, $condition: ModelResultadoCampeonatoConditionInput) {
+        deleteResultadoCampeonato(input: $input, condition: $condition) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteResultadoCampeonatoMutation>(
+      response.data.deleteResultadoCampeonato
+    );
+  }
   async CreateGolPartidaCampeonato(
     input: CreateGolPartidaCampeonatoInput,
     condition?: ModelGolPartidaCampeonatoConditionInput
@@ -3745,6 +4976,198 @@ export class APIService {
     )) as any;
     return <DeleteGrupoMutation>response.data.deleteGrupo;
   }
+  async GetFotos(id: string): Promise<GetFotosQuery> {
+    const statement = `query GetFotos($id: ID!) {
+        getFotos(id: $id) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetFotosQuery>response.data.getFotos;
+  }
+  async ListFotos(
+    filter?: ModelFotosFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListFotosQuery> {
+    const statement = `query ListFotos($filter: ModelFotosFilterInput, $limit: Int, $nextToken: String) {
+        listFotos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            foto
+            idGrupoFoto
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListFotosQuery>response.data.listFotos;
+  }
+  async GetResultadoCampeonato(
+    id: string
+  ): Promise<GetResultadoCampeonatoQuery> {
+    const statement = `query GetResultadoCampeonato($id: ID!) {
+        getResultadoCampeonato(id: $id) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetResultadoCampeonatoQuery>response.data.getResultadoCampeonato;
+  }
+  async ListResultadoCampeonatoes(
+    filter?: ModelResultadoCampeonatoFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListResultadoCampeonatoesQuery> {
+    const statement = `query ListResultadoCampeonatoes($filter: ModelResultadoCampeonatoFilterInput, $limit: Int, $nextToken: String) {
+        listResultadoCampeonatoes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            agradecimento
+            createdAt
+            updatedAt
+            resultadoCampeonatoArtilheiroId
+            resultadoCampeonatoGoleiroId
+            resultadoCampeonatoDestaqueId
+            resultadoCampeonatoCampeaoId
+            resultadoCampeonatoSegundoId
+            resultadoCampeonatoTerceiroId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListResultadoCampeonatoesQuery>(
+      response.data.listResultadoCampeonatoes
+    );
+  }
   async GetGolPartidaCampeonato(
     id: string
   ): Promise<GetGolPartidaCampeonatoQuery> {
@@ -4558,6 +5981,405 @@ export class APIService {
     )) as any;
     return <ListGruposQuery>response.data.listGrupos;
   }
+  OnCreateFotosListener(
+    filter?: ModelSubscriptionFotosFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFotos">>
+  > {
+    const statement = `subscription OnCreateFotos($filter: ModelSubscriptionFotosFilterInput) {
+        onCreateFotos(filter: $filter) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateFotos">>
+    >;
+  }
+
+  OnUpdateFotosListener(
+    filter?: ModelSubscriptionFotosFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFotos">>
+  > {
+    const statement = `subscription OnUpdateFotos($filter: ModelSubscriptionFotosFilterInput) {
+        onUpdateFotos(filter: $filter) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateFotos">>
+    >;
+  }
+
+  OnDeleteFotosListener(
+    filter?: ModelSubscriptionFotosFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFotos">>
+  > {
+    const statement = `subscription OnDeleteFotos($filter: ModelSubscriptionFotosFilterInput) {
+        onDeleteFotos(filter: $filter) {
+          __typename
+          id
+          foto
+          idGrupoFoto
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteFotos">>
+    >;
+  }
+
+  OnCreateResultadoCampeonatoListener(
+    filter?: ModelSubscriptionResultadoCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateResultadoCampeonato">
+    >
+  > {
+    const statement = `subscription OnCreateResultadoCampeonato($filter: ModelSubscriptionResultadoCampeonatoFilterInput) {
+        onCreateResultadoCampeonato(filter: $filter) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateResultadoCampeonato">
+      >
+    >;
+  }
+
+  OnUpdateResultadoCampeonatoListener(
+    filter?: ModelSubscriptionResultadoCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateResultadoCampeonato">
+    >
+  > {
+    const statement = `subscription OnUpdateResultadoCampeonato($filter: ModelSubscriptionResultadoCampeonatoFilterInput) {
+        onUpdateResultadoCampeonato(filter: $filter) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateResultadoCampeonato">
+      >
+    >;
+  }
+
+  OnDeleteResultadoCampeonatoListener(
+    filter?: ModelSubscriptionResultadoCampeonatoFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteResultadoCampeonato">
+    >
+  > {
+    const statement = `subscription OnDeleteResultadoCampeonato($filter: ModelSubscriptionResultadoCampeonatoFilterInput) {
+        onDeleteResultadoCampeonato(filter: $filter) {
+          __typename
+          id
+          Artilheiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Goleiro {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Destaque {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
+          Campeao {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Segundo {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          Terceiro {
+            __typename
+            id
+            nome
+            pais
+            createdAt
+            updatedAt
+            equipeCampeonatoCampeonatoId
+          }
+          agradecimento
+          createdAt
+          updatedAt
+          resultadoCampeonatoArtilheiroId
+          resultadoCampeonatoGoleiroId
+          resultadoCampeonatoDestaqueId
+          resultadoCampeonatoCampeaoId
+          resultadoCampeonatoSegundoId
+          resultadoCampeonatoTerceiroId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteResultadoCampeonato">
+      >
+    >;
+  }
+
   OnCreateGolPartidaCampeonatoListener(
     filter?: ModelSubscriptionGolPartidaCampeonatoFilterInput
   ): Observable<

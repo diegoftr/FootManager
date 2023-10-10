@@ -1,3 +1,20 @@
+type Fotos @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  foto: String
+  idGrupoFoto: String
+}
+
+type ResultadoCampeonato @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Artilheiro: Jogadores @hasOne
+  Goleiro: Jogadores @hasOne
+  Destaque: Jogadores @hasOne
+  Campeao: EquipeCampeonato @hasOne
+  Segundo: EquipeCampeonato @hasOne
+  Terceiro: EquipeCampeonato @hasOne
+  agradecimento: String
+}
+
 type GolPartidaCampeonato @model @auth(rules: [{allow: public}]) {
   id: ID!
   JogadoresGol: JogadoresCampeonato @hasOne

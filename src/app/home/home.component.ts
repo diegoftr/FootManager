@@ -3,6 +3,8 @@ import { APIService, Grupo, ListGruposQuery } from '../API.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +17,16 @@ export class HomeComponent {
   grupos: Array<Grupo> = [];
 
 
-  constructor(private router: Router, private api: APIService, private spinner: NgxSpinnerService) {
-
+  constructor(private router: Router, private api: APIService, private spinner: NgxSpinnerService, private authenticator: AuthenticatorService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    var logIn = {username: "Visitante",
+    password: "Visitante"}
+    if(await this.authenticator.user == null)
+      await Auth.signIn(logIn);
+
     this.spinner.show();
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -30,6 +37,9 @@ export class HomeComponent {
     // });
     this.api.ListGrupos().then((grupo: ListGruposQuery) => {
       this.grupos = (grupo as any).items
+      if(this.grupos.length == 1) {
+        this.acaoBotaoDetalharGrupo(this.grupos[0].id);
+      }
       this.spinner.hide();
     });
   }

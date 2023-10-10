@@ -1,4 +1,4 @@
-import { NgModule, isDevMode} from '@angular/core';
+import { NgModule, isDevMode, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -33,8 +33,8 @@ import { ManterEquipeCampeonatoComponent } from './manter-equipe-campeonato/mant
 import { SelecionarJogadoresComponent } from './selecionar-jogadores/selecionar-jogadores.component';
 import { ManterPartidaCampeonatoComponent } from './manter-partida-campeonato/manter-partida-campeonato.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-
+import { ManterResultadoCampeonatoComponent } from './manter-resultado-campeonato/manter-resultado-campeonato.component';
+import { ManterFotosComponent } from './manter-fotos/manter-fotos.component';
 
 
 @NgModule({
@@ -51,6 +51,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ManterEquipeCampeonatoComponent,
     SelecionarJogadoresComponent,
     ManterPartidaCampeonatoComponent,
+    ManterResultadoCampeonatoComponent,
+    ManterFotosComponent,
     
   ],
   imports: [
@@ -79,7 +81,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  schemas: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {provide: MAT_DATE_LOCALE , useValue: 'pt-BR'},
   ],
