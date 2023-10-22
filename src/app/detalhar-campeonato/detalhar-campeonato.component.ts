@@ -33,8 +33,8 @@ export class DetalharCampeonatoComponent implements OnInit {
 
         this.consultarJogadoresCampeonato(campeonato);
         this.listarEquipesCampeonatos(campeonato);
-        await this.listarPartidas(campeonato);
-        await this.listarResultadoCampeonato(campeonato);
+        this.listarPartidas(campeonato);
+        this.listarResultadoCampeonato(campeonato);
 
         this.spinner.hide();
       } catch (error) {
@@ -115,7 +115,7 @@ export class DetalharCampeonatoComponent implements OnInit {
     return retorno;
   }
 
-  carregarImagemJogadorGol(idEquipe:string , gol:GolPartidaCampeonato | null) {
+  carregarImagemJogadorGol(idEquipe:string, gol:GolPartidaCampeonato | null) {
     var retorno;
     if(gol?.golPartidaCampeonatoEquipeCampeonatoId == idEquipe) {
 
@@ -127,6 +127,19 @@ export class DetalharCampeonatoComponent implements OnInit {
         }
 
       }
+    }
+    return retorno;
+  }
+
+  carregarNomeJogadorGol(idEquipe:string, idJogadorCamp: string | null | undefined) {
+    var retorno;
+    if (idJogadorCamp != null) {
+      this.equipes.filter(e=>e.id == idEquipe).forEach(e => {
+        var jogador = e.JogadoresCampeonatoes?.items.filter(j => j?.id == idJogadorCamp);
+        if(jogador!.length > 0) {
+          retorno = jogador![0]?.Jogadores?.nome;
+        }
+      })
     }
     return retorno;
   }
@@ -290,7 +303,7 @@ export class DetalharCampeonatoComponent implements OnInit {
         }
       ]
     };
-    this.api.ListJogadoresCampeonatoes(filter2).then(j => {
+    await this.api.ListJogadoresCampeonatoes(filter2).then(j => {
       this.jogadoresCampeonato = j.items as any
 
       this.jogadoresCampeonato.forEach(async (j) => {
@@ -314,19 +327,30 @@ export class DetalharCampeonatoComponent implements OnInit {
       const ruins = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Pé murcho' && jogador.equipecampeonatoID == null);
       const normais = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Normal' && jogador.equipecampeonatoID == null);
 
-      this.shuffleArray(this.equipes);
+
+      this.equipes.sort((a, b) => {
+        if (a.JogadoresCampeonatoes?.items.length != null && b.JogadoresCampeonatoes?.items.length != null) {
+          if (a.JogadoresCampeonatoes?.items.length > b.JogadoresCampeonatoes?.items.length) {
+            return 1;
+          } else if (a.JogadoresCampeonatoes?.items.length < b.JogadoresCampeonatoes?.items.length) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+        return 0;
+      });
+
       bons.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
       });
 
-      this.shuffleArray(this.equipes);
       ruins.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
       });
 
-      this.shuffleArray(this.equipes);
       normais.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
@@ -338,6 +362,10 @@ export class DetalharCampeonatoComponent implements OnInit {
       this.spinner.hide();
 
     }
+  }
+
+  compararPorJogadores(a : EquipeCampeonato, b: EquipeCampeonato) {
+    return a.JogadoresCampeonatoes!.items.length - b.JogadoresCampeonatoes!.items.length;
   }
 
   async atualizarJogadores(todosJogadores: any) {

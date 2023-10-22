@@ -126,6 +126,7 @@ export type CreateResultadoCampeonatoInput = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type ModelResultadoCampeonatoConditionInput = {
@@ -139,6 +140,7 @@ export type ModelResultadoCampeonatoConditionInput = {
   resultadoCampeonatoCampeaoId?: ModelIDInput | null;
   resultadoCampeonatoSegundoId?: ModelIDInput | null;
   resultadoCampeonatoTerceiroId?: ModelIDInput | null;
+  resultadoCampeonatoAssistenciasId?: ModelIDInput | null;
 };
 
 export type ModelIDInput = {
@@ -167,6 +169,7 @@ export type ResultadoCampeonato = {
   Segundo?: EquipeCampeonato | null;
   Terceiro?: EquipeCampeonato | null;
   agradecimento?: string | null;
+  Assistencias?: Jogadores | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -175,6 +178,7 @@ export type ResultadoCampeonato = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type Jogadores = {
@@ -296,6 +300,7 @@ export type UpdateResultadoCampeonatoInput = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type DeleteResultadoCampeonatoInput = {
@@ -630,6 +635,7 @@ export type ModelResultadoCampeonatoFilterInput = {
   resultadoCampeonatoCampeaoId?: ModelIDInput | null;
   resultadoCampeonatoSegundoId?: ModelIDInput | null;
   resultadoCampeonatoTerceiroId?: ModelIDInput | null;
+  resultadoCampeonatoAssistenciasId?: ModelIDInput | null;
 };
 
 export type ModelResultadoCampeonatoConnection = {
@@ -1013,6 +1019,21 @@ export type CreateResultadoCampeonatoMutation = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -1021,6 +1042,7 @@ export type CreateResultadoCampeonatoMutation = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type UpdateResultadoCampeonatoMutation = {
@@ -1099,6 +1121,21 @@ export type UpdateResultadoCampeonatoMutation = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -1107,6 +1144,7 @@ export type UpdateResultadoCampeonatoMutation = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type DeleteResultadoCampeonatoMutation = {
@@ -1185,6 +1223,21 @@ export type DeleteResultadoCampeonatoMutation = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -1193,6 +1246,7 @@ export type DeleteResultadoCampeonatoMutation = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type CreateGolPartidaCampeonatoMutation = {
@@ -1998,6 +2052,21 @@ export type GetResultadoCampeonatoQuery = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -2006,6 +2075,7 @@ export type GetResultadoCampeonatoQuery = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type ListResultadoCampeonatoesQuery = {
@@ -2022,6 +2092,7 @@ export type ListResultadoCampeonatoesQuery = {
     resultadoCampeonatoCampeaoId?: string | null;
     resultadoCampeonatoSegundoId?: string | null;
     resultadoCampeonatoTerceiroId?: string | null;
+    resultadoCampeonatoAssistenciasId?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -2543,6 +2614,21 @@ export type OnCreateResultadoCampeonatoSubscription = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -2551,6 +2637,7 @@ export type OnCreateResultadoCampeonatoSubscription = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type OnUpdateResultadoCampeonatoSubscription = {
@@ -2629,6 +2716,21 @@ export type OnUpdateResultadoCampeonatoSubscription = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -2637,6 +2739,7 @@ export type OnUpdateResultadoCampeonatoSubscription = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type OnDeleteResultadoCampeonatoSubscription = {
@@ -2715,6 +2818,21 @@ export type OnDeleteResultadoCampeonatoSubscription = {
     equipeCampeonatoCampeonatoId?: string | null;
   } | null;
   agradecimento?: string | null;
+  Assistencias?: {
+    __typename: "Jogadores";
+    id: string;
+    nome?: string | null;
+    email?: string | null;
+    telefone?: string | null;
+    foto?: string | null;
+    time?: string | null;
+    aniversario?: string | null;
+    escudo?: string | null;
+    posicao?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    jogadoresGrupoId: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
   resultadoCampeonatoArtilheiroId?: string | null;
@@ -2723,6 +2841,7 @@ export type OnDeleteResultadoCampeonatoSubscription = {
   resultadoCampeonatoCampeaoId?: string | null;
   resultadoCampeonatoSegundoId?: string | null;
   resultadoCampeonatoTerceiroId?: string | null;
+  resultadoCampeonatoAssistenciasId?: string | null;
 };
 
 export type OnCreateGolPartidaCampeonatoSubscription = {
@@ -3590,6 +3709,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -3598,6 +3732,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3694,6 +3829,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -3702,6 +3852,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3798,6 +3949,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -3806,6 +3972,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5109,6 +5276,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -5117,6 +5299,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5147,6 +5330,7 @@ export class APIService {
             resultadoCampeonatoCampeaoId
             resultadoCampeonatoSegundoId
             resultadoCampeonatoTerceiroId
+            resultadoCampeonatoAssistenciasId
           }
           nextToken
         }
@@ -6143,6 +6327,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -6151,6 +6350,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -6250,6 +6450,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -6258,6 +6473,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -6357,6 +6573,21 @@ export class APIService {
             equipeCampeonatoCampeonatoId
           }
           agradecimento
+          Assistencias {
+            __typename
+            id
+            nome
+            email
+            telefone
+            foto
+            time
+            aniversario
+            escudo
+            posicao
+            createdAt
+            updatedAt
+            jogadoresGrupoId
+          }
           createdAt
           updatedAt
           resultadoCampeonatoArtilheiroId
@@ -6365,6 +6596,7 @@ export class APIService {
           resultadoCampeonatoCampeaoId
           resultadoCampeonatoSegundoId
           resultadoCampeonatoTerceiroId
+          resultadoCampeonatoAssistenciasId
         }
       }`;
     const gqlAPIServiceArguments: any = {};

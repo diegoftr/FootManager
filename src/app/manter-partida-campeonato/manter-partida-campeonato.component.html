@@ -2,7 +2,7 @@
     <div class="content2" role="main">
         <div class="voltar">
             <a (click)='acaoVoltar()'><svg height="34px" width="34px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <polygon style="fill:#ff9911;" points="370.552,497.491 83.082,255.978 370.552,14.465 "></polygon> <path d="M376.935,1.354c-5.1-2.376-10.973-1.581-15.275,2.036L74.258,244.905c-3.272,2.747-5.126,6.801-5.126,11.073 s1.906,8.326,5.176,11.073l287.478,241.513c2.658,2.233,5.969,3.39,9.311,3.39c2.071,0,3.883-0.445,5.833-1.354 c5.095-2.375,8.082-7.488,8.082-13.109V14.465C385.015,8.842,382.031,3.729,376.935,1.354z M356.089,466.45L105.567,255.978 L356.089,45.505V466.45z"></path> <path d="M428.405,0.002c-7.987,0-14.463,6.477-14.463,14.463v483.072c0,7.987,6.477,14.463,14.463,14.463 s14.463-6.477,14.463-14.463V14.465C442.868,6.477,436.391,0.002,428.405,0.002z"></path> </g></svg></a>
-            <span class="titulo" style="padding-bottom: 5px;">{{campeonato != null ? campeonato.nome : ''}}</span>
+            <span class="titulo" style="padding-bottom: 15px;">{{campeonato != null ? campeonato.nome : ''}}</span>
             <a style="width: 34px;"></a>
         </div>
 
@@ -12,7 +12,7 @@
 
         <div *ngIf="isAlteracao && partida != null && partida!.EquipeA != null && partida!.EquipeB != null" class="tabela" style="height: 100%;">
             <div style="text-align: center; width: 100%;">
-                <span class="titulo" style="color: white;font-size: 70px;"><img height="54px" src='assets/times/{{partida!.EquipeA!.pais}}.png' >&nbsp;{{golsMarcados(partida!.EquipeA!.id)}} X {{golsMarcados(partida!.EquipeB!.id)}}&nbsp;<img height="54px" src='assets/times/{{partida!.EquipeB!.pais}}.png' ></span>
+                <span class="titulo" style="color: white;font-size: 60px;"><img height="54px" src='assets/times/{{partida!.EquipeA!.pais}}.png' >&nbsp;{{golsMarcados(partida!.EquipeA!.id)}} X {{golsMarcados(partida!.EquipeB!.id)}}&nbsp;<img height="54px" src='assets/times/{{partida!.EquipeB!.pais}}.png' ></span>
             </div>
             <br>
             <table style="width: 100%;">

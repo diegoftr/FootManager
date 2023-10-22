@@ -13,6 +13,7 @@ type ResultadoCampeonato @model @auth(rules: [{allow: public}]) {
   Segundo: EquipeCampeonato @hasOne
   Terceiro: EquipeCampeonato @hasOne
   agradecimento: String
+  Assistencias: Jogadores @hasOne
 }
 
 type GolPartidaCampeonato @model @auth(rules: [{allow: public}]) {

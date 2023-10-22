@@ -46,8 +46,8 @@ export class JogadoresComponent implements OnInit {
     this.form = new FormGroup({
       id: new FormControl(null),
       nome: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.email, Validators.required]),
-      telefone: new FormControl(null, Validators.required),
+      email: new FormControl(null),
+      telefone: new FormControl(null),
       foto: new FormControl(null),
       time: new FormControl(null, Validators.required),
       aniversario: new FormControl(null, Validators.required),
@@ -131,36 +131,40 @@ export class JogadoresComponent implements OnInit {
   salvarJogador() {
     this.spinner.show();
     if (this.form.valid && this.croppedImage != null) {
-      var telefone = this.form.get('telefone')?.value;
-      this.form.get('telefone')?.setValue('+55' + telefone);
-      var dateAniversario = this.form.get('aniversario')?.value;
-
-      const ano = dateAniversario.getFullYear().toString().padStart(4, '0');
-      const mes = (dateAniversario.getMonth() + 1).toString().padStart(2, '0');
-      const dia = dateAniversario.getDate().toString().padStart(2, '0');
-      const dataFormatada = `${ano}-${mes}-${dia}`;
-
-      this.form.get('aniversario')?.setValue(dataFormatada);
-      this.form.get('jogadoresGrupoId')?.setValue(this.grupo.id);
-      this.form.get('id')?.setValue(uuid());
-      this.croppedImage = this.reduzirTamanhoBase64(this.croppedImage, 144, 156).then((imagemRedimensionadaBase64) => {
-
-        fetch(imagemRedimensionadaBase64 as any)
-          .then(res => res.blob())
-          .then(blob => {
-            const file = new File([blob], "File name", { type: "image/png" })
-            Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then((a: { key: any; }) => {
-              this.form.get('foto')?.setValue(a.key)
-              this.api.CreateJogadores(this.form.value).then(a => {
-                this.isInclusao = false;
-                this.isAlteracao = false;
-                this.limparForm();
-                this.ngOnInit();
-                this.spinner.hide();
-              });
+      try {
+        var telefone = this.form.get('telefone')?.value;
+        this.form.get('telefone')?.setValue('+55' + telefone);
+        var dateAniversario = this.form.get('aniversario')?.value;
+  
+        const ano = dateAniversario.getFullYear().toString().padStart(4, '0');
+        const mes = (dateAniversario.getMonth() + 1).toString().padStart(2, '0');
+        const dia = dateAniversario.getDate().toString().padStart(2, '0');
+        const dataFormatada = `${ano}-${mes}-${dia}`;
+  
+        this.form.get('aniversario')?.setValue(dataFormatada);
+        this.form.get('jogadoresGrupoId')?.setValue(this.grupo.id);
+        this.form.get('id')?.setValue(uuid());
+        this.croppedImage = this.reduzirTamanhoBase64(this.croppedImage, 144, 156).then((imagemRedimensionadaBase64) => {
+  
+          fetch(imagemRedimensionadaBase64 as any)
+            .then(res => res.blob())
+            .then(blob => {
+              const file = new File([blob], "File name", { type: "image/png" })
+              Storage.put(this.form.get('nome')?.value + Math.floor(Math.random() * 100000) + 1 + '.png', file).then((a: { key: any; }) => {
+                this.form.get('foto')?.setValue(a.key)
+                this.api.CreateJogadores(this.form.value).then(a => {
+                  this.isInclusao = false;
+                  this.isAlteracao = false;
+                  this.limparForm();
+                  this.ngOnInit();
+                  this.spinner.hide();
+                });
+              })
             })
-          })
-      });
+        });
+      } catch (e) {
+        this.spinner.hide();
+      }
     } else {
       this.spinner.hide();
     }
@@ -223,7 +227,10 @@ export class JogadoresComponent implements OnInit {
 
   acaoVoltar() {
     if (this.isInclusao || this.isAlteracao) {
-      this.router.navigate(['/jogadores'], { queryParams: { idGrupo: this.grupo.id } });
+      this.isInclusao = false;
+      this.isAlteracao = false;
+      this.limparForm();
+      this.ngOnInit();
 
     } else {
       this.router.navigate(['/detalharGrupo'], { queryParams: { idGrupo: this.grupo.id } });

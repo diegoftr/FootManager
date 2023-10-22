@@ -46,6 +46,7 @@ export class ManterResultadoCampeonatoComponent implements OnInit {
           resultadoCampeonatoCampeaoId: new FormControl(resultado == null ? null : resultado.resultadoCampeonatoCampeaoId, Validators.required),
           resultadoCampeonatoSegundoId: new FormControl(resultado == null ? null : resultado.resultadoCampeonatoSegundoId, Validators.required),
           resultadoCampeonatoTerceiroId: new FormControl(resultado == null ? null : resultado.resultadoCampeonatoTerceiroId, Validators.required),
+          resultadoCampeonatoAssistenciasId: new FormControl(resultado == null ? null : resultado.resultadoCampeonatoAssistenciasId, Validators.required),
         });
 
 

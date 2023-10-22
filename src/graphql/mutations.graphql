@@ -121,6 +121,21 @@ mutation CreateResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -129,6 +144,7 @@ mutation CreateResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }
@@ -212,6 +228,21 @@ mutation UpdateResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -220,6 +251,7 @@ mutation UpdateResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }
@@ -303,6 +335,21 @@ mutation DeleteResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -311,6 +358,7 @@ mutation DeleteResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }

@@ -111,6 +111,21 @@ subscription OnCreateResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -119,6 +134,7 @@ subscription OnCreateResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }
@@ -201,6 +217,21 @@ subscription OnUpdateResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -209,6 +240,7 @@ subscription OnUpdateResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }
@@ -291,6 +323,21 @@ subscription OnDeleteResultadoCampeonato(
       __typename
     }
     agradecimento
+    Assistencias {
+      id
+      nome
+      email
+      telefone
+      foto
+      time
+      aniversario
+      escudo
+      posicao
+      createdAt
+      updatedAt
+      jogadoresGrupoId
+      __typename
+    }
     createdAt
     updatedAt
     resultadoCampeonatoArtilheiroId
@@ -299,6 +346,7 @@ subscription OnDeleteResultadoCampeonato(
     resultadoCampeonatoCampeaoId
     resultadoCampeonatoSegundoId
     resultadoCampeonatoTerceiroId
+    resultadoCampeonatoAssistenciasId
     __typename
   }
 }

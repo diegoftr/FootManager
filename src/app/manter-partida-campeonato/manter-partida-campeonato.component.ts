@@ -52,7 +52,7 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
           id: new FormControl(idPartida),
           partidacampeonatoID: new FormControl(idCampeonato),
           golPartidaCampeonatoJogadoresGolId: new FormControl(null, Validators.required),
-          golPartidaCampeonatoJogadoresAssistenciaId: new FormControl(null, Validators.required),
+          golPartidaCampeonatoJogadoresAssistenciaId: new FormControl(null),
           golPartidaCampeonatoEquipeCampeonatoId: new FormControl(null, Validators.required),
         });
 

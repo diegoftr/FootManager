@@ -1,7 +1,7 @@
 <div class="content2" role="main" style="font-size: 16px;">
     <div class="voltar">
         <a (click)='acaoVoltar()'><svg height="34px" width="34px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <polygon style="fill:#ff9911;" points="370.552,497.491 83.082,255.978 370.552,14.465 "></polygon> <path d="M376.935,1.354c-5.1-2.376-10.973-1.581-15.275,2.036L74.258,244.905c-3.272,2.747-5.126,6.801-5.126,11.073 s1.906,8.326,5.176,11.073l287.478,241.513c2.658,2.233,5.969,3.39,9.311,3.39c2.071,0,3.883-0.445,5.833-1.354 c5.095-2.375,8.082-7.488,8.082-13.109V14.465C385.015,8.842,382.031,3.729,376.935,1.354z M356.089,466.45L105.567,255.978 L356.089,45.505V466.45z"></path> <path d="M428.405,0.002c-7.987,0-14.463,6.477-14.463,14.463v483.072c0,7.987,6.477,14.463,14.463,14.463 s14.463-6.477,14.463-14.463V14.465C442.868,6.477,436.391,0.002,428.405,0.002z"></path> </g></svg></a>
-        <span class="titulo" style="padding-bottom: 5px;">{{campeonato != null ? campeonato.nome : ''}}</span>
+        <span class="titulo" style="padding-bottom: 15px;">{{campeonato != null ? campeonato.nome : ''}}</span>
         <a style="width: 34px;"></a>
     </div>
 
@@ -55,9 +55,9 @@
                     <img src="assets/times/{{resultadoCampeonato.Campeao!.pais}}.png" style="height: 40px;position: relative;top: -201px;left: 33%;">
                     <img src="assets/times/{{resultadoCampeonato.Segundo!.pais}}.png" style="height: 40px;position: relative;top: -178px;left: 54%;">
 
-                    <div>{{resultadoCampeonato.Terceiro!.nome}}</div>
-                    <div>{{resultadoCampeonato.Campeao!.nome}}</div>
-                    <div>{{resultadoCampeonato.Segundo!.nome}}</div>
+                    <div style="height: 40px;position: relative;top: -78px;left: 1%;width: 90px;text-align: center;font-size: 12px;">{{resultadoCampeonato.Terceiro!.nome}}</div>
+                    <div style="height: 40px;position: relative;top: -144px;left: 31%;width: 114px;text-align: center;font-size: 12px;">{{resultadoCampeonato.Campeao!.nome}}</div>
+                    <div style="height: 40px;position: relative;top: -159px;left: 69%;width: 90px;text-align: center;font-size: 12px;">{{resultadoCampeonato.Segundo!.nome}}</div>
                 </td>
             </tr>
         </table>
@@ -123,6 +123,26 @@
             </table>
     </div>
 
+    <div *ngIf="resultadoCampeonato != null" class="tabela" style="width: 340px; height: 450px;">
+        <table id="tabela" style="width: 100%;">
+            <tr>
+                <td style="text-align: center;font-size: 30px;">Assistências</td>
+            </tr>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td>
+                    <img style="width: 280px; position: relative;" src="assets/escudos/{{resultadoCampeonato.Assistencias!.escudo}}.png"/>
+                    <img style="width: 153px;position: relative;top: -361px;left: 31%;" src="https://stlbuckt213907-dev.s3.us-east-1.amazonaws.com/public/{{resultadoCampeonato.Assistencias!.foto}}"  />
+                    <div style="position: relative;top: -322px;left: -2%;text-align: center;font-size: 32px;color: black;">{{resultadoCampeonato.Assistencias!.nome}}</div>
+                    <img style="max-height: 70px;position: relative;top: -455px;left: 12%;" src="assets/times/{{resultadoCampeonato.Assistencias!.time}}.png"/>
+                    <div style="position: relative;top: -549px;left: -27%;text-align: center;color: black;">{{resultadoCampeonato.Assistencias!.posicao}}</div>
+                </td>
+            </tr>
+            </table>
+    </div>
+
     <div *ngIf="campeonato != null" style="width: 95%;"> 
         <div  style="height: auto;width: 100%;background: linear-gradient(45deg, gold 0%, silver 100%);" class="tabela" *ngFor="let partida of filtrarPartidas(campeonato.PartidaCampeonatoes?.items, 'Final'); let i = index">
             <table style="width: 100%;">
@@ -132,12 +152,16 @@
                 <tr *ngIf="partida!.EquipeA != null && partida!.EquipeB != null">
                     <td style="width: 47%; font-size: 20px;">
                         <svg *ngIf="isLogado()" (click)="alterarPartidaCampeonato(partida!.id)" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Home"></g> <g id="Print"></g> <g id="Mail"></g> <g id="Camera"></g> <g id="Video"></g> <g id="Film"></g> <g id="Message"></g> <g id="Telephone"></g> <g id="User"></g> <g id="File"></g> <g id="Folder"></g> <g id="Map"></g> <g id="Download"></g> <g id="Upload"></g> <g id="Video_Recorder"></g> <g id="Schedule"></g> <g id="Cart"></g> <g id="Setting"></g> <g id="Search"></g> <g id="Pencils"> <path d="M31,29.7l-0.9-6.8c0-0.2-0.1-0.4-0.3-0.6L13.3,5.8l0,0l0,0L9.4,1.9C8.8,1.3,8,1,7.2,1l0,0 C6.8,1,6.4,1.1,6,1.2c0,0,0,0,0,0C5.8,1.3,5.7,1.4,5.5,1.5c0,0-0.1,0-0.1,0C5.3,1.6,5.1,1.8,4.9,1.9L3.4,3.5l0,0L1.9,5 c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8l0,0l0,0l16.5,16.5c0.2,0.2,0.4,0.3,0.6,0.3l7,0.9c0,0,0.1,0,0.1,0c0,0,0,0,0,0 c0.3,0,0.5-0.1,0.7-0.3c0.2-0.2,0.3-0.4,0.3-0.7C31,29.9,31,29.8,31,29.7z" fill="#FFC10A"></path> <path d="M13.2,5.7C13.2,5.7,13.3,5.8,13.2,5.7L9.4,1.9C8.8,1.3,8,1,7.2,1c0,0,0,0,0,0C6.4,1,5.6,1.3,4.9,1.9 L3.4,3.5l0,0L1.9,5c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8c-0.4-0.4-0.4-1,0-1.4l0.7-0.7l2.3-2.3l3-3c0.2-0.2,0.4-0.3,0.7-0.3 c0,0,0.1,0,0.1,0c0.1,0,0.2,0,0.3,0.1C13.1,5.6,13.2,5.7,13.2,5.7L13.2,5.7C13.3,5.8,13.3,5.8,13.2,5.7L13.2,5.7z" fill="#F44236"></path> </g> <g id="Group"></g> <g id="Record"></g> <g id="Headphone"></g> <g id="Music_Player"></g> <g id="Sound_On"></g> <g id="Sound_Off"></g> <g id="Lock"></g> <g id="Lock_open"></g> <g id="Love"></g> <g id="Favorite"></g> <g id="Film_1_"></g> <g id="Music"></g> <g id="Puzzle"></g> <g id="Turn_Off"></g> <g id="Book"></g> <g id="Save"></g> <g id="Reload"></g> <g id="Trash"></g> <g id="Tag"></g> <g id="Link"></g> <g id="Like"></g> <g id="Bad"></g> <g id="Gallery"></g> <g id="Add"></g> <g id="Close"></g> <g id="Forward"></g> <g id="Back"></g> <g id="Buy"></g> <g id="Mac"></g> <g id="Laptop"></g> </g></svg>
-                        <img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' >
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeA.nome}}</div>
                     </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeA.id)}}</td>
                     <td style="width: 2%; text-align: center; font-size: 50px;"> X </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeB.id)}}</td>
-                    <td style="width: 47%; text-align: right; font-size: 50px;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></td>
+                    <td style="width: 47%; text-align: right; font-size: 50px;">
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeB.nome}}</div>
+                    </td>
                 </tr>
             </table>
             <table style="width: 100%;">
@@ -145,14 +169,22 @@
                     <td style="width: 50%;  border-right: 5px solid white;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeA!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
                     <td style="width: 50%;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeB!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -170,12 +202,16 @@
                 <tr *ngIf="partida!.EquipeA != null && partida!.EquipeB != null">
                     <td style="width: 47%; font-size: 20px;">
                         <svg *ngIf="isLogado()" (click)="alterarPartidaCampeonato(partida!.id)" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Home"></g> <g id="Print"></g> <g id="Mail"></g> <g id="Camera"></g> <g id="Video"></g> <g id="Film"></g> <g id="Message"></g> <g id="Telephone"></g> <g id="User"></g> <g id="File"></g> <g id="Folder"></g> <g id="Map"></g> <g id="Download"></g> <g id="Upload"></g> <g id="Video_Recorder"></g> <g id="Schedule"></g> <g id="Cart"></g> <g id="Setting"></g> <g id="Search"></g> <g id="Pencils"> <path d="M31,29.7l-0.9-6.8c0-0.2-0.1-0.4-0.3-0.6L13.3,5.8l0,0l0,0L9.4,1.9C8.8,1.3,8,1,7.2,1l0,0 C6.8,1,6.4,1.1,6,1.2c0,0,0,0,0,0C5.8,1.3,5.7,1.4,5.5,1.5c0,0-0.1,0-0.1,0C5.3,1.6,5.1,1.8,4.9,1.9L3.4,3.5l0,0L1.9,5 c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8l0,0l0,0l16.5,16.5c0.2,0.2,0.4,0.3,0.6,0.3l7,0.9c0,0,0.1,0,0.1,0c0,0,0,0,0,0 c0.3,0,0.5-0.1,0.7-0.3c0.2-0.2,0.3-0.4,0.3-0.7C31,29.9,31,29.8,31,29.7z" fill="#FFC10A"></path> <path d="M13.2,5.7C13.2,5.7,13.3,5.8,13.2,5.7L9.4,1.9C8.8,1.3,8,1,7.2,1c0,0,0,0,0,0C6.4,1,5.6,1.3,4.9,1.9 L3.4,3.5l0,0L1.9,5c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8c-0.4-0.4-0.4-1,0-1.4l0.7-0.7l2.3-2.3l3-3c0.2-0.2,0.4-0.3,0.7-0.3 c0,0,0.1,0,0.1,0c0.1,0,0.2,0,0.3,0.1C13.1,5.6,13.2,5.7,13.2,5.7L13.2,5.7C13.3,5.8,13.3,5.8,13.2,5.7L13.2,5.7z" fill="#F44236"></path> </g> <g id="Group"></g> <g id="Record"></g> <g id="Headphone"></g> <g id="Music_Player"></g> <g id="Sound_On"></g> <g id="Sound_Off"></g> <g id="Lock"></g> <g id="Lock_open"></g> <g id="Love"></g> <g id="Favorite"></g> <g id="Film_1_"></g> <g id="Music"></g> <g id="Puzzle"></g> <g id="Turn_Off"></g> <g id="Book"></g> <g id="Save"></g> <g id="Reload"></g> <g id="Trash"></g> <g id="Tag"></g> <g id="Link"></g> <g id="Like"></g> <g id="Bad"></g> <g id="Gallery"></g> <g id="Add"></g> <g id="Close"></g> <g id="Forward"></g> <g id="Back"></g> <g id="Buy"></g> <g id="Mac"></g> <g id="Laptop"></g> </g></svg>
-                        <img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' >
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeA.nome}}</div>
                     </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeA.id)}}</td>
                     <td style="width: 2%; text-align: center; font-size: 50px;"> X </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeB.id)}}</td>
-                    <td style="width: 47%; text-align: right; font-size: 50px;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></td>
+                    <td style="width: 47%; text-align: right; font-size: 50px;">
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeB.nome}}</div>
+                    </td>
                 </tr>
             </table>
             <table style="width: 100%;">
@@ -183,14 +219,22 @@
                     <td style="width: 50%;    border-right: 5px solid white;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeA!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
                     <td style="width: 50%;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeB!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
@@ -269,12 +313,16 @@
                 <tr *ngIf="partida!.EquipeA != null && partida!.EquipeB != null">
                     <td style="width: 47%; font-size: 20px;">
                         <svg *ngIf="isLogado()" (click)="alterarPartidaCampeonato(partida!.id)" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Home"></g> <g id="Print"></g> <g id="Mail"></g> <g id="Camera"></g> <g id="Video"></g> <g id="Film"></g> <g id="Message"></g> <g id="Telephone"></g> <g id="User"></g> <g id="File"></g> <g id="Folder"></g> <g id="Map"></g> <g id="Download"></g> <g id="Upload"></g> <g id="Video_Recorder"></g> <g id="Schedule"></g> <g id="Cart"></g> <g id="Setting"></g> <g id="Search"></g> <g id="Pencils"> <path d="M31,29.7l-0.9-6.8c0-0.2-0.1-0.4-0.3-0.6L13.3,5.8l0,0l0,0L9.4,1.9C8.8,1.3,8,1,7.2,1l0,0 C6.8,1,6.4,1.1,6,1.2c0,0,0,0,0,0C5.8,1.3,5.7,1.4,5.5,1.5c0,0-0.1,0-0.1,0C5.3,1.6,5.1,1.8,4.9,1.9L3.4,3.5l0,0L1.9,5 c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8l0,0l0,0l16.5,16.5c0.2,0.2,0.4,0.3,0.6,0.3l7,0.9c0,0,0.1,0,0.1,0c0,0,0,0,0,0 c0.3,0,0.5-0.1,0.7-0.3c0.2-0.2,0.3-0.4,0.3-0.7C31,29.9,31,29.8,31,29.7z" fill="#FFC10A"></path> <path d="M13.2,5.7C13.2,5.7,13.3,5.8,13.2,5.7L9.4,1.9C8.8,1.3,8,1,7.2,1c0,0,0,0,0,0C6.4,1,5.6,1.3,4.9,1.9 L3.4,3.5l0,0L1.9,5c-1.2,1.2-1.2,3.2,0,4.5l3.9,3.8c-0.4-0.4-0.4-1,0-1.4l0.7-0.7l2.3-2.3l3-3c0.2-0.2,0.4-0.3,0.7-0.3 c0,0,0.1,0,0.1,0c0.1,0,0.2,0,0.3,0.1C13.1,5.6,13.2,5.7,13.2,5.7L13.2,5.7C13.3,5.8,13.3,5.8,13.2,5.7L13.2,5.7z" fill="#F44236"></path> </g> <g id="Group"></g> <g id="Record"></g> <g id="Headphone"></g> <g id="Music_Player"></g> <g id="Sound_On"></g> <g id="Sound_Off"></g> <g id="Lock"></g> <g id="Lock_open"></g> <g id="Love"></g> <g id="Favorite"></g> <g id="Film_1_"></g> <g id="Music"></g> <g id="Puzzle"></g> <g id="Turn_Off"></g> <g id="Book"></g> <g id="Save"></g> <g id="Reload"></g> <g id="Trash"></g> <g id="Tag"></g> <g id="Link"></g> <g id="Like"></g> <g id="Bad"></g> <g id="Gallery"></g> <g id="Add"></g> <g id="Close"></g> <g id="Forward"></g> <g id="Back"></g> <g id="Buy"></g> <g id="Mac"></g> <g id="Laptop"></g> </g></svg>
-                        <img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' >
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeA.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeA.nome}}</div>
                     </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeA.id)}}</td>
                     <td style="width: 2%; text-align: center; font-size: 50px;"> X </td>
                     <td style="width: 2%; text-align: center; font-size: 50px;">{{quantidadeGolsEquipe(partida!.GolPartidaCampeonatoes!.items, partida!.EquipeB.id)}}</td>
-                    <td style="width: 47%; text-align: right; font-size: 50px;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></td>
+                    <td style="width: 47%; text-align: right; font-size: 50px;">
+                        <div style="width: 100%;text-align: center;"><img height="70px" src='assets/times/{{partida!.EquipeB.pais}}.png' ></div>
+                        <div style="width: 100%;text-align: center;font-size: 12px;">{{partida!.EquipeB.nome}}</div>
+                    </td>
                 </tr>
             </table>
             <table style="width: 100%;">
@@ -282,14 +330,22 @@
                     <td style="width: 50%;    border-right: 5px solid white;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeA!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeA!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
                     <td style="width: 50%;">
                         <table style="width: 100%; text-align: center;" *ngIf="partida != null && partida!.GolPartidaCampeonatoes != null">
                             <tr *ngFor="let gol of partida.GolPartidaCampeonatoes.items.reverse()">
-                                <td><img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" /></td>
+                                <td>
+                                    <img style="height: 60px;" src="{{carregarImagemJogadorGol(partida.EquipeB!.id, gol)}}" />
+                                    <br>
+                                    <span style="font-size: 12px;">{{carregarNomeJogadorGol(partida.EquipeB!.id, gol!.golPartidaCampeonatoJogadoresGolId)}}</span>
+                                </td>
                             </tr>
                         </table>
                     </td>
