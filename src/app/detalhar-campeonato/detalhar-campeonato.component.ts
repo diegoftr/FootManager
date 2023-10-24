@@ -306,6 +306,19 @@ export class DetalharCampeonatoComponent implements OnInit {
     await this.api.ListJogadoresCampeonatoes(filter2).then(j => {
       this.jogadoresCampeonato = j.items as any
 
+      this.jogadoresCampeonato.sort((a, b) => {
+        if (a.classificacao != null && b.classificacao != null) {
+          if (a.classificacao > b.classificacao) {
+            return 1;
+          } else if (a.classificacao < b.classificacao) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+        return 0;
+      })
+
       this.jogadoresCampeonato.forEach(async (j) => {
         await this.api.GetJogadores(j.jogadoresCampeonatoJogadoresId as string).then(a => {
           j.Jogadores = a;
@@ -323,45 +336,57 @@ export class DetalharCampeonatoComponent implements OnInit {
       this.shuffleArray(this.jogadoresCampeonato);
 
 
-      const bons = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Destaque' && jogador.equipecampeonatoID == null);
+      const bonsA = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Destaque A' && jogador.equipecampeonatoID == null);
+      const bonsB = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Destaque B' && jogador.equipecampeonatoID == null);
       const ruins = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Pé murcho' && jogador.equipecampeonatoID == null);
       const normais = this.jogadoresCampeonato.filter(jogador => jogador.classificacao === 'Normal' && jogador.equipecampeonatoID == null);
 
 
-      this.equipes.sort((a, b) => {
-        if (a.JogadoresCampeonatoes?.items.length != null && b.JogadoresCampeonatoes?.items.length != null) {
-          if (a.JogadoresCampeonatoes?.items.length > b.JogadoresCampeonatoes?.items.length) {
-            return 1;
-          } else if (a.JogadoresCampeonatoes?.items.length < b.JogadoresCampeonatoes?.items.length) {
-            return -1;
-          } else {
-            return 0;
-          }
-        }
-        return 0;
-      });
-
-      bons.forEach((jogador, index) => {
+      this.equipes.sort(this.ordenarEquipesSorteio());
+      bonsA.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
       });
 
+      this.equipes.sort(this.ordenarEquipesSorteio());
+      bonsB.forEach((jogador, index) => {
+        const equipeIndex = index % this.equipes.length;
+        jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
+      });
+
+      this.equipes.sort(this.ordenarEquipesSorteio());
       ruins.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
       });
 
+      this.equipes.sort(this.ordenarEquipesSorteio());
       normais.forEach((jogador, index) => {
         const equipeIndex = index % this.equipes.length;
         jogador.equipecampeonatoID = this.equipes[equipeIndex].id;
       });
 
-      const todosJogadores = bons.concat(ruins, normais);
+      const todosJogadores = bonsA.concat(ruins, normais, bonsB);
 
       await this.atualizarJogadores(todosJogadores);
       this.spinner.hide();
 
     }
+  }
+
+  private ordenarEquipesSorteio(): ((a: EquipeCampeonato, b: EquipeCampeonato) => number) | undefined {
+    return (a, b) => {
+      if (a.JogadoresCampeonatoes?.items.length != null && b.JogadoresCampeonatoes?.items.length != null) {
+        if (a.JogadoresCampeonatoes?.items.length > b.JogadoresCampeonatoes?.items.length) {
+          return 1;
+        } else if (a.JogadoresCampeonatoes?.items.length < b.JogadoresCampeonatoes?.items.length) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+      return 0;
+    };
   }
 
   compararPorJogadores(a : EquipeCampeonato, b: EquipeCampeonato) {

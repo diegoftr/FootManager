@@ -22,7 +22,7 @@ export class SelecionarJogadoresComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   idCampeonato!: string;
   idGrupo!: string;
-  classificacoes: Array<Escudo> = [{ nome: 'Normal' }, { nome: 'Destaque' }, { nome: 'Pé murcho' }];
+  classificacoes: Array<Escudo> = [{ nome: 'Normal' }, { nome: 'Destaque A' }, { nome: 'Destaque B' }, { nome: 'Pé murcho' }, { nome: 'Goleiro' }];
 
 
 

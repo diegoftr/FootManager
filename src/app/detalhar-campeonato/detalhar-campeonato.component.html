@@ -52,8 +52,8 @@
                 <td>
                     <img src="assets/podium.png" style="width: 300px;">
                     <img src="assets/times/{{resultadoCampeonato.Terceiro!.pais}}.png" style="height: 40px;position: relative;top: -153px;left: 10%;">
-                    <img src="assets/times/{{resultadoCampeonato.Campeao!.pais}}.png" style="height: 40px;position: relative;top: -201px;left: 33%;">
-                    <img src="assets/times/{{resultadoCampeonato.Segundo!.pais}}.png" style="height: 40px;position: relative;top: -178px;left: 54%;">
+                    <img src="assets/times/{{resultadoCampeonato.Campeao!.pais}}.png" style="height: 40px;position: relative;top: -201px;left: 30%;">
+                    <img src="assets/times/{{resultadoCampeonato.Segundo!.pais}}.png" style="height: 40px;position: relative;top: -178px;left: 52%;">
 
                     <div style="height: 40px;position: relative;top: -78px;left: 1%;width: 90px;text-align: center;font-size: 12px;">{{resultadoCampeonato.Terceiro!.nome}}</div>
                     <div style="height: 40px;position: relative;top: -144px;left: 31%;width: 114px;text-align: center;font-size: 12px;">{{resultadoCampeonato.Campeao!.nome}}</div>
@@ -247,7 +247,7 @@
 
         <table style="width: 100%;">
             <tr>
-                <td style="text-align: center; font-size: 20px;">Equipes</td>
+                <td style="text-align: center; font-size: 20px;">Fase de grupo</td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp;</td>
@@ -255,39 +255,36 @@
             <tr>
                 <td colspan="3">
                     <table >
-                        <tr>
-                            <th>
-                            </th>
-                            <!-- <th>
-                            </th> -->
-                            <th>
-                                PT
-                            </th>
-                            <th>
-                                PJ
-                            </th>
-                            <th>
-                                VT
-                            </th>
-                            <th>
-                                EM
-                            </th>
-                            <th>
-                                DE 
-                            </th>
-                            <th>
-                                GM 
-                            </th>
-                            <th>
-                                GC 
-                            </th>
-                            <th>
-                                SG 
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    PT
+                                </th>
+                                <th>
+                                    PJ
+                                </th>
+                                <th>
+                                    VT
+                                </th>
+                                <th>
+                                    EM
+                                </th>
+                                <th>
+                                    DE 
+                                </th>
+                                <th>
+                                    GM 
+                                </th>
+                                <th>
+                                    GC 
+                                </th>
+                                <th>
+                                    SG 
+                                </th>
+                            </tr>
                         <tr *ngFor="let equipe of equipes; let i = index">
                             <td style="width: 10%;text-align: center;"><img height="40px" src='assets/times/{{equipe.pais}}.png' ></td>
-                            <!-- <td style="padding-left: 10px;">{{equipe.nome}}</td> -->
                             <td style="text-align: center;">{{calcularPontosGanhos(equipe.id)}}</td>
                             <td style="text-align: center;">{{quantPartidasJogadas(equipe.id)}}</td>
                             <td style="text-align: center;">{{quantResultado(equipe.id,'VITORIA')}}</td>
@@ -385,9 +382,10 @@
         </div>
             <table id="tabela" style="width: 100%;">
                 <tr>
-                    <td style="text-align: center; font-size: 20px;">Jogadores</td>
+                    <td style="text-align: center; font-size: 20px;" colspan="3">Jogadores</td>
                 </tr>
                 <tr *ngFor="let jogador of jogadoresCampeonato; let i = index">
+                    <td>{{i + 1}}</td>
                     <td>{{jogador.Jogadores?.nome}}</td>
                     <td>{{jogador.classificacao}}</td>
                 </tr>
