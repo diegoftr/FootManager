@@ -51,7 +51,7 @@ export class ManterPartidaCampeonatoComponent implements OnInit {
         this.form = new FormGroup({
           id: new FormControl(idPartida),
           partidacampeonatoID: new FormControl(idCampeonato),
-          golPartidaCampeonatoJogadoresGolId: new FormControl(null, Validators.required),
+          golPartidaCampeonatoJogadoresGolId: new FormControl(null),
           golPartidaCampeonatoJogadoresAssistenciaId: new FormControl(null),
           golPartidaCampeonatoEquipeCampeonatoId: new FormControl(null, Validators.required),
         });

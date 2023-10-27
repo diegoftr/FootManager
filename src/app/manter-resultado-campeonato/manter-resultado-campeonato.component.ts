@@ -84,6 +84,10 @@ export class ManterResultadoCampeonatoComponent implements OnInit {
     });
   }
 
+  listaGoleiros() {
+    return this.jogadoresCamp.filter(j=>j.classificacao == 'Goleiro')
+  }
+
   acaoVoltar() {
     this.router.navigate(['/detalharCampeonato'], { queryParams: { idCampeonato: this.campeonato.id } });
   }

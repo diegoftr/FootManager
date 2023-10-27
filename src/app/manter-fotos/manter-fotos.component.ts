@@ -61,22 +61,21 @@ export class ManterFotosComponent implements OnInit {
       this.spinner.show();
       this.form.get('id')?.setValue(uuid());
 
-      this.reduzirTamanhoBase64(fotoSelfie.value, 400, 225).then((imagemRedimensionadaBase64) => {
   
-        fetch(imagemRedimensionadaBase64 as any)
-          .then(res => res.blob())
-          .then(blob => {
-            const file = new File([blob], "File name", { type: "image/png" })
-            Storage.put(this.id + Math.floor(Math.random() * 100000) + 1 + '.png', file).then((a: { key: any; }) => {
-              this.form.get('foto')?.setValue(a.key)
-  
-              this.api.CreateFotos(this.form.value).then(a => {
-                this.ngOnInit();
-                this.spinner.hide();
-              });
-            })
+      fetch(fotoSelfie.value as any)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], "File name", { type: "image/png" })
+          Storage.put(this.id + Math.floor(Math.random() * 100000) + 1 + '.png', file).then((a: { key: any; }) => {
+            this.form.get('foto')?.setValue(a.key)
+
+            this.api.CreateFotos(this.form.value).then(a => {
+              this.ngOnInit();
+              this.spinner.hide();
+            });
           })
-      });
+        })
+      
     }
 
 

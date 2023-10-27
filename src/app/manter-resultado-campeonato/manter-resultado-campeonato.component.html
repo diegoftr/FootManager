@@ -59,7 +59,7 @@
             <mat-form-field style="width: 100%;" >
                 <mat-label>Melhor Goleiro</mat-label>
                 <mat-select formControlName="resultadoCampeonatoGoleiroId">
-                    <mat-option *ngFor="let jogador of jogadoresCamp" [value]="jogador.Jogadores!.id">
+                    <mat-option *ngFor="let jogador of listaGoleiros()" [value]="jogador.Jogadores!.id">
                         {{jogador.Jogadores!.nome}}
                     </mat-option>
                 </mat-select>
