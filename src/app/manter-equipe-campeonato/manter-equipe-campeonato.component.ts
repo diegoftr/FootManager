@@ -41,7 +41,7 @@ export class ManterEquipeCampeonatoComponent implements OnInit {
     { "nome": "Fluminense" },
     { "nome": "Chelsea" },
     { "nome": "Paris Saint-Germain" },
-    { "nome": "Real Madrid" },
+    { "nome": "Real Madrid" }
   ]
 
   constructor(private authenticator: AuthenticatorService, private router: Router, private activateRouter: ActivatedRoute, private api: APIService, private spinner: NgxSpinnerService) {
